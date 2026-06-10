@@ -1,0 +1,213 @@
+import { useTransactions } from '../hooks/useTransactions';
+import { Card, CardContent } from '../components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from 'recharts';
+import { format } from 'date-fns';
+import { id as localeId } from 'date-fns/locale';
+import { BarChart3, Wallet, Users, AlertTriangle, ArrowRight } from 'lucide-react';
+
+export default function Laporan() {
+  const { kas, talang, loading } = useTransactions();
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 gap-3">
+        <div className="h-10 w-10 border-4 border-emerald-500/30 border-t-emerald-400 rounded-full animate-spin" />
+        <span className="text-sm text-slate-400">Menyusun Analitik...</span>
+      </div>
+    );
+  }
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
+  };
+
+  // Process Kas Data
+  const kasBalance = kas.reduce((acc, curr) => {
+    return curr.jenis === 'Pemasukan' ? acc + curr.nominal : acc - curr.nominal;
+  }, 0);
+
+  // Group kas by month for chart
+  const kasByMonth = kas.reduce((acc: any, curr) => {
+    const month = format(new Date(curr.tanggal), 'MMM yy', { locale: localeId });
+    if (!acc[month]) acc[month] = { name: month, Pemasukan: 0, Pengeluaran: 0 };
+    acc[month][curr.jenis] += curr.nominal;
+    return acc;
+  }, {});
+  
+  const chartData = Object.values(kasByMonth).reverse();
+
+  // Process Talang Data
+  const talangBalances = { Jisoi: 0, Rakka: 0, Shae: 0 };
+  talang.forEach((t) => {
+    if (t.jenis === 'Baru') {
+      talangBalances[t.akun_talang] += t.nominal;
+    } else if (t.jenis === 'Pelunasan') {
+      talangBalances[t.akun_talang] -= t.nominal;
+    } else if (t.jenis === 'Transfer') {
+      talangBalances[t.akun_talang] -= t.nominal;
+      if (t.akun_tujuan) {
+        talangBalances[t.akun_tujuan as keyof typeof talangBalances] += t.nominal;
+      }
+    }
+  });
+
+  const totalTalangAktif = talangBalances.Jisoi + talangBalances.Rakka + talangBalances.Shae;
+  const saldoBersih = kasBalance - totalTalangAktif;
+
+  return (
+    <div className="space-y-4">
+      {/* Dynamic Mini Row Cards */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
+          <span className="text-[9px] font-bold text-slate-400 uppercase">Kas Lembaga</span>
+          <span className="text-[12px] font-extrabold text-white leading-tight mt-1 truncate">
+            {formatCurrency(kasBalance)}
+          </span>
+        </div>
+        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
+          <span className="text-[9px] font-bold text-rose-400 uppercase">Hutang Talang</span>
+          <span className="text-[12px] font-extrabold text-rose-400 leading-tight mt-1 truncate">
+            {formatCurrency(totalTalangAktif)}
+          </span>
+        </div>
+        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
+          <span className="text-[9px] font-bold text-emerald-400 uppercase">Bersih SIKAT</span>
+          <span className="text-[12px] font-extrabold text-emerald-400 leading-tight mt-1 truncate">
+            {formatCurrency(saldoBersih)}
+          </span>
+        </div>
+      </div>
+
+      {/* Main Tabs Container */}
+      <Tabs defaultValue="kas" className="w-full space-y-3">
+        <TabsList className="grid w-full grid-cols-2 bg-slate-900/60 p-1 rounded-xl border border-white/5 h-auto">
+          <TabsTrigger 
+            value="kas" 
+            className="data-[state=active]:bg-emerald-500 data-[state=active]:text-slate-950 text-slate-400 text-xs py-1.5 rounded-lg font-bold"
+          >
+            Arus Kas Utama
+          </TabsTrigger>
+          <TabsTrigger 
+            value="talang" 
+            className="data-[state=active]:bg-violet-500 data-[state=active]:text-white text-slate-400 text-xs py-1.5 rounded-lg font-bold"
+          >
+            Sensus Dana Talang
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="kas" className="outline-none">
+          <Card className="bg-[#121829]/40 border-white/5 rounded-2xl p-4 overflow-hidden">
+            <div className="flex flex-col mb-4">
+              <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
+                <BarChart3 className="h-4 w-4 text-emerald-400" /> Tren Transaksi Bulanan
+              </h3>
+              <p className="text-[9px] text-slate-500 mt-0.5">Komparasi kredit & debit instansi terpusat</p>
+            </div>
+
+            <div className="h-64 w-full text-[10px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" opacity={0.3} />
+                  <XAxis 
+                    dataKey="name" 
+                    stroke="#475569" 
+                    fontSize={9} 
+                    tickLine={false} 
+                  />
+                  <YAxis 
+                    stroke="#475569" 
+                    fontSize={9} 
+                    tickLine={false} 
+                    tickFormatter={(val) => `Rp${val >= 1000000 ? (val/1000000).toFixed(0) + 'jt' : val}`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: '#131c31', borderColor: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}
+                    itemStyle={{ color: '#fff', fontSize: '11px' }}
+                    labelStyle={{ color: '#94a3b8', fontWeight: 'bold' }}
+                    formatter={(val: number) => [formatCurrency(val), '']}
+                  />
+                  <Bar dataKey="Pemasukan" fill="#00e5a3" radius={[5, 5, 0, 0]} maxBarSize={30} />
+                  <Bar dataKey="Pengeluaran" fill="#f43f5e" radius={[5, 5, 0, 0]} maxBarSize={30} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Micro Legenda Indicator */}
+            <div className="flex justify-center items-center gap-4 mt-3 pt-3 border-t border-white/5">
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#00e5a3]" />
+                <span className="text-[10px] font-bold text-slate-300">Pemasukan</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#f43f5e]" />
+                <span className="text-[10px] font-bold text-slate-300">Pengeluaran</span>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="talang" className="outline-none">
+          <Card className="bg-[#121829]/40 border-white/5 rounded-2xl p-4 overflow-hidden space-y-4">
+            <div className="flex flex-col">
+              <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
+                <Users className="h-4 w-4 text-violet-400" /> Kewajiban Outstanding Aktif
+              </h3>
+              <p className="text-[9px] text-slate-500 mt-0.5">Analisa hutang terhutang per penjamin dana</p>
+            </div>
+
+            <div className="space-y-2">
+              {Object.entries(talangBalances).map(([akun, balance]) => {
+                const totalHutangRekomendasi = 4000000; // Mock limit limit
+                const persentasi = Math.min(100, (balance / totalHutangRekomendasi) * 100);
+                
+                return (
+                  <div key={akun} className="p-3 bg-[#111625]/60 hover:border-white/10 transition-colors rounded-xl border border-white/5 space-y-2">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <div className="h-6 w-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-200 text-[10px]">
+                          {akun[0]}
+                        </div>
+                        <span className="text-xs font-bold text-slate-100">{akun}</span>
+                      </div>
+                      <span className="text-xs font-bold text-rose-400">{formatCurrency(balance)}</span>
+                    </div>
+
+                    {/* Progress tracking indicator */}
+                    <div className="space-y-1">
+                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                        <div 
+                          style={{ width: `${persentasi}%` }}
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            balance > 2500000 ? 'bg-rose-500' : 'bg-violet-400'
+                          }`}
+                        />
+                      </div>
+                      <div className="flex justify-between text-[8px] text-slate-500 font-medium">
+                        <span>Lunas</span>
+                        <span>Batas Aman: {formatCurrency(totalHutangRekomendasi)}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {totalTalangAktif > 0 && (
+              <div className="rounded-xl border border-amber-500/10 bg-amber-500/5 p-3 flex items-start gap-2.5">
+                <AlertTriangle className="h-4.5 w-4.5 text-amber-500 shrink-0" />
+                <div className="space-y-1">
+                  <h4 className="text-[10px] font-bold text-amber-300">Peringatan Dana Talang</h4>
+                  <p className="text-[9px] text-slate-400 leading-relaxed">
+                    Total kewajiban outstanding aktif sebesar {formatCurrency(totalTalangAktif)} membebani likuditas kas sekolah. Segera lakukan koordinasi settlement pelunasan.
+                  </p>
+                </div>
+              </div>
+            )}
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+

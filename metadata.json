@@ -1,0 +1,6 @@
+{
+  "name": "SIKAT - Sistem Informasi Keuangan",
+  "description": "Aplikasi manajemen keuangan berbasis web app untuk mengelola kas sekolah dan dana talang.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
