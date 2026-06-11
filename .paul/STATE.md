@@ -2,29 +2,29 @@
 
 ## Current Position
 
-Milestone: v0.4 Security Fixes — Not started
-Phase: Ready to plan v0.4
-Plan: Not started
-Status: v0.3 complete — ready to plan v0.4
-Last activity: 2026-06-12 — Phase 03 complete, v0.3 milestone shipped
+Milestone: v0.4 Security Fixes — Complete ✅
+Phase: 4 of 4 (Token Security) — Complete ✅
+Plan: 04-01 unified
+Status: Milestone complete, ready for next milestone
+Last activity: 2026-06-12 — Phase 04 complete, Milestone v0.4 complete
 
 Progress:
 - Milestone v0.3: [██████████] 100% ✅
-- Milestone v0.4: [░░░░░░░░░░] 0%
+- Milestone v0.4: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — v0.3 milestone complete]
+  ✓        ✓        ✓     [Loop complete — Milestone v0.4 complete]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-12
-Stopped at: Phase 03 UNIFY complete — v0.3 milestone done
-Next action: /paul:plan untuk v0.4 Security Fixes (token generation + credential rotation)
+Stopped at: Milestone v0.4 complete
+Next action: /paul:milestone untuk v0.5, atau /paul:complete-milestone untuk close v0.4
 Resume file: .paul/ROADMAP.md
 
 ## Decisions
@@ -42,9 +42,9 @@ Resume file: .paul/ROADMAP.md
 
 ## Accumulated Context
 
-### Security Concerns (deferred ke v0.4)
-- Token generation: `Math.random().toString(36)` di server.ts — insecure, kandidat v0.4
-- Password stored plain text di database — security concern, kandidat v0.4
+### Security Concerns
+- ~~Token generation: `Math.random().toString(36)` di server.ts~~ — ✅ Fixed in v0.4
+- Password stored plain text di database — security concern, kandidat milestone berikutnya
 - NeonDB credentials pernah ada di git history (.env.example lama) — pertimbangkan rotate
 
 ### Design Debt
@@ -52,4 +52,4 @@ Resume file: .paul/ROADMAP.md
 
 ### Git State
 Branch: main
-Last commit: 905567a (feat(unused-deps-cleanup)) — v0.3 belum di-commit
+Last commit: 8fb1731 (feat(pwa-vercel-deploy): deploy ke Vercel + implementasi PWA)

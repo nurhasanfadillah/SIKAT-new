@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import pg from "pg";
 import dotenv from "dotenv";
+import { randomBytes } from 'crypto';
 
 dotenv.config();
 
@@ -187,7 +188,7 @@ export function createApp() {
         return res.status(400).json({ error: "Email ini sudah digunakan" });
       }
 
-      const userId = "usr_" + Math.random().toString(36).substring(2, 11);
+      const userId = "usr_" + randomBytes(6).toString('hex');
       const defaultRole = normalizedEmail === "nurhasanfadillah@gmail.com" ? "Super Admin" : "Viewer";
 
       await pool.query(`
@@ -196,7 +197,7 @@ export function createApp() {
       `, [userId, trimmedName, normalizedEmail, password, defaultRole]);
 
       // Create session
-      const token = "tok_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      const token = "tok_" + randomBytes(32).toString('hex');
       const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000; // 30 days
 
       await pool.query(`
@@ -230,7 +231,7 @@ export function createApp() {
       }
 
       // Create session
-      const token = "tok_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      const token = "tok_" + randomBytes(32).toString('hex');
       const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000; // 30 days
 
       await pool.query(`
@@ -410,7 +411,7 @@ export function createApp() {
         normalizedKategori = trimmedKategori;
       }
 
-      const id = "kas_" + Math.random().toString(36).substring(2, 11);
+      const id = "kas_" + randomBytes(6).toString('hex');
       const createdAt = Date.now();
 
       await pool.query(`
@@ -521,7 +522,7 @@ export function createApp() {
         normalizedUnit = trimmedUnit;
       }
 
-      const id = "talang_" + Math.random().toString(36).substring(2, 11);
+      const id = "talang_" + randomBytes(6).toString('hex');
       const createdAt = Date.now();
 
       // Insert Talangan row
@@ -532,7 +533,7 @@ export function createApp() {
 
       // If Pelunasan, automatically log an outgoing entry in Kas Sekolah
       if (jenis === "Pelunasan") {
-        const kasId = "kas_" + Math.random().toString(36).substring(2, 11);
+        const kasId = "kas_" + randomBytes(6).toString('hex');
         await pool.query(`
           INSERT INTO transaksi_kas (id, tanggal, jenis, sumber_dana, kategori, keterangan, nominal, created_by, "createdAt")
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -779,7 +780,7 @@ export function createApp() {
         await pool.query("DELETE FROM transaksi_kas WHERE kategori = 'Pelunasan Dana Talang' AND keterangan = $1 AND nominal = $2", [oldDescription, oldNominal]);
       } else if (oldJenis !== "Pelunasan" && jenis === "Pelunasan") {
         // Create fresh Kas entry
-        const kasId = "kas_" + Math.random().toString(36).substring(2, 11);
+        const kasId = "kas_" + randomBytes(6).toString('hex');
         await pool.query(`
           INSERT INTO transaksi_kas (id, tanggal, jenis, sumber_dana, kategori, keterangan, nominal, created_by, "createdAt")
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)

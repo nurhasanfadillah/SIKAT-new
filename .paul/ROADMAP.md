@@ -38,8 +38,13 @@
 
 ---
 
-## Kandidat Milestone Berikutnya
+---
 
-- **v0.4 — Security Fixes:**
-  - Token generation lemah (`Math.random().toString(36)`) → ganti ke `crypto.randomBytes`
-  - Rotate NeonDB credentials (ada di git history)
+## Milestone v0.4 — Security Fixes ✅
+
+**Status:** Complete (2026-06-12)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 04 — Token Security ✅
+**Status:** Complete (2026-06-12) | **Plans:** 1/1
+- Plan 04-01: `Math.random()` → `crypto.randomBytes` di 7 lokasi (session tokens + entity IDs) di server.ts
