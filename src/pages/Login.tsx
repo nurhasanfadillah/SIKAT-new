@@ -13,8 +13,8 @@ export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false);
   
   // Credentials input
-  const [email, setEmail] = useState('nurhasanfadillah@gmail.com');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   
   const [loading, setLoading] = useState(false);
@@ -80,19 +80,6 @@ export default function Login() {
             Sistem Informasi Keuangan Terpusat
           </p>
         </div>
-
-        {/* Local Test Mode callout */}
-        {!isSignUp && (
-          <div className="bg-[#121829] border border-emerald-500/15 rounded-2xl p-3 mb-5 text-[11px] text-slate-300">
-            <p className="font-bold text-[#00e5a3] flex items-center gap-1 mb-1">
-              <Sparkles className="h-3 w-3" /> Uji Coba Demo Akun:
-            </p>
-            <div className="space-y-0.5 text-slate-400 font-mono mt-1 text-[10px]">
-              <p>Email: <span className="text-white">nurhasanfadillah@gmail.com</span></p>
-              <p>Pass: <span className="text-white">password123</span></p>
-            </div>
-          </div>
-        )}
 
         <form onSubmit={handleAuth} className="space-y-3.5">
           {isSignUp && (
