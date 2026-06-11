@@ -4,13 +4,8 @@
 
 ## APIs & External Services
 
-**AI/ML:**
-- Google Gemini API - Listed in dependencies (`@google/genai` 2.4.0)
-  - SDK/Client: `@google/genai` npm package
-  - Auth: `GEMINI_API_KEY` env var — `.env.example`
-  - Status: **Not actively used** — no Gemini calls found in codebase
-
 **External APIs not detected:**
+- No AI/ML services (active)
 - No payment processing (Stripe, Midtrans, etc.)
 - No email service (SendGrid, Mailgun, etc.)
 - No SMS/messaging (Twilio, etc.)
@@ -37,7 +32,7 @@
 ## Authentication & Identity
 
 **Auth Provider:**
-- Custom implementation in `server.ts` — NOT using Better Auth despite it being in dependencies
+- Custom implementation in `server.ts`
   - Endpoints: `/api/auth/register`, `/api/auth/login`, `/api/auth/logout`
   - Token storage: `app_sessions` PostgreSQL table
   - Client storage: `localStorage` key `sikat_session_token` — `src/lib/auth-client.ts`
@@ -72,7 +67,7 @@
 
 **Development:**
 - Required env vars: `DATABASE_URL`
-- Optional: `GEMINI_API_KEY`, `APP_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`
+- Optional: `APP_URL`
 - Secrets location: `.env` file (gitignored)
 - Template: `.env.example`
 - Note: `server.ts` falls back to hardcoded DATABASE_URL if env not set
@@ -80,13 +75,7 @@
 **Production:**
 - Environment managed by Google AI Studio deployment platform
 
-## Unused Dependencies (Present in package.json)
-
-- `better-auth` 1.6.16 — Custom auth implemented instead
-- `better-sqlite3` 12.10.0 — PostgreSQL used, not SQLite
-- `@google/genai` 2.4.0 — No Gemini calls in codebase
-
 ---
 
-*Integration audit: 2026-06-12*
+*Integration audit: 2026-06-12 (updated after v0.2 cleanup)*
 *Update when adding/removing external services*
