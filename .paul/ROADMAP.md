@@ -49,6 +49,19 @@
 
 ---
 
+## Milestone v0.6 — Color System (In Progress)
+
+**Status:** In progress
+**Progress:** 0/1 phases complete — 0%
+
+### Phase 06 — Color System 🔄
+**Status:** Planning | **Plans:** 0/3
+- Plan 06-01: Token foundation (@theme) + UI components (button, input, tabs, card, SplashScreen)
+- Plan 06-02: Layout.tsx + Login.tsx migration
+- Plan 06-03: Pages — Dashboard, Kas, Talang, Laporan + CHART_COLORS
+
+---
+
 ## Milestone v0.5 — Design Polish ✅
 
 **Status:** Complete (2026-06-12)

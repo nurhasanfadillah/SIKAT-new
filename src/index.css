@@ -11,12 +11,45 @@
   --radius-xl: 8px;
   --radius-2xl: 10px;
   --radius-3xl: 12px;
+
+  /* ── Brand ───────────────────────────────────────── */
+  --color-brand-300: #00f5a0;
+  --color-brand-400: #00cfa2;
+  --color-brand-500: #00e5a3;
+
+  /* ── Surface hierarchy (dark navy) ───────────────── */
+  --color-surface-base:     #050811;
+  --color-surface-app:      #060a13;
+  --color-surface-panel:    #0c1221;
+  --color-surface-card:     #121829;
+  --color-surface-elevated: #161d30;
+  --color-surface-nav:      #121a2e;
+  --color-surface-overlay:  #131c31;
+
+  /* ── Gradient primitives ─────────────────────────── */
+  --color-hero-from: #0a2540;
+  --color-hero-via:  #093554;
+  --color-hero-to:   #041221;
+  --color-grd-start: #00d2ff;
+  --color-grd-end:   #00f5a0;
+
+  /* ── Status ──────────────────────────────────────── */
+  --color-positive: #34d399;
+  --color-negative: #fb7185;
+  --color-warning:  #fbbf24;
+  --color-info:     #60a5fa;
+
+  /* ── Text hierarchy ──────────────────────────────── */
+  --color-text-primary:   #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted:     #64748b;
+  --color-text-inverse:   #0f172a;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #050811;
-  color: #f8fafc;
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
 }
 

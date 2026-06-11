@@ -5,19 +5,16 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-surface-base transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "bg-emerald-600 text-white hover:bg-emerald-700",
-        destructive:
-          "bg-red-500 text-white hover:bg-red-600",
-        outline:
-          "border border-emerald-200 bg-white hover:bg-emerald-50 text-emerald-700",
-        secondary:
-          "bg-emerald-100 text-emerald-900 hover:bg-emerald-200",
-        ghost: "hover:bg-emerald-100 hover:text-emerald-900",
-        link: "text-emerald-600 underline-offset-4 hover:underline",
+        default:     "bg-brand-500 text-text-inverse hover:bg-brand-400",
+        destructive: "bg-negative text-white hover:bg-rose-500",
+        outline:     "border border-brand-500/30 bg-transparent hover:bg-brand-500/10 text-brand-500",
+        secondary:   "bg-brand-500/10 text-brand-500 hover:bg-brand-500/20",
+        ghost:       "hover:bg-brand-500/10 hover:text-brand-500",
+        link:        "text-brand-500 underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",
