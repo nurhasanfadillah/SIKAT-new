@@ -37,7 +37,7 @@
   - Token storage: `app_sessions` PostgreSQL table
   - Client storage: `localStorage` key `sikat_session_token` — `src/lib/auth-client.ts`
   - Session duration: 30 days (hardcoded)
-  - Token format: `tok_` + `Math.random().toString(36)` (insecure — see CONCERNS.md)
+  - Token format: `tok_` + `crypto.randomBytes(32).toString('hex')` (fixed from Math.random)
 
 **OAuth Integrations:**
 - None
@@ -56,9 +56,11 @@
 ## CI/CD & Deployment
 
 **Hosting:**
-- Google AI Studio — App ID `3f1a33de-9427-4e85-a5ba-c581657719b7`
-  - View URL: configured in `metadata.json`
-  - Deployment: Managed by AI Studio platform
+- **Vercel** — serverless deployment
+  - Config: `vercel.json` rewrites all `/api/*` to serverless handler
+  - Handler: `api/index.js` (30s max duration)
+  - Build: `npm run vercel-build`
+  - Static SPA served from `dist/`
 
 **CI Pipeline:**
 - Not detected (no `.github/workflows/`, no CI config files)

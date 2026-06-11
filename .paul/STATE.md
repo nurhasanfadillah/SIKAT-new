@@ -6,7 +6,7 @@ Milestone: v0.5 Design Polish — Complete ✅
 Phase: 5 of 5 (PWA Icons + Splash Screen) — Complete ✅
 Plan: All plans complete
 Status: Milestone v0.5 complete — ready for next milestone
-Last activity: 2026-06-12 — Milestone v0.5 complete (splash screen + icons)
+Last activity: 2026-06-12 — Codebase map updated (/paul:map-codebase update)
 
 Progress:
 - Milestone v0.1: [██████████] 100% ✅
@@ -54,4 +54,4 @@ Resume file: .paul/ROADMAP.md
 
 ### Git State
 Branch: main
-Last commit: c73cda6 (feat(04-security-fixes): ganti Math.random() dengan crypto.randomBytes)
+Last commit: f8da5e4 (feat(05-pwa-icons-splash): branded icons + native splash screen)

@@ -22,8 +22,9 @@ SIKAT-new/
 ├── tsconfig.json          # TypeScript compiler config
 ├── package.json           # Dependencies & npm scripts
 ├── .env.example           # Required environment variable template
-├── metadata.json          # Google AI Studio deployment metadata
-├── public/                # Static assets
+├── vercel.json            # Vercel deployment config
+├── pwa-assets.config.ts   # PWA asset generator config
+├── public/                # Static assets (PWA icons, favicon)
 └── dist/                  # Build output (gitignored)
 ```
 

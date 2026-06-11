@@ -15,11 +15,9 @@
 - Files: `server.ts` (fallback DATABASE_URL hardcoded), `.env.example` (actual credentials)
 - Fix: Remove hardcoded fallback from `server.ts`; use env var validation that exits on missing var
 
-**Weak Session Token Generation:**
-- Risk: `Math.random()` is not cryptographically secure — sessions could be predicted/brute-forced
-- Files: `server.ts` (token creation ~lines 172, 206)
-- Code: `"tok_" + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)`
-- Fix: Use `crypto.randomBytes(32).toString('hex')` from Node.js built-in
+**~~Weak Session Token Generation~~ (FIXED):**
+- Fixed in `feat(04-security-fixes)`: now uses `crypto.randomBytes(32).toString('hex')`
+- Files: `server.ts` (token creation)
 
 **Hardcoded Admin Role by Email:**
 - Risk: Business logic coupled to personal email address
@@ -63,11 +61,8 @@
 - Risk: Audit trail gaps; Kas modifications can break Talang state
 - Fix approach: Explicit sync service or event log
 
-**Unused Dependencies:**
-- Issue: 4 large packages installed but not used in runtime code
-- Files: `package.json`
-- Packages: `firebase` 12.14.0, `better-auth` 1.6.16, `better-sqlite3` 12.10.0, `@google/genai` 2.4.0
-- Fix: `npm uninstall firebase better-auth better-sqlite3 @google/genai`
+**~~Unused Dependencies~~ (FIXED):**
+- Fixed in `feat(unused-deps-cleanup)` + `feat(firebase-cleanup)`: firebase, better-auth, better-sqlite3, @google/genai removed
 
 ## Performance Bottlenecks
 

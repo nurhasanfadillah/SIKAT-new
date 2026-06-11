@@ -55,7 +55,7 @@
 **Authentication Flow:**
 1. User submits login form (`src/pages/Login.tsx`)
 2. POST `/api/auth/login` sent with email/password
-3. `server.ts` validates credentials against `app_users` table (plaintext comparison)
+3. `server.ts` validates credentials against `app_users` table (plaintext comparison ⚠️ — bcrypt not yet implemented)
 4. Session token created in `app_sessions` table, returned to client
 5. Client stores token in `localStorage` (`sikat_session_token`)
 6. `AuthContext` reads token, fetches `/api/user/profile` with Bearer header

@@ -51,18 +51,15 @@
 - dotenv 17.2.3 - Environment variable loading - `server.ts`
 - date-fns 4.4.0 - Date formatting utilities - `src/pages/Dashboard.tsx`
 
-**Unused (present in package.json but not active):**
-- firebase 12.14.0 - Config exists, data operations use PostgreSQL instead
-- better-auth 1.6.16 - Included but custom auth implemented
-- better-sqlite3 12.10.0 - Included but PostgreSQL used
-- @google/genai 2.4.0 - AI SDK included but no usage in codebase
+**PWA:**
+- vite-plugin-pwa 1.3.0 - Service worker + offline support
+- @vite-pwa/assets-generator 1.0.2 - PWA icon generation
 
 ## Configuration
 
 **Environment:**
 - `.env` file loaded via dotenv - `.env.example`
-- Key variables: `DATABASE_URL` (required), `GEMINI_API_KEY`, `APP_URL`, `BETTER_AUTH_SECRET`
-- Fallback: `server.ts` has hardcoded DATABASE_URL if env not set (security concern - see CONCERNS.md)
+- Key variables: `DATABASE_URL` (required), `APP_URL` (optional, auto-injected by Vercel)
 
 **Build:**
 - `vite.config.ts` - Vite + React plugin + Tailwind plugin + path alias `@/*`
@@ -77,9 +74,9 @@
 - `npm run dev` starts both frontend (Vite HMR) and backend (tsx) via single command
 
 **Production:**
-- Deployed on Google AI Studio (`ai.studio/apps/3f1a33de-9427-4e85-a5ba-c581657719b7`)
-- Frontend static files served by Express in production
-- `npm run build` then `npm run start`
+- Deployed on **Vercel** (serverless functions + CDN)
+- Serverless handler: `api/index.js` via `vercel.json` rewrites
+- `npm run vercel-build` (Vite + esbuild)
 - Requires `DATABASE_URL` env var pointing to NeonDB (PostgreSQL serverless)
 
 ---
