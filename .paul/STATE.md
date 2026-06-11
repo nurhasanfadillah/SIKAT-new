@@ -2,29 +2,32 @@
 
 ## Current Position
 
-Milestone: v0.4 Security Fixes — Complete ✅
-Phase: 4 of 4 (Token Security) — Complete ✅
-Plan: 04-01 unified
-Status: Milestone complete, ready for next milestone
-Last activity: 2026-06-12 — Phase 04 complete, Milestone v0.4 complete
+Milestone: v0.5 Design Polish — Complete ✅
+Phase: 5 of 5 (PWA Icons + Splash Screen) — Complete ✅
+Plan: All plans complete
+Status: Milestone v0.5 complete — ready for next milestone
+Last activity: 2026-06-12 — Milestone v0.5 complete (splash screen + icons)
 
 Progress:
+- Milestone v0.1: [██████████] 100% ✅
+- Milestone v0.2: [██████████] 100% ✅
 - Milestone v0.3: [██████████] 100% ✅
 - Milestone v0.4: [██████████] 100% ✅
+- Milestone v0.5: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Milestone v0.4 complete]
+  ✓        ✓        ✓     [Milestone v0.5 complete — loop closed]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-12
-Stopped at: Milestone v0.4 complete
-Next action: /paul:milestone untuk v0.5, atau /paul:complete-milestone untuk close v0.4
+Stopped at: Milestone v0.5 complete (icons + splash screen)
+Next action: /paul:milestone untuk define Milestone v0.6 (atau /paul:discuss untuk brainstorm)
 Resume file: .paul/ROADMAP.md
 
 ## Decisions
@@ -39,6 +42,8 @@ Resume file: .paul/ROADMAP.md
 | 2026-06-12 | Split 03 menjadi 2 plan | Plan 03-01 (Vercel) → 03-02 (PWA): berbeda subsystem, keduanya touch package.json |
 | 2026-06-12 | App factory pattern untuk Vercel | createApp() pure factory, startServer() conditional via VERCEL env var |
 | 2026-06-12 | VitePWA generateSW + NetworkFirst /api/* | Workbox auto-generate SW; API tidak pernah served dari cache |
+| 2026-06-12 | Icon set dari SVG custom via @vite-pwa/assets-generator | Single source of truth; regenerate dengan npm run pwa:assets |
+| 2026-06-12 | SplashScreen di luar AuthProvider | Muncul sebelum auth check; timer 2500ms + AnimatePresence exit fade |
 
 ## Accumulated Context
 
@@ -47,9 +52,6 @@ Resume file: .paul/ROADMAP.md
 - Password stored plain text di database — security concern, kandidat milestone berikutnya
 - NeonDB credentials pernah ada di git history (.env.example lama) — pertimbangkan rotate
 
-### Design Debt
-- PWA icons placeholder (solid blue #2563EB) — perlu icon desain final sebelum public launch
-
 ### Git State
 Branch: main
-Last commit: 8fb1731 (feat(pwa-vercel-deploy): deploy ke Vercel + implementasi PWA)
+Last commit: c73cda6 (feat(04-security-fixes): ganti Math.random() dengan crypto.randomBytes)

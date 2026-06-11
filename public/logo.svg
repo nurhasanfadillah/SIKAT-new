@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background biru brand -->
+  <rect width="512" height="512" rx="96" fill="#2563EB"/>
+  <!-- Buku/ledger body (putih) -->
+  <rect x="116" y="96" width="280" height="320" rx="20" fill="white"/>
+  <!-- Spine buku (biru gelap) -->
+  <rect x="116" y="96" width="36" height="320" rx="4" fill="#1D4ED8"/>
+  <!-- Baris ledger (biru muda) -->
+  <rect x="175" y="152" width="185" height="14" rx="7" fill="#DBEAFE"/>
+  <rect x="175" y="190" width="145" height="14" rx="7" fill="#DBEAFE"/>
+  <rect x="175" y="228" width="185" height="14" rx="7" fill="#DBEAFE"/>
+  <rect x="175" y="266" width="125" height="14" rx="7" fill="#DBEAFE"/>
+  <rect x="175" y="304" width="165" height="14" rx="7" fill="#DBEAFE"/>
+  <!-- Koin accent (kuning/amber) kanan bawah -->
+  <circle cx="358" cy="360" r="70" fill="#F59E0B"/>
+  <circle cx="358" cy="360" r="54" fill="#FCD34D"/>
+  <!-- Garis horizontal koin (symbol Rp) -->
+  <rect x="330" y="349" width="56" height="10" rx="5" fill="#92400E"/>
+  <rect x="330" y="369" width="56" height="10" rx="5" fill="#92400E"/>
+</svg>

@@ -38,8 +38,6 @@
 
 ---
 
----
-
 ## Milestone v0.4 — Security Fixes ✅
 
 **Status:** Complete (2026-06-12)
@@ -48,3 +46,15 @@
 ### Phase 04 — Token Security ✅
 **Status:** Complete (2026-06-12) | **Plans:** 1/1
 - Plan 04-01: `Math.random()` → `crypto.randomBytes` di 7 lokasi (session tokens + entity IDs) di server.ts
+
+---
+
+## Milestone v0.5 — Design Polish ✅
+
+**Status:** Complete (2026-06-12)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 05 — PWA Icons + Splash Screen ✅
+**Status:** Complete (2026-06-12) | **Plans:** 2/2
+- Plan 05-01: SVG icon design + @vite-pwa/assets-generator setup + manifest/index.html update
+- Plan 05-02: React SplashScreen component (Framer Motion) + App.tsx integration

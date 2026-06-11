@@ -3,8 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { SplashScreen } from './components/SplashScreen';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { FeedbackProvider } from './contexts/FeedbackContext';
 import Layout from './components/Layout';
@@ -22,21 +23,31 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <AuthProvider>
-      <FeedbackProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-              <Route index element={<Dashboard />} />
-              <Route path="kas" element={<Kas />} />
-              <Route path="talang" element={<Talang />} />
-              <Route path="laporan" element={<Laporan />} />
-            </Route>
-          </Routes>
-        </Router>
-      </FeedbackProvider>
-    </AuthProvider>
+    <>
+      <SplashScreen visible={showSplash} />
+      <AuthProvider>
+        <FeedbackProvider>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+                <Route index element={<Dashboard />} />
+                <Route path="kas" element={<Kas />} />
+                <Route path="talang" element={<Talang />} />
+                <Route path="laporan" element={<Laporan />} />
+              </Route>
+            </Routes>
+          </Router>
+        </FeedbackProvider>
+      </AuthProvider>
+    </>
   );
 }
