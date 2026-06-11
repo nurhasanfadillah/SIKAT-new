@@ -80,18 +80,8 @@
 **Production:**
 - Environment managed by Google AI Studio deployment platform
 
-## Firebase (Present But Inactive)
-
-Firebase is configured but not used for data operations — all data uses PostgreSQL:
-- Config: `firebase-applet-config.json` (project `gen-lang-client-0660753479`)
-- Blueprint: `firebase-blueprint.json` (Firestore schema definitions)
-- Rules: `firestore.rules` (security rules for Firestore)
-- Package: `firebase` 12.14.0 in `package.json`
-- Status: **Configuration remnant** — PostgreSQL is the active database
-
 ## Unused Dependencies (Present in package.json)
 
-- `firebase` 12.14.0 — Config files present but no runtime Firebase calls
 - `better-auth` 1.6.16 — Custom auth implemented instead
 - `better-sqlite3` 12.10.0 — PostgreSQL used, not SQLite
 - `@google/genai` 2.4.0 — No Gemini calls in codebase

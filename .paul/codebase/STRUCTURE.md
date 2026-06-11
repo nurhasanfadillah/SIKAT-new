@@ -22,9 +22,6 @@ SIKAT-new/
 ├── tsconfig.json          # TypeScript compiler config
 ├── package.json           # Dependencies & npm scripts
 ├── .env.example           # Required environment variable template
-├── firebase-applet-config.json  # Firebase config (not active in runtime)
-├── firebase-blueprint.json      # Firestore schema blueprint (not active)
-├── firestore.rules              # Firestore security rules (not active)
 ├── metadata.json          # Google AI Studio deployment metadata
 ├── public/                # Static assets
 └── dist/                  # Build output (gitignored)
