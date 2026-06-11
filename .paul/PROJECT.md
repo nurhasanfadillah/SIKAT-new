@@ -9,22 +9,26 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.2 (Unused Dependencies Cleanup — complete) |
-| Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind |
+| Version | v0.3 (PWA + Vercel Deploy — complete) |
+| Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind, vite-plugin-pwa |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
+| Deploy | Vercel (https://sikat-new.vercel.app) |
 
 ## Requirements
 
 ### Active
 - [ ] Security: ganti token generation lemah (`Math.random()`) ke `crypto.randomBytes`
-- [ ] Security: hapus hardcoded DATABASE_URL dari `server.ts`
 - [ ] Security: rotate NeonDB credentials (ada di git history dari .env.example lama)
+- [ ] Design: ganti PWA icons placeholder dengan icon desain final
 
 ### Validated (Shipped)
 - ✓ Firebase artifact dihapus — Phase 01 (v0.1)
 - ✓ Unused dependencies dihapus (better-auth, better-sqlite3, @google/genai) — Phase 02 (v0.2)
 - ✓ .env.example bersih dari kredensial dan variabel unused — Phase 02 (v0.2)
+- ✓ Hardcoded DATABASE_URL dihapus dari server.ts — Phase 03 (v0.3)
+- ✓ App deployed ke Vercel, accessible publik — Phase 03 (v0.3)
+- ✓ PWA: app installable, offline caching, service worker aktif — Phase 03 (v0.3)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -38,6 +42,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-12 | Hapus Firebase sepenuhnya | Tidak ada runtime usage; sisa template AI Studio |
 | 2026-06-12 | Hapus unused deps (better-auth, better-sqlite3, @google/genai) | Tidak ada import di codebase; sisa template AI Studio |
 | 2026-06-12 | Sanitasi DATABASE_URL di .env.example | File mengandung kredensial NeonDB asli |
+| 2026-06-12 | Deploy ke Vercel dengan app factory pattern | NeonDB serverless-compatible; esbuild pre-bundle api-handler.ts → api/index.js |
+| 2026-06-12 | PWA via vite-plugin-pwa + Workbox generateSW | Auto-generate SW dari glob patterns; NetworkFirst untuk /api/* |
 
 ---
-*Last updated: 2026-06-12 after Phase 02*
+*Last updated: 2026-06-12 after Phase 03*

@@ -26,9 +26,20 @@
 
 ---
 
+## Milestone v0.3 — PWA + Deploy to Vercel ✅
+
+**Status:** Complete (2026-06-12)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 03 — PWA + Vercel Deploy ✅
+**Status:** Complete (2026-06-12) | **Plans:** 2/2
+- Plan 03-01: Vercel Deploy — server.ts refactor, api-handler.ts, vercel.json, live di https://sikat-new.vercel.app
+- Plan 03-02: PWA Implementation — vite-plugin-pwa, service worker, manifest, icons, offline support
+
+---
+
 ## Kandidat Milestone Berikutnya
 
-- **v0.3 — Security Fixes:**
+- **v0.4 — Security Fixes:**
   - Token generation lemah (`Math.random().toString(36)`) → ganti ke `crypto.randomBytes`
-  - Hardcoded DATABASE_URL di `server.ts` → wajib dari env var
   - Rotate NeonDB credentials (ada di git history)
