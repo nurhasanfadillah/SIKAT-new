@@ -11,9 +11,14 @@ export function useTransactions() {
     try {
       const res = await safeFetch('/api/transactions');
       if (res.ok) {
-        const data = await res.json();
-        setKas(data.kas || []);
-        setTalang(data.talang || []);
+        const contentType = res.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await res.json();
+          setKas(data.kas || []);
+          setTalang(data.talang || []);
+        } else {
+          console.warn('Expected JSON response from /api/transactions, got:', contentType);
+        }
       }
     } catch (error) {
       console.error('Failed to fetch transactions:', error);

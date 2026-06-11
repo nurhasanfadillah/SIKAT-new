@@ -37,7 +37,7 @@ export default function Layout() {
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-[#a855f7]/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Responsive Smartphone Device Container */}
-      <div className="w-full max-w-md md:h-[860px] h-screen md:rounded-[44px] bg-[#0c1221] flex flex-col md:border-8 md:border-[#1e293b] md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
+      <div className="w-full max-w-md md:h-[860px] h-screen md:rounded-3xl bg-[#0c1221] flex flex-col md:border-8 md:border-[#1e293b] md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
         
         {/* Device Camera Punch Hole / Speaker simulated (only visible on desktop wrapper) */}
         <div className="hidden md:flex absolute top-1.5 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#1e293b] rounded-full z-50 items-center justify-center">

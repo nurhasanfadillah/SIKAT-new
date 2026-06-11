@@ -1,10 +1,11 @@
-import { Card, CardContent } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import { useTransactions } from '../hooks/useTransactions';
 import { Wallet, CreditCard, ArrowUpRight, ArrowDownLeft, RefreshCw, Send, ListCollapse } from 'lucide-react';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
 import { TransaksiKas, TransaksiTalang } from '../types';
 import { Link } from 'react-router-dom';
+import { parseDateIgnoreTimezone, formatIgnoreTimezone } from '../lib/utils';
 
 export default function Dashboard() {
   const { kas, talang, loading } = useTransactions();
@@ -48,12 +49,12 @@ export default function Dashboard() {
   const allTransactions = [
     ...kas.map(t => ({ ...t, kind: 'kas' as const })),
     ...talang.map(t => ({ ...t, kind: 'talang' as const }))
-  ].sort((a, b) => new Date(b.tanggal).getTime() - new Date(a.tanggal).getTime()).slice(0, 4);
+  ].sort((a, b) => parseDateIgnoreTimezone(b.tanggal).getTime() - parseDateIgnoreTimezone(a.tanggal).getTime()).slice(0, 4);
 
   return (
     <div className="space-y-5">
       {/* Premium Gradient Hero Card (Fintech E-Wallet style) */}
-      <div className="relative overflow-hidden rounded-[26px] bg-gradient-to-br from-[#0a2540] via-[#093554] to-[#041221] p-5 border border-white/5 shadow-[0_15px_30px_rgba(4,18,33,0.5)]">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a2540] via-[#093554] to-[#041221] p-5 border border-white/5 shadow-[0_15px_30px_rgba(4,18,33,0.5)]">
         {/* Glow decorative effects inside hero */}
         <div className="absolute top-[-30%] right-[-10%] w-44 h-44 bg-[#00e5a3]/10 rounded-full blur-[50px] pointer-events-none" />
         <div className="absolute bottom-[-20%] left-[10%] w-36 h-36 bg-blue-500/10 rounded-full blur-[40px] pointer-events-none" />
@@ -239,7 +240,7 @@ export default function Dashboard() {
                           {tx.kind === 'kas' ? 'Kas' : `Talang ${((tx as TransaksiTalang).akun_talang)}`}
                         </span>
                         <span>•</span>
-                        <span>{format(new Date(tx.tanggal), 'dd MMM yy', { locale: id })}</span>
+                        <span>{formatIgnoreTimezone(tx.tanggal, 'dd MMM yy', { locale: id })}</span>
                       </span>
                     </div>
                   </div>

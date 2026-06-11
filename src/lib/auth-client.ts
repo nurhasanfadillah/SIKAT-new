@@ -42,12 +42,17 @@ export const authClient = {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password, name }),
         });
-        const data = await res.json();
-        if (!res.ok) {
-          return { error: { message: data.error || "Gagal registrasi" } };
+        const contentType = res.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await res.json();
+          if (!res.ok) {
+            return { error: { message: data.error || "Gagal registrasi" } };
+          }
+          authClient.setToken(data.token);
+          return { data };
+        } else {
+          return { error: { message: "Gagal registrasi: Server merespons format tidak valid" } };
         }
-        authClient.setToken(data.token);
-        return { data };
       } catch (err: any) {
         return { error: { message: err.message || "Gagal melakukan registrasi" } };
       }
@@ -62,12 +67,17 @@ export const authClient = {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
         });
-        const data = await res.json();
-        if (!res.ok) {
-          return { error: { message: data.error || "Email atau password salah" } };
+        const contentType = res.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await res.json();
+          if (!res.ok) {
+            return { error: { message: data.error || "Email atau password salah" } };
+          }
+          authClient.setToken(data.token);
+          return { data };
+        } else {
+          return { error: { message: "Gagal masuk: Server merespons format tidak valid" } };
         }
-        authClient.setToken(data.token);
-        return { data };
       } catch (err: any) {
         return { error: { message: err.message || "Gagal masuk" } };
       }

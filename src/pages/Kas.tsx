@@ -3,13 +3,22 @@ import { useTransactions } from '../hooks/useTransactions';
 import { useAuth } from '../contexts/AuthContext';
 import { useFeedback } from '../contexts/FeedbackContext';
 import { safeFetch } from '../lib/auth-client';
-import { Card, CardContent } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { format, endOfDay } from 'date-fns';
 import { id as localeId } from 'date-fns/locale';
-import { TrendingUp, TrendingDown, Plus, X, Calendar, Wallet, Layers, Search, SlidersHorizontal, RotateCcw, Filter, Edit2, Trash2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Plus, X, Calendar, Wallet, Search, SlidersHorizontal, RotateCcw, Edit2, Trash2 } from 'lucide-react';
+import { parseDateIgnoreTimezone, formatIgnoreTimezone } from '../lib/utils';
+
+const getLocalDateString = (dateInput: any) => {
+  const d = parseDateIgnoreTimezone(dateInput);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 export default function Kas() {
   const { kas, loading, refetch } = useTransactions();
@@ -21,7 +30,7 @@ export default function Kas() {
   const handleStartEdit = (t: any) => {
     setEditingId(t.id || null);
     setJenis(t.jenis);
-    setTanggal(new Date(t.tanggal).toISOString().split('T')[0]);
+    setTanggal(getLocalDateString(t.tanggal));
     if (t.jenis === 'Pemasukan') {
       setSumberDana(t.sumber_dana || 'BOS SD');
     } else {
@@ -30,14 +39,23 @@ export default function Kas() {
     setKeterangan(t.keterangan);
     setNominal(String(t.nominal));
     setShowForm(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Smoothly scroll to the form element
+    setTimeout(() => {
+      const formElement = document.getElementById('kas-action-form');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 100);
   };
 
   const handleCancelEdit = async () => {
-    if (keterangan.trim() || nominal.trim()) {
+    if (!editingId && (keterangan.trim() || nominal.trim())) {
       const isConfirmed = await confirm({
         title: 'Batalkan Catatan',
-        message: 'Apakah Anda yakin ingin membatalkan rekap keuangan ini? Semua data yang telah Anda ketik akan dibuang.',
+        message: 'Apakah Anda yakin ingin mematalkan rekap keuangan ini? Semua data yang telah Anda ketik akan dibuang.',
         confirmLabel: 'Ya, Batalkan',
         cancelLabel: 'Lanjut Mengisi',
         variant: 'warning'
@@ -159,10 +177,10 @@ export default function Kas() {
       
       let matchesDate = true;
       if (dateFrom) {
-         matchesDate = matchesDate && new Date(t.tanggal) >= new Date(dateFrom);
+         matchesDate = matchesDate && parseDateIgnoreTimezone(t.tanggal) >= parseDateIgnoreTimezone(dateFrom);
       }
       if (dateTo) {
-         matchesDate = matchesDate && new Date(t.tanggal) <= endOfDay(new Date(dateTo));
+         matchesDate = matchesDate && parseDateIgnoreTimezone(t.tanggal) <= endOfDay(parseDateIgnoreTimezone(dateTo));
       }
 
       let matchesJenis = true;
@@ -201,7 +219,11 @@ export default function Kas() {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
   };
 
-  const currentMonthTransactions = kas.filter(t => new Date(t.tanggal).getMonth() === new Date().getMonth());
+  const currentMonthTransactions = kas.filter(t => {
+    const d = parseDateIgnoreTimezone(t.tanggal);
+    const now = new Date();
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  });
   const pemasukanBulanIni = currentMonthTransactions.filter(t => t.jenis === 'Pemasukan').reduce((sum, t) => sum + t.nominal, 0);
   const pengeluaranBulanIni = currentMonthTransactions.filter(t => t.jenis === 'Pengeluaran').reduce((sum, t) => sum + t.nominal, 0);
 
@@ -274,24 +296,34 @@ export default function Kas() {
   return (
     <div className="space-y-4">
       {/* Modern Compact Flow Highlights */}
-      <div className="grid grid-cols-3 gap-2">
-        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
-          <span className="text-[9px] font-bold text-slate-400 uppercase">Saldo Kas</span>
-          <span className="text-[13px] font-bold text-white leading-tight mt-1 truncate">
-            {formatCurrency(kasBalance)}
-          </span>
+      <div className="flex flex-col gap-2">
+        {/* Baris 1: Saldo Kas */}
+        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-3.5 flex items-center justify-between gap-3">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">Saldo Kas</span>
+            <span className="text-[18px] font-extrabold text-white leading-tight mt-1 truncate">
+              {formatCurrency(kasBalance)}
+            </span>
+          </div>
+          <div className="p-2 rounded-xl bg-violet-500/10 text-violet-400 border border-violet-500/20 shrink-0">
+            <Wallet className="h-5 w-5" />
+          </div>
         </div>
-        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
-          <span className="text-[9px] font-bold text-emerald-400 uppercase">In (Bulan ini)</span>
-          <span className="text-[13px] font-bold text-emerald-400 leading-tight mt-1 truncate">
-            {formatCurrency(pemasukanBulanIni)}
-          </span>
-        </div>
-        <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
-          <span className="text-[9px] font-bold text-rose-400 uppercase">Out (Bulan ini)</span>
-          <span className="text-[13px] font-bold text-rose-400 leading-tight mt-1 truncate">
-            {formatCurrency(pengeluaranBulanIni)}
-          </span>
+
+        {/* Baris 2: In (Bulan ini) + Out (Bulan ini) */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
+            <span className="text-[9px] font-bold text-emerald-400 uppercase">In (Bulan ini)</span>
+            <span className="text-[13px] font-bold text-emerald-400 leading-tight mt-1 truncate">
+              {formatCurrency(pemasukanBulanIni)}
+            </span>
+          </div>
+          <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-2.5 flex flex-col justify-between">
+            <span className="text-[9px] font-bold text-rose-400 uppercase">Out (Bulan ini)</span>
+            <span className="text-[13px] font-bold text-rose-450 leading-tight mt-1 truncate">
+              {formatCurrency(pengeluaranBulanIni)}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -313,7 +345,7 @@ export default function Kas() {
       </div>
 
       {showForm && isBendahara && (
-        <Card className="bg-[#161d30]/90 border border-emerald-500/20 rounded-2xl p-4 shadow-xl animate-in fade-in slide-in-from-top-3 duration-200">
+        <Card id="kas-action-form" className="bg-[#161d30]/90 border border-emerald-500/20 rounded-2xl p-4 shadow-xl animate-in fade-in slide-in-from-top-3 duration-200">
           <h3 className="text-sm font-bold text-emerald-400 mb-3 flex items-center gap-1.5 border-b border-white/5 pb-2">
             <Wallet className="h-4 w-4" /> {editingId ? 'Ubah Catatan Aliran' : 'Catat Aliran Baru'}
           </h3>
@@ -538,8 +570,6 @@ export default function Kas() {
                 <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Pilihan Waktu Cepat</Label>
                 <div className="flex flex-wrap gap-1.5">
                   {[
-                    { label: 'Semua Waktu', value: 'Semua' },
-                    { label: 'Hari Ini', value: 'Hari Ini' },
                     { label: 'Bulan Ini', value: 'Bulan Ini' },
                     { label: '30 Hari Terakhir', value: '30_hari' }
                   ].map((preset) => (
@@ -565,7 +595,6 @@ export default function Kas() {
                   <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Rentang Tanggal Kustom</Label>
                   <div className="flex items-center gap-1.5">
                     <div className="relative flex-1">
-                      <Calendar className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-500" />
                       <Input 
                         type="date"
                         value={dateFrom}
@@ -573,12 +602,11 @@ export default function Kas() {
                           setDateFrom(e.target.value);
                           setQuickDate('Custom');
                         }}
-                        className="pl-7 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-emerald-500 [color-scheme:dark]"
+                        className="px-2 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-emerald-500 [color-scheme:dark]"
                       />
                     </div>
                     <span className="text-slate-500 text-xs">-</span>
                     <div className="relative flex-1">
-                      <Calendar className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-500" />
                       <Input 
                         type="date"
                         value={dateTo}
@@ -586,7 +614,7 @@ export default function Kas() {
                           setDateTo(e.target.value);
                           setQuickDate('Custom');
                         }}
-                        className="pl-7 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-emerald-500 [color-scheme:dark]"
+                        className="px-2 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-emerald-500 [color-scheme:dark]"
                       />
                     </div>
                   </div>
@@ -684,10 +712,14 @@ export default function Kas() {
             return (
               <div 
                 key={t.id} 
-                className="p-3 rounded-2xl bg-[#121829]/60 border border-white/5 hover:border-white/10 transition-colors flex items-center justify-between gap-3"
+                className={`p-3 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 items-center ${
+                  editingId === t.id 
+                    ? 'border-emerald-500 bg-[#121829]/95 shadow-[0_0_15px_rgba(16,185,129,0.15)]' 
+                    : 'border-white/5 hover:border-white/10'
+                }`}
               >
-                <div className="flex items-center gap-3 overflow-hidden">
-                  {/* Ledger Indicators */}
+                {/* Kolom 1: baris 1, 2 merge center - Icon */}
+                <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex items-center justify-center self-center">
                   <div className={`p-2 rounded-xl shrink-0 border ${
                     isPemasukan 
                       ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/10' 
@@ -695,29 +727,39 @@ export default function Kas() {
                   }`}>
                     {isPemasukan ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
                   </div>
-                  <div className="flex flex-col truncate">
-                    <span className="text-[12px] font-bold text-slate-100 truncate leading-tight">
-                      {t.keterangan}
-                    </span>
-                    <div className="flex flex-wrap items-center gap-x-1.5 text-[9px] text-slate-400 mt-1">
-                      <span className="bg-white/5 px-1.5 py-0.5 rounded text-white border border-white/5">
-                        {isPemasukan ? t.sumber_dana : t.kategori}
-                      </span>
-                      <span>•</span>
-                      <span>{format(new Date(t.tanggal), 'dd MMM yyyy', { locale: localeId })}</span>
-                    </div>
-                  </div>
                 </div>
 
-                <div className="flex items-center gap-2.5 shrink-0">
-                  <div className="text-right">
-                    <span className={`text-[12px] font-bold block ${isPemasukan ? 'text-emerald-400' : 'text-slate-100'}`}>
-                      {isPemasukan ? '+' : '-'}{formatCurrency(t.nominal)}
-                    </span>
-                  </div>
+                {/* Kolom 2, 3 (merge): baris 1 - Keterangan */}
+                <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0">
+                  <span className="text-[12px] font-bold text-slate-100 block truncate leading-tight">
+                    {t.keterangan}
+                  </span>
+                </div>
 
-                  {isBendahara && (
-                    <div className="flex items-center gap-1 border-l border-white/10 pl-2">
+                {/* Kolom 2: baris 2 - Tanggal + Unit */}
+                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-wrap items-center gap-x-1.5 text-[9px] text-slate-400">
+                  <span className="bg-white/5 px-1.5 py-0.5 rounded text-white border border-white/5">
+                    {isPemasukan ? t.sumber_dana : t.kategori}
+                  </span>
+                  <span>•</span>
+                  <span>{formatIgnoreTimezone(t.tanggal, 'dd MMM yyyy', { locale: localeId })}</span>
+                </div>
+
+                {/* Kolom 2: baris 3 - Nominal */}
+                <div className="col-start-2 col-end-3 row-start-3 row-end-4">
+                  <span className={`text-[12px] font-bold block ${isPemasukan ? 'text-emerald-400' : 'text-slate-100'}`}>
+                    {isPemasukan ? '+' : '-'}{formatCurrency(t.nominal)}
+                  </span>
+                </div>
+
+                {/* Kolom 3: baris 2, 3 (merge) - Icon Action */}
+                {isBendahara ? (
+                  t.kategori === 'Pelunasan Dana Talang' ? (
+                    <div className="col-start-3 col-end-4 row-start-2 row-end-4 pr-1 text-[10px] text-slate-500 italic text-right self-center">
+                      Kelola di Dana Talang
+                    </div>
+                  ) : (
+                    <div className="col-start-3 col-end-4 row-start-2 row-end-4 flex items-center justify-end self-center border-l border-white/10 pl-2 h-full py-1">
                       <button 
                         onClick={() => handleStartEdit(t)}
                         className="p-1.5 rounded-lg text-slate-400 hover:text-emerald-400 hover:bg-white/5 transition-colors"
@@ -744,8 +786,10 @@ export default function Kas() {
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>
                     </div>
-                  )}
-                </div>
+                  )
+                ) : (
+                  <div className="col-start-3 col-end-4 row-start-2 row-end-4" />
+                )}
               </div>
             );
           })}

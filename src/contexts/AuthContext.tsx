@@ -32,8 +32,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const res = await safeFetch('/api/user/profile');
         if (res.ok) {
-          const data = await res.json();
-          setProfile(data);
+          const contentType = res.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) {
+            const data = await res.json();
+            setProfile(data);
+          } else {
+            console.warn('Expected JSON response from /api/user/profile, got:', contentType);
+            setProfile(null);
+          }
         } else {
           setProfile(null);
         }

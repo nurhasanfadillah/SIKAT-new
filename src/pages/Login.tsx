@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { authClient } from '../lib/auth-client';
-import { Wallet, Key, Mail, UserPlus, LogIn, Sparkles } from 'lucide-react';
+import { Wallet, UserPlus, LogIn, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
+import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 
@@ -66,7 +66,7 @@ export default function Login() {
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-[#a855f7]/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Glassmorphic device card wrapper */}
-      <Card className="w-full max-w-sm bg-[#0c1221] border border-white/5 backdrop-blur-xl relative z-10 text-white rounded-[32px] p-6 shadow-2xl ring-1 ring-white/5">
+      <Card className="w-full max-w-sm bg-[#0c1221] border border-white/5 backdrop-blur-xl relative z-10 text-white rounded-2xl p-6 shadow-2xl ring-1 ring-white/5">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3">
             <div className="w-12 h-12 bg-gradient-to-tr from-[#00d2ff] to-[#00f5a0] rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,245,160,0.3)] text-slate-950 font-black text-lg">
