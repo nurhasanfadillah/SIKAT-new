@@ -74,5 +74,5 @@ Resume file: .paul/ROADMAP.md
 
 ### Git State
 Branch: main
-Last commit: d2266ec (feat(06-color-system): complete semantic token migration — seluruh app bebas hardcoded hex)
+Last commit: 331fafb (feat(07-spacing-typography): complete typography & spacing system — v0.7)
 Feature branches merged: none
