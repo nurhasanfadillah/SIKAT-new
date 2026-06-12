@@ -21,6 +21,7 @@ export default defineConfig(() => {
           display: 'standalone',
           start_url: '/',
           scope: '/',
+          categories: ['finance', 'education', 'productivity'],
           icons: [
             {
               src: 'pwa-64x64.png',
@@ -47,6 +48,8 @@ export default defineConfig(() => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+          navigateFallback: '/offline.html',
+          navigateFallbackAllowlist: [/^(?!\/api\/).*/],
           runtimeCaching: [
             {
               urlPattern: /^\/api\//,

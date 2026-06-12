@@ -31,13 +31,13 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-app font-sans flex items-center justify-center p-0 md:p-6 text-slate-100 relative overflow-hidden">
+    <div className="min-h-dvh bg-surface-app font-sans flex items-center justify-center p-0 md:p-6 text-slate-100 relative overflow-hidden">
       {/* Decorative Blur Orbs */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Responsive Smartphone Device Container */}
-      <div className="w-full max-w-md md:h-[860px] h-screen md:rounded-3xl bg-surface-panel flex flex-col md:border-8 md:border-slate-800 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
+      <div className="w-full max-w-md md:h-[860px] h-dvh md:rounded-3xl bg-surface-panel flex flex-col md:border-8 md:border-slate-800 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
 
         {/* Device Camera Punch Hole / Speaker simulated (only visible on desktop wrapper) */}
         <div className="hidden md:flex absolute top-1.5 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-full z-50 items-center justify-center">
@@ -48,6 +48,8 @@ export default function Layout() {
         {/* Custom Mobile Header Bar */}
         <header className="sticky top-0 z-40 bg-surface-panel/95 backdrop-blur-md border-b border-white/5 pt-5 md:pt-9 pb-3 px-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            {/* App Logo */}
+            <img src="/logo.svg" alt="SIKAT" className="h-8 w-8 flex-shrink-0" />
             {/* Quick Avatar Initials */}
             <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-grd-start to-grd-end flex items-center justify-center font-bold text-surface-panel text-sm shadow-[0_0_15px_rgba(0,245,160,0.3)]">
               {profile?.nama?.[0]?.toUpperCase() || 'U'}
@@ -88,7 +90,7 @@ export default function Layout() {
         </div>
 
         {/* Scrollable View Area */}
-        <main className="flex-1 overflow-y-auto px-4 pb-24 pt-2 no-scrollbar scroll-smooth">
+        <main className="flex-1 overflow-y-auto px-4 pb-20 pt-2 no-scrollbar scroll-smooth">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -96,7 +98,7 @@ export default function Layout() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="pb-4"
+              className=""
             >
               <Outlet />
             </motion.div>

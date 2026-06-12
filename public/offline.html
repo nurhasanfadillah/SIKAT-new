@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIKAT — Offline</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
+    img.logo { width: 96px; height: 96px; margin-bottom: 0.5rem; opacity: 0.9; }
+    h1 { font-size: 1.5rem; font-weight: 700; color: #f8fafc; }
+    p { font-size: 0.875rem; color: #94a3b8; max-width: 320px; line-height: 1.6; }
+    .hint {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="/logo.svg" alt="SIKAT">
+  <h1>Anda sedang offline</h1>
+  <p>Periksa koneksi internet Anda dan coba lagi. Aplikasi akan otomatis terhubung kembali saat jaringan tersedia.</p>
+  <p class="hint">Pastikan Wi-Fi atau data seluler Anda aktif</p>
+</body>
+</html>

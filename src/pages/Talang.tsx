@@ -361,6 +361,7 @@ export default function Talang() {
   // Quick Action Fill to pay back the remaining balance
   const initiateQuickRepayment = (akun: AkunTalang, balance: number) => {
     if (!isBendahara) return;
+    setAkunFilter('Semua');
     setJenis('Pelunasan');
     setAkunTalang(akun);
     setNominal(String(balance));
@@ -368,14 +369,6 @@ export default function Talang() {
     setTanggal(new Date().toISOString().split('T')[0]);
     setEditingId(null);
     setShowForm(true);
-
-    // Scroll to form smoothly
-    setTimeout(() => {
-      const formElement = document.getElementById('talang-action-form');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -1162,7 +1155,7 @@ export default function Talang() {
         </div>
 
         {/* List of transactions */}
-        <div className="space-y-2 max-h-[500px] overflow-y-auto no-scrollbar pr-0.5">
+        <div className={`space-y-2 overflow-y-auto no-scrollbar pr-0.5 ${showForm ? 'max-h-[300px]' : 'max-h-[500px]'}`}>
           {filteredTalang.map((t) => {
             let bgTheme = "text-violet-400 bg-violet-400/10 border-violet-400/15";
             let Icon = ArrowUpRight;

@@ -84,3 +84,31 @@
 **Status:** Complete (2026-06-12) | **Plans:** 2/2
 - Plan 05-01: SVG icon design + @vite-pwa/assets-generator setup + manifest/index.html update
 - Plan 05-02: React SplashScreen component (Framer Motion) + App.tsx integration
+
+---
+
+## Milestone v0.8 — Logo & Branding Polish ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 08 — Logo & Branding ✅
+**Status:** Complete (2026-06-13) | **Plans:** 1/1
+- Plan 08-01: Logo di header Layout + Login, SplashScreen SVG redesign, logo-mono.svg, favicon auto-generate, Apple Touch verification
+
+---
+
+## Milestone v0.9 — PWA Installation Polish ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 09 — PWA Installation Polish ✅
+**Status:** Complete (2026-06-13) | **Plans:** 2/2
+- Plan 09-01: Custom install prompt dengan `beforeinstallprompt` + `useRegisterSW` + offline fallback page + update notification toast
+- Plan 09-02: Manifest categories + favicon consolidation + INTEGRATIONS.md PWA section
+- Plan 09-02: Manifest enhancements (categories, screenshots) + favicon consolidation + INTEGRATIONS.md PWA section
+
+---
+
+*Last updated: 2026-06-13*

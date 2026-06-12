@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { authClient } from '../lib/auth-client';
-import { Wallet, UserPlus, LogIn, Sparkles } from 'lucide-react';
+import { UserPlus, LogIn, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -69,9 +69,7 @@ export default function Login() {
       <Card className="w-full max-w-sm bg-surface-panel border border-white/5 backdrop-blur-xl relative z-10 text-white rounded-2xl p-6 shadow-2xl ring-1 ring-white/5">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3">
-            <div className="w-12 h-12 bg-gradient-to-tr from-grd-start to-grd-end rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,245,160,0.3)] text-text-inverse font-black text-lg">
-              <Wallet className="h-6 w-6" />
-            </div>
+            <img src="/logo.svg" alt="SIKAT" className="h-16 w-16 drop-shadow-[0_0_20px_rgba(0,245,160,0.25)]" />
           </div>
           <h1 className="text-2xl font-black tracking-tight text-white mb-1">
             &lt;SIKAT&gt;

@@ -65,6 +65,38 @@
 **CI Pipeline:**
 - Not detected (no `.github/workflows/`, no CI config files)
 
+## PWA (Progressive Web App)
+
+**Plugin:** vite-plugin-pwa v1.3.0 (generateSW strategy)
+
+**Service Worker:**
+- Auto-generated via Workbox at build time (`dist/sw.js`)
+- `registerType: 'autoUpdate'` — automatic updates without user prompt
+- Precache: 21 entries (all JS/CSS/HTML/icons)
+- Runtime cache: `NetworkFirst` for `/api/*` (10s timeout, 50 entries, 300s TTL)
+
+**Offline Support:**
+- `navigateFallback: '/offline.html'` — branded fallback page when network unavailable
+- Allowlist excludes `/api/*` from navigation interception
+
+**Manifest:**
+- `manifest.webmanifest` generated at build, injected into index.html
+- `display: standalone` — native app experience
+- Theme/bg color: `#2563EB` (brand blue)
+- Categories: finance, education, productivity
+
+**Icons:**
+- Generated from `public/logo.svg` via `@vite-pwa/assets-generator` (`minimal2023Preset`)
+- Sizes: 64x64, 192x192, 512x512 (standard) + 512x512 (maskable)
+- Apple Touch: 180x180
+
+**UX Components:**
+- **SplashScreen** (`src/components/SplashScreen.tsx`) — Framer Motion, 2.5s display, renders before AuthProvider
+- **ReloadPrompt** (`src/components/ReloadPrompt.tsx`) — toast "Versi baru tersedia" via `useRegisterSW`
+- **InstallPrompt** (`src/components/InstallPrompt.tsx`) — floating install button via `beforeinstallprompt`
+
+**Build Script:** `npm run pwa:assets` regenerates all PWA icon sizes from source SVG.
+
 ## Environment Configuration
 
 **Development:**

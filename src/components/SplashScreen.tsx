@@ -15,9 +15,9 @@ export function SplashScreen({ visible }: SplashScreenProps) {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-surface-base"
         >
           <img
-            src="/pwa-512x512.png"
+            src="/logo.svg"
             alt="SIKAT"
-            className="w-24 h-24 mb-6 rounded-2xl shadow-lg"
+            className="w-28 h-28 mb-6 drop-shadow-2xl"
           />
           <p className="text-white text-2xl font-bold tracking-widest">SIKAT</p>
           <p className="text-brand-300 text-sm mt-2 tracking-wide">

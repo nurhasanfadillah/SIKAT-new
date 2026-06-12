@@ -6,6 +6,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { SplashScreen } from './components/SplashScreen';
+import { ReloadPrompt } from './components/ReloadPrompt';
+import { InstallPrompt } from './components/InstallPrompt';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { FeedbackProvider } from './contexts/FeedbackContext';
 import Layout from './components/Layout';
@@ -33,6 +35,8 @@ export default function App() {
   return (
     <>
       <SplashScreen visible={showSplash} />
+      <ReloadPrompt />
+      <InstallPrompt />
       <AuthProvider>
         <FeedbackProvider>
           <Router>
