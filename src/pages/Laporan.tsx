@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { id as localeId } from 'date-fns/locale';
 import { BarChart3, Users, AlertTriangle, Wallet, Building2, Receipt } from 'lucide-react';
 import { formatIgnoreTimezone } from '../lib/utils';
+import { tokens } from '../lib/tokens';
 
 export default function Laporan() {
   const { kas, talang, loading } = useTransactions();
@@ -13,7 +14,7 @@ export default function Laporan() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
-        <div className="h-10 w-10 border-4 border-emerald-500/30 border-t-emerald-400 rounded-full animate-spin" />
+        <div className="h-10 w-10 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
         <span className="text-sm text-slate-400">Menyusun Analitik...</span>
       </div>
     );
@@ -35,7 +36,7 @@ export default function Laporan() {
     acc[month][curr.jenis] += curr.nominal;
     return acc;
   }, {});
-  
+
   const chartData = Object.values(kasByMonth).reverse();
 
   // Process Talang Data
@@ -61,31 +62,31 @@ export default function Laporan() {
       {/* Dynamic Cards Layout */}
       <div className="space-y-3">
         {/* Baris 1: Bersih Sikat */}
-        <div className="bg-gradient-to-br from-emerald-500/10 via-[#121829]/90 to-[#121829]/95 border border-emerald-500/20 rounded-2xl p-4 flex items-center justify-between shadow-lg shadow-emerald-950/10 relative overflow-hidden group">
-          <div className="absolute right-0 top-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-br from-brand-500/10 via-surface-card/90 to-surface-card/95 border border-brand-500/20 rounded-2xl p-4 flex items-center justify-between shadow-lg shadow-brand-500/5 relative overflow-hidden group">
+          <div className="absolute right-0 top-0 w-32 h-32 bg-brand-500/5 rounded-full blur-3xl pointer-events-none" />
           <div className="space-y-1 z-10">
             <div className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[10px] font-bold text-emerald-400 tracking-wider uppercase">Bersih SIKAT</span>
+              <span className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
+              <span className="text-[10px] font-bold text-brand-500 tracking-wider uppercase">Bersih SIKAT</span>
             </div>
             <h2 className="text-2xl font-black text-white tracking-tight">
               {formatCurrency(saldoBersih)}
             </h2>
             <p className="text-[9px] text-slate-400 font-medium">Dana bersih lembaga siap sikat setelah dikurangi utang talang</p>
           </div>
-          <div className="h-11 w-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 z-10">
-            <Wallet className="h-5 w-5 text-emerald-400" />
+          <div className="h-11 w-11 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center shrink-0 z-10">
+            <Wallet className="h-5 w-5 text-brand-500" />
           </div>
         </div>
 
         {/* Baris 2: Kas Lembaga & Hutang Talang */}
         <div className="grid grid-cols-2 gap-3">
           {/* Kas Lembaga */}
-          <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
+          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[9.5px] font-bold text-slate-400 tracking-wider uppercase">Kas Lembaga</span>
-              <div className="h-6 w-6 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                <Building2 className="h-3.5 w-3.5 text-emerald-400" />
+              <div className="h-6 w-6 rounded-lg bg-brand-500/10 flex items-center justify-center">
+                <Building2 className="h-3.5 w-3.5 text-brand-500" />
               </div>
             </div>
             <div className="space-y-0.5">
@@ -97,7 +98,7 @@ export default function Laporan() {
           </div>
 
           {/* Hutang Talang */}
-          <div className="bg-[#121829]/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
+          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[9.5px] font-bold text-rose-400 tracking-wider uppercase">Hutang Talang</span>
               <div className="h-6 w-6 rounded-lg bg-rose-500/10 flex items-center justify-center">
@@ -116,15 +117,15 @@ export default function Laporan() {
 
       {/* Main Tabs Container */}
       <Tabs defaultValue="kas" className="w-full space-y-3">
-        <TabsList className="grid w-full grid-cols-2 bg-slate-900/60 p-1 rounded-xl border border-white/5 h-auto">
-          <TabsTrigger 
-            value="kas" 
-            className="data-[state=active]:bg-emerald-500 data-[state=active]:text-slate-950 text-slate-400 text-xs py-1.5 rounded-lg font-bold"
+        <TabsList className="grid w-full grid-cols-2 bg-surface-card/60 p-1 rounded-xl border border-white/5 h-auto">
+          <TabsTrigger
+            value="kas"
+            className="data-[state=active]:bg-brand-500 data-[state=active]:text-text-inverse text-slate-400 text-xs py-1.5 rounded-lg font-bold"
           >
             Arus Kas Utama
           </TabsTrigger>
-          <TabsTrigger 
-            value="talang" 
+          <TabsTrigger
+            value="talang"
             className="data-[state=active]:bg-violet-500 data-[state=active]:text-white text-slate-400 text-xs py-1.5 rounded-lg font-bold"
           >
             Sensus Dana Talang
@@ -132,10 +133,10 @@ export default function Laporan() {
         </TabsList>
 
         <TabsContent value="kas" className="outline-none">
-          <Card className="bg-[#121829]/40 border-white/5 rounded-2xl p-4 overflow-hidden">
+          <Card className="bg-surface-card/40 border-white/5 rounded-2xl p-4 overflow-hidden">
             <div className="flex flex-col mb-4">
               <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
-                <BarChart3 className="h-4 w-4 text-emerald-400" /> Tren Transaksi Bulanan
+                <BarChart3 className="h-4 w-4 text-brand-500" /> Tren Transaksi Bulanan
               </h3>
               <p className="text-[9px] text-slate-500 mt-0.5">Komparasi kredit & debit instansi terpusat</p>
             </div>
@@ -144,26 +145,26 @@ export default function Laporan() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" opacity={0.3} />
-                  <XAxis 
-                    dataKey="name" 
-                    stroke="#475569" 
-                    fontSize={9} 
-                    tickLine={false} 
+                  <XAxis
+                    dataKey="name"
+                    stroke="#475569"
+                    fontSize={9}
+                    tickLine={false}
                   />
-                  <YAxis 
-                    stroke="#475569" 
-                    fontSize={9} 
-                    tickLine={false} 
+                  <YAxis
+                    stroke="#475569"
+                    fontSize={9}
+                    tickLine={false}
                     tickFormatter={(val) => `Rp${val >= 1000000 ? (val/1000000).toFixed(0) + 'jt' : val}`}
                   />
-                  <Tooltip 
-                    contentStyle={{ backgroundColor: '#131c31', borderColor: 'rgba(255,255,255,0.05)', borderRadius: '6px' }}
+                  <Tooltip
+                    contentStyle={{ backgroundColor: tokens.colors.surface.overlay, borderColor: 'rgba(255,255,255,0.05)', borderRadius: '6px' }}
                     itemStyle={{ color: '#fff', fontSize: '11px' }}
                     labelStyle={{ color: '#94a3b8', fontWeight: 'bold' }}
                     formatter={(val: number) => [formatCurrency(val), '']}
                   />
-                  <Bar dataKey="Pemasukan" fill="#00e5a3" radius={[3, 3, 0, 0]} maxBarSize={30} />
-                  <Bar dataKey="Pengeluaran" fill="#f43f5e" radius={[3, 3, 0, 0]} maxBarSize={30} />
+                  <Bar dataKey="Pemasukan" fill={tokens.colors.chart.pemasukan} radius={[3, 3, 0, 0]} maxBarSize={30} />
+                  <Bar dataKey="Pengeluaran" fill={tokens.colors.chart.pengeluaran} radius={[3, 3, 0, 0]} maxBarSize={30} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -171,11 +172,11 @@ export default function Laporan() {
             {/* Micro Legenda Indicator */}
             <div className="flex justify-center items-center gap-4 mt-3 pt-3 border-t border-white/5">
               <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-[#00e5a3]" />
+                <span className="h-2 w-2 rounded-full bg-brand-500" />
                 <span className="text-[10px] font-bold text-slate-300">Pemasukan</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-[#f43f5e]" />
+                <span className="h-2 w-2 rounded-full bg-rose-500" />
                 <span className="text-[10px] font-bold text-slate-300">Pengeluaran</span>
               </div>
             </div>
@@ -183,7 +184,7 @@ export default function Laporan() {
         </TabsContent>
 
         <TabsContent value="talang" className="outline-none">
-          <Card className="bg-[#121829]/40 border-white/5 rounded-2xl p-4 overflow-hidden space-y-4">
+          <Card className="bg-surface-card/40 border-white/5 rounded-2xl p-4 overflow-hidden space-y-4">
             <div className="flex flex-col">
               <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
                 <Users className="h-4 w-4 text-violet-400" /> Kewajiban Outstanding Aktif
@@ -195,9 +196,9 @@ export default function Laporan() {
               {Object.entries(talangBalances).map(([akun, balance]) => {
                 const totalHutangRekomendasi = 4000000; // Mock limit limit
                 const persentasi = Math.min(100, (balance / totalHutangRekomendasi) * 100);
-                
+
                 return (
-                  <div key={akun} className="p-3 bg-[#111625]/60 hover:border-white/10 transition-colors rounded-xl border border-white/5 space-y-2">
+                  <div key={akun} className="p-3 bg-surface-card/60 hover:border-white/10 transition-colors rounded-xl border border-white/5 space-y-2">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
                         <div className="h-6 w-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-200 text-[10px]">
@@ -211,7 +212,7 @@ export default function Laporan() {
                     {/* Progress tracking indicator */}
                     <div className="space-y-1">
                       <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                        <div 
+                        <div
                           style={{ width: `${persentasi}%` }}
                           className={`h-full rounded-full transition-all duration-500 ${
                             balance > 2500000 ? 'bg-rose-500' : 'bg-violet-400'
@@ -245,4 +246,3 @@ export default function Laporan() {
     </div>
   );
 }
-

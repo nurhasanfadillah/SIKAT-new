@@ -49,16 +49,16 @@
 
 ---
 
-## Milestone v0.6 — Color System (In Progress)
+## Milestone v0.6 — Color System ✅
 
-**Status:** In progress
-**Progress:** 0/1 phases complete — 0%
+**Status:** Complete (2026-06-12)
+**Progress:** 1/1 phases complete — 100%
 
-### Phase 06 — Color System 🔄
-**Status:** Planning | **Plans:** 0/3
-- Plan 06-01: Token foundation (@theme) + UI components (button, input, tabs, card, SplashScreen)
-- Plan 06-02: Layout.tsx + Login.tsx migration
-- Plan 06-03: Pages — Dashboard, Kas, Talang, Laporan + CHART_COLORS
+### Phase 06 — Color System ✅
+**Status:** Complete (2026-06-12) | **Plans:** 3/3
+- Plan 06-01: 25 semantic tokens (@theme Tailwind v4) + 5 UI components + SplashScreen migrated
+- Plan 06-02: Layout.tsx + Login.tsx — 19 hex/emerald-* removed; 2 WCAG violations fixed
+- Plan 06-03: Dashboard, Kas, Talang, Laporan — semua emerald-*/hex → brand-*; recharts via tokens.ts
 
 ---
 

@@ -10,23 +10,23 @@ import { Label } from '../components/ui/label';
 import { format, endOfDay } from 'date-fns';
 import { id as localeId } from 'date-fns/locale';
 import { parseDateIgnoreTimezone, formatIgnoreTimezone } from '../lib/utils';
-import { 
-  Plus, 
-  X, 
-  ArrowLeftRight, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  Search, 
-  Calendar, 
-  SlidersHorizontal, 
-  RotateCcw, 
-  Edit2, 
-  Trash2, 
-  Coins, 
-  TrendingUp, 
-  Info, 
-  Percent, 
-  CheckCircle2, 
+import {
+  Plus,
+  X,
+  ArrowLeftRight,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Search,
+  Calendar,
+  SlidersHorizontal,
+  RotateCcw,
+  Edit2,
+  Trash2,
+  Coins,
+  TrendingUp,
+  Info,
+  Percent,
+  CheckCircle2,
   AlertCircle,
   ArrowUp,
   ArrowDown
@@ -37,9 +37,9 @@ import { AkunTalang, JenisTalang } from '../types';
 function getTerbilang(num: number): string {
   if (num <= 0) return '';
   if (num > 1000000000000) return 'Nominal terlalu besar (di atas 1 Triliun)';
-  
+
   const words = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
-  
+
   function konversi(n: number): string {
     let temp = "";
     if (n < 12) {
@@ -65,7 +65,7 @@ function getTerbilang(num: number): string {
     }
     return temp;
   }
-  
+
   const hasil = konversi(num).trim().replace(/\s+/g, " ");
   if (!hasil) return '';
   return hasil.charAt(0).toUpperCase() + hasil.slice(1) + " rupiah";
@@ -132,7 +132,7 @@ export default function Talang() {
     setKeterangan(t.keterangan);
     setNominal(String(t.nominal));
     setShowForm(true);
-    
+
     // Smoothly scroll to the form element
     setTimeout(() => {
       const formElement = document.getElementById('talang-action-form');
@@ -201,7 +201,7 @@ export default function Talang() {
   const handleQuickDateChange = (preset: string) => {
     setQuickDate(preset);
     const today = new Date();
-    
+
     if (preset === 'Semua') {
       setDateFrom('');
       setDateTo('');
@@ -225,11 +225,11 @@ export default function Talang() {
   };
 
   const isAnyFilterActive = useMemo(() => {
-    return searchTerm !== '' || 
-           dateFrom !== '' || 
-           dateTo !== '' || 
-           jenisFilter !== 'Semua' || 
-           akunFilter !== 'Semua' || 
+    return searchTerm !== '' ||
+           dateFrom !== '' ||
+           dateTo !== '' ||
+           jenisFilter !== 'Semua' ||
+           akunFilter !== 'Semua' ||
            unitFilter !== 'Semua' ||
            quickDate !== 'Semua';
   }, [searchTerm, dateFrom, dateTo, jenisFilter, akunFilter, unitFilter, quickDate]);
@@ -248,11 +248,11 @@ export default function Talang() {
   const filteredTalang = useMemo(() => {
     const matched = talang.filter(t => {
       const s = searchTerm.toLowerCase();
-      const matchesSearch = t.keterangan.toLowerCase().includes(s) || 
+      const matchesSearch = t.keterangan.toLowerCase().includes(s) ||
                             t.akun_talang.toLowerCase().includes(s) ||
                             (t.akun_tujuan && t.akun_tujuan.toLowerCase().includes(s)) ||
                             (t.unit && t.unit.toLowerCase().includes(s));
-      
+
       let matchesDate = true;
       if (dateFrom) {
          matchesDate = matchesDate && parseDateIgnoreTimezone(t.tanggal) >= parseDateIgnoreTimezone(dateFrom);
@@ -332,8 +332,8 @@ export default function Talang() {
     });
 
     const outstanding = Math.max(0, talangBalances.Jisoi) + Math.max(0, talangBalances.Rakka) + Math.max(0, talangBalances.Shae);
-    const progressPercent = pinjamanBaru > 0 
-      ? Math.min(100, Math.round((pelunasanBayar / pinjamanBaru) * 100)) 
+    const progressPercent = pinjamanBaru > 0
+      ? Math.min(100, Math.round((pelunasanBayar / pinjamanBaru) * 100))
       : 100;
 
     return {
@@ -368,7 +368,7 @@ export default function Talang() {
     setTanggal(new Date().toISOString().split('T')[0]);
     setEditingId(null);
     setShowForm(true);
-    
+
     // Scroll to form smoothly
     setTimeout(() => {
       const formElement = document.getElementById('talang-action-form');
@@ -408,7 +408,7 @@ export default function Talang() {
 
     // Client-side simulation of account balances to prevent any balance from going negative
     const simulatedBalances: Record<AkunTalang, number> = { Jisoi: 0, Rakka: 0, Shae: 0 };
-    
+
     // Build simulated transactions list
     const otherTransactions = talang.filter(t => t.id !== editingId);
     const mockTx = {
@@ -417,9 +417,9 @@ export default function Talang() {
       akun_tujuan: jenis === 'Transfer' ? akunTujuan : undefined,
       nominal: parsedNominal
     };
-    
+
     const allSimulatedTxs = [...otherTransactions, mockTx];
-    
+
     allSimulatedTxs.forEach((t) => {
       if (t.jenis === 'Baru') {
         simulatedBalances[t.akun_talang] += t.nominal;
@@ -480,7 +480,7 @@ export default function Talang() {
       }
 
       await refetch();
-      
+
       toast.success(
         editingId ? 'Alokasi dan rincian talangan berhasil disesuaikan.' : 'Catatan kewajiban dana talangan baru berhasil diaktifkan.',
         'Kewajiban Disimpan'
@@ -515,7 +515,7 @@ export default function Talang() {
       <Card className="bg-gradient-to-br from-violet-900/30 via-indigo-950/20 to-slate-900/60 border border-violet-500/20 rounded-3xl p-4 shadow-xl relative overflow-hidden">
         {/* Abstract design elements */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 rounded-full blur-2xl pointer-events-none" />
-        
+
         <div className="flex justify-between items-start">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-violet-300 uppercase tracking-widest flex items-center gap-1">
@@ -543,23 +543,23 @@ export default function Talang() {
             </div>
             <div className="h-2.5 w-full rounded-full bg-slate-950 overflow-hidden flex border border-white/5 p-0.5">
               {isoiShare > 0 && (
-                <div 
-                  style={{ width: `${isoiShare}%` }} 
-                  className="bg-violet-555 rounded-full h-full transition-all bg-violet-500" 
+                <div
+                  style={{ width: `${isoiShare}%` }}
+                  className="bg-violet-555 rounded-full h-full transition-all bg-violet-500"
                   title={`Jisoi: ${isoiShare.toFixed(1)}%`}
                 />
               )}
               {rakkaShare > 0 && (
-                <div 
-                  style={{ width: `${rakkaShare}%` }} 
-                  className="bg-blue-400 rounded-full h-full transition-all" 
+                <div
+                  style={{ width: `${rakkaShare}%` }}
+                  className="bg-blue-400 rounded-full h-full transition-all"
                   title={`Rakka: ${rakkaShare.toFixed(1)}%`}
                 />
               )}
               {shaeShare > 0 && (
-                <div 
-                  style={{ width: `${shaeShare}%` }} 
-                  className="bg-indigo-300 rounded-full h-full transition-all" 
+                <div
+                  style={{ width: `${shaeShare}%` }}
+                  className="bg-indigo-300 rounded-full h-full transition-all"
                   title={`Shae: ${shaeShare.toFixed(1)}%`}
                 />
               )}
@@ -586,8 +586,8 @@ export default function Talang() {
           </div>
           <div className="bg-slate-900/40 p-2 rounded-2xl border border-white/5">
             <span className="text-[8px] font-bold text-slate-500 uppercase block">Total Pengembalian (Kas)</span>
-            <span className="text-[12px] font-extrabold text-emerald-400 mt-0.5 block flex items-center gap-1">
-              <CheckCircle2 className="h-3 w-3 text-emerald-400 shrink-0" />
+            <span className="text-[12px] font-extrabold text-brand-500 mt-0.5 block flex items-center gap-1">
+              <CheckCircle2 className="h-3 w-3 text-brand-500 shrink-0" />
               {formatCurrency(talangMetrics.totalRepaid)}
             </span>
           </div>
@@ -598,7 +598,7 @@ export default function Talang() {
       <div className="space-y-1">
         <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 tracking-wider">
           <span>SUMBER DANA TALANG INDIVIDUAL</span>
-          <span className="text-[9px] text-[#00e5a3] bg-[#00e5a3]/5 px-1.5 py-0.5 rounded-full border border-[#00e5a3]/10">Saring Cepat</span>
+          <span className="text-[9px] text-brand-500 bg-brand-500/5 px-1.5 py-0.5 rounded-full border border-brand-500/10">Saring Cepat</span>
         </div>
         <div className="space-y-2">
           {(Object.entries(talangBalances) as [AkunTalang, number][]).map(([akun, balance]) => {
@@ -609,8 +609,8 @@ export default function Talang() {
             if (akun === "Shae") initialsColor = "bg-indigo-500/15 border-indigo-500/30 text-indigo-300";
 
             return (
-              <button 
-                key={akun} 
+              <button
+                key={akun}
                 onClick={() => handleAccountCardClick(akun)}
                 className={`w-full py-2.5 px-4 rounded-xl border flex items-center justify-between text-left transition-all active:scale-98 ${themeRingColor}`}
               >
@@ -631,7 +631,7 @@ export default function Talang() {
                     {balance > 0 ? formatCurrency(balance) : 'Lunas'}
                   </span>
                   {balance < 0 && (
-                    <span className="text-[8px] font-semibold text-emerald-400 bg-emerald-500/5 px-1 py-0.5 rounded block mt-0.5">
+                    <span className="text-[8px] font-semibold text-brand-500 bg-brand-500/5 px-1 py-0.5 rounded block mt-0.5">
                       Kelebihan {formatCurrency(Math.abs(balance))}
                     </span>
                   )}
@@ -651,14 +651,14 @@ export default function Talang() {
               </p>
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
-              <button 
+              <button
                 onClick={() => setAkunFilter('Semua')}
                 className="px-2 py-1 bg-white/5 border border-white/10 hover:bg-white/10 transition-all rounded-lg text-[10px] text-slate-300 font-bold"
               >
                 Tutup
               </button>
               {isBendahara && talangBalances[akunFilter as keyof typeof talangBalances] > 0 && (
-                <button 
+                <button
                   onClick={() => initiateQuickRepayment(akunFilter as AkunTalang, talangBalances[akunFilter as keyof typeof talangBalances])}
                   className="px-2.5 py-1 bg-violet-500 hover:bg-violet-600 active:scale-95 text-white shadow-md transition-all rounded-lg text-[10px] font-black flex items-center gap-1"
                 >
@@ -676,11 +676,11 @@ export default function Talang() {
           <Info className="h-3.5 w-3.5 text-violet-400" /> {showForm ? 'Isi Formulir Sirkulasi' : 'Alokasikan & Urus Data'}
         </h2>
         {isBendahara && (
-          <button 
+          <button
             onClick={() => { if (showForm) { handleCancelEdit(); } else { setShowForm(true); } }}
             className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all active:scale-95 border ${
-              showForm 
-                ? 'bg-rose-500/15 text-rose-400 border-rose-500/25' 
+              showForm
+                ? 'bg-rose-500/15 text-rose-400 border-rose-500/25'
                 : 'bg-violet-500/10 text-violet-300 border-violet-500/20 shadow-sm'
             }`}
           >
@@ -695,37 +695,37 @@ export default function Talang() {
             <ArrowLeftRight className="h-4 w-4" /> {editingId ? 'Edit Draft Kewajiban Talang' : 'Catat Aliran Dana Talang'}
           </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
-            
+
             {/* Elegant Segmented Select button for Transaction Type */}
             <div className="bg-slate-900 p-1 rounded-xl grid grid-cols-3 gap-1 border border-white/5">
-              <button 
+              <button
                 type="button"
                 onClick={() => setJenis('Baru')}
                 className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
-                  jenis === 'Baru' 
-                    ? 'bg-violet-500 text-white shadow-md' 
+                  jenis === 'Baru'
+                    ? 'bg-violet-500 text-white shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 Pinjam Baru
               </button>
-              <button 
+              <button
                 type="button"
                 onClick={() => setJenis('Pelunasan')}
                 className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
-                  jenis === 'Pelunasan' 
-                    ? 'bg-emerald-500 text-slate-950 shadow-md' 
+                  jenis === 'Pelunasan'
+                    ? 'bg-brand-500 text-text-inverse shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 Pelunasan
               </button>
-              <button 
+              <button
                 type="button"
                 onClick={() => setJenis('Transfer')}
                 className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
-                  jenis === 'Transfer' 
-                    ? 'bg-blue-500 text-white shadow-md' 
+                  jenis === 'Transfer'
+                    ? 'bg-blue-500 text-white shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -737,12 +737,12 @@ export default function Talang() {
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <Label className="text-slate-400 text-[9px] uppercase font-bold">Tanggal</Label>
-                  <Input 
-                    type="date" 
-                    value={tanggal} 
-                    onChange={e => setTanggal(e.target.value)} 
-                    required 
-                    className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl pr-2 focus:border-violet-500/40" 
+                  <Input
+                    type="date"
+                    value={tanggal}
+                    onChange={e => setTanggal(e.target.value)}
+                    required
+                    className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl pr-2 focus:border-violet-500/40"
                   />
                 </div>
 
@@ -750,7 +750,7 @@ export default function Talang() {
                   <Label className="text-slate-400 text-[9px] uppercase font-bold">
                     {jenis === 'Transfer' ? 'Dari Akun' : 'Nama Pemegang'}
                   </Label>
-                  <select 
+                  <select
                     className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                     value={akunTalang}
                     onChange={(e) => setAkunTalang(e.target.value as AkunTalang)}
@@ -766,7 +766,7 @@ export default function Talang() {
                 {jenis === 'Transfer' && (
                   <div className="space-y-1">
                     <Label className="text-slate-400 text-[9px] uppercase font-bold">Ke Akun Tujuan</Label>
-                    <select 
+                    <select
                       className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                       value={akunTujuan}
                       onChange={(e) => setAkunTujuan(e.target.value as AkunTalang)}
@@ -781,7 +781,7 @@ export default function Talang() {
                 {jenis === 'Baru' && (
                   <div className="space-y-1">
                     <Label className="text-slate-400 text-[9px] uppercase font-bold">Unit Terkait</Label>
-                    <select 
+                    <select
                       className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                       value={unit || 'SD'}
                       onChange={(e) => setUnit(e.target.value)}
@@ -798,14 +798,14 @@ export default function Talang() {
                   <Label className="text-slate-400 text-[9px] uppercase font-bold">Nominal (IDR)</Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500 font-mono">Rp</span>
-                    <Input 
-                      type="number" 
-                      min="0" 
-                      placeholder="Masukkan nominal" 
-                      value={nominal} 
-                      onChange={e => setNominal(e.target.value)} 
-                      required 
-                      className="bg-slate-900 border-white/4 text-xs text-white h-9 rounded-xl pl-8 placeholder:text-slate-605 w-full focus:border-violet-500/40" 
+                    <Input
+                      type="number"
+                      min="0"
+                      placeholder="Masukkan nominal"
+                      value={nominal}
+                      onChange={e => setNominal(e.target.value)}
+                      required
+                      className="bg-slate-900 border-white/4 text-xs text-white h-9 rounded-xl pl-8 placeholder:text-slate-605 w-full focus:border-violet-500/40"
                     />
                   </div>
                   {Number(nominal) < 0 && (
@@ -835,17 +835,17 @@ export default function Talang() {
 
               <div className="space-y-1">
                 <Label className="text-slate-400 text-[9px] uppercase font-bold">Keterangan Catatan Keuangan</Label>
-                <Input 
-                  placeholder="Detail sirkulasi dana / keperluan sekolah..." 
-                  value={keterangan} 
-                  onChange={e => setKeterangan(e.target.value)} 
-                  required 
-                  className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl placeholder:text-slate-600 focus:border-violet-500/40" 
+                <Input
+                  placeholder="Detail sirkulasi dana / keperluan sekolah..."
+                  value={keterangan}
+                  onChange={e => setKeterangan(e.target.value)}
+                  required
+                  className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl placeholder:text-slate-600 focus:border-violet-500/40"
                 />
               </div>
 
               {jenis === 'Pelunasan' && (
-                <div className="bg-emerald-500/10 p-2.5 rounded-xl text-[10px] text-emerald-400 border border-emerald-500/15 leading-relaxed flex items-start gap-1.5">
+                <div className="bg-brand-500/10 p-2.5 rounded-xl text-[10px] text-brand-500 border border-brand-500/15 leading-relaxed flex items-start gap-1.5">
                   <AlertCircle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
                   <div>
                     <strong>Pelunasan Otomatis:</strong> Kas Utama Sekolah <strong>(Pengeluaran)</strong> akan terpotong secara real-time sejumlah nominal di atas untuk menyinkronkan pengembalian {akunTalang}.
@@ -856,17 +856,17 @@ export default function Talang() {
 
             <div className="flex gap-2">
               {editingId && (
-                <Button 
-                  type="button" 
+                <Button
+                  type="button"
                   onClick={handleCancelEdit}
                   className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-extrabold text-xs h-9 rounded-xl transition-all"
                 >
                   Batal
                 </Button>
               )}
-              <Button 
-                type="submit" 
-                disabled={submitting} 
+              <Button
+                type="submit"
+                disabled={submitting}
                 className={`${editingId ? 'flex-1' : 'w-full'} bg-violet-500 hover:bg-violet-600 text-white font-extrabold text-xs h-9 rounded-xl shadow-md`}
               >
                 {submitting ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Daftarkan Transaksi Talangan')}
@@ -888,27 +888,27 @@ export default function Talang() {
           <div className="flex gap-2">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-              <Input 
-                placeholder="Cari keterangan, akun, unit..." 
+              <Input
+                placeholder="Cari keterangan, akun, unit..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-9 pr-8 bg-[#121829]/70 border-white/5 text-xs text-white h-10 rounded-xl w-full focus-visible:ring-violet-500"
               />
               {searchTerm && (
-                <button 
-                  onClick={() => setSearchTerm('')} 
+                <button
+                  onClick={() => setSearchTerm('')}
                   className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white"
                 >
                   <X className="h-3 w-3" />
                 </button>
               )}
             </div>
-            
-            <button 
+
+            <button
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
               className={`flex items-center gap-1.5 px-3 h-10 rounded-xl text-xs font-bold transition-all border active:scale-95 ${
                 showAdvancedFilters || dateFrom || dateTo || akunFilter !== 'Semua' || unitFilter !== 'Semua'
-                  ? 'bg-violet-500/15 border-violet-500/30 text-violet-300 font-extrabold' 
+                  ? 'bg-violet-500/15 border-violet-500/30 text-violet-300 font-extrabold'
                   : 'bg-[#121829]/60 border-white/5 text-slate-300 hover:border-white/10'
               }`}
             >
@@ -920,7 +920,7 @@ export default function Talang() {
             </button>
 
             {isAnyFilterActive && (
-              <button 
+              <button
                 onClick={handleResetFilters}
                 className="flex items-center justify-center p-2.5 h-10 w-10 text-rose-400 bg-rose-500/5 hover:bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all active:scale-95"
                 title="Reset Semua Filter"
@@ -936,7 +936,7 @@ export default function Talang() {
               {[
                 { label: 'Semua', value: 'Semua', count: countAll },
                 { label: 'Baru', value: 'Baru', count: countBaru, color: 'text-violet-400 font-extrabold' },
-                { label: 'Lunas', value: 'Pelunasan', count: countPelunasan, color: 'text-emerald-400 font-extrabold' },
+                { label: 'Lunas', value: 'Pelunasan', count: countPelunasan, color: 'text-brand-500 font-extrabold' },
                 { label: 'Transfer', value: 'Transfer', count: countTransfer, color: 'text-blue-400 font-extrabold' }
               ].map((item) => (
                 <button
@@ -951,8 +951,8 @@ export default function Talang() {
                 >
                   <span className={jenisFilter === item.value ? 'text-white' : item.color}>{item.label}</span>
                   <span className={`text-[8px] px-1 py-0.2 rounded-full font-medium ${
-                    jenisFilter === item.value 
-                      ? 'bg-white/20 text-white font-bold' 
+                    jenisFilter === item.value
+                      ? 'bg-white/20 text-white font-bold'
                       : 'bg-white/5 text-slate-500'
                   }`}>
                     {item.count}
@@ -999,7 +999,7 @@ export default function Talang() {
                   <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Rentang Tanggal Kustom</Label>
                   <div className="flex items-center gap-1.5">
                     <div className="relative flex-1">
-                      <Input 
+                      <Input
                         type="date"
                         value={dateFrom}
                         onChange={(e) => {
@@ -1011,7 +1011,7 @@ export default function Talang() {
                     </div>
                     <span className="text-slate-500 text-xs">-</span>
                     <div className="relative flex-1">
-                      <Input 
+                      <Input
                         type="date"
                         value={dateTo}
                         onChange={(e) => {
@@ -1108,7 +1108,7 @@ export default function Talang() {
           {isAnyFilterActive && (
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
               <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Filter Aktif:</span>
-              
+
               {searchTerm && (
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Cari: "{searchTerm}"
@@ -1151,8 +1151,8 @@ export default function Talang() {
                 </span>
               )}
 
-              <button 
-                onClick={handleResetFilters} 
+              <button
+                onClick={handleResetFilters}
                 className="text-[9px] text-rose-400 hover:text-rose-300 font-bold underline cursor-pointer ml-1"
               >
                 Reset
@@ -1167,9 +1167,9 @@ export default function Talang() {
             let bgTheme = "text-violet-400 bg-violet-400/10 border-violet-400/15";
             let Icon = ArrowUpRight;
             let showOp = "+";
-            
+
             if (t.jenis === 'Pelunasan') {
-              bgTheme = "text-emerald-400 bg-emerald-400/10 border-emerald-400/15";
+              bgTheme = "text-brand-500 bg-brand-500/10 border-brand-500/15";
               Icon = ArrowDownLeft;
               showOp = "-";
             } else if (t.jenis === 'Transfer') {
@@ -1179,11 +1179,11 @@ export default function Talang() {
             }
 
             return (
-              <div 
-                key={t.id} 
+              <div
+                key={t.id}
                 className={`p-3.5 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1.5 items-center group ${
-                  editingId === t.id 
-                    ? 'border-violet-500 bg-[#121829]/95 shadow-[0_0_15px_rgba(139,92,246,0.15)]' 
+                  editingId === t.id
+                    ? 'border-violet-500 bg-[#121829]/95 shadow-[0_0_15px_rgba(139,92,246,0.15)]'
                     : 'border-white/5 hover:border-white/10 hover:bg-[#121829]/95'
                 }`}
               >
@@ -1204,7 +1204,7 @@ export default function Talang() {
                 {/* Kolom 1: baris 3 - akun dana talang */}
                 <div className="col-start-1 col-end-2 row-start-3 row-end-4 flex justify-center justify-self-center w-full">
                   <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-bold border shrink-0 text-center w-full max-w-[56px] truncate leading-none ${
-                    t.akun_talang === 'Jisoi' 
+                    t.akun_talang === 'Jisoi'
                       ? 'bg-violet-500/10 border-violet-500/20 text-violet-300'
                       : t.akun_talang === 'Rakka'
                       ? 'bg-blue-500/10 border-blue-500/20 text-blue-300'
@@ -1229,7 +1229,7 @@ export default function Talang() {
                   <span>•</span>
                   <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold border shrink-0 ${
                     t.jenis === 'Pelunasan'
-                      ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                      ? 'bg-brand-500/10 border-brand-500/20 text-brand-500'
                       : t.jenis === 'Transfer'
                       ? 'bg-blue-500/10 border-blue-500/20 text-blue-400'
                       : 'bg-violet-500/10 border-violet-500/20 text-violet-400'
@@ -1240,7 +1240,7 @@ export default function Talang() {
 
                 {/* Kolom 2: baris 3 - Nominal (rata kanan) */}
                 <div className="col-start-2 col-end-3 row-start-3 row-end-4 text-right">
-                  <span className={`text-[12px] font-black inline-block ${t.jenis === 'Pelunasan' ? 'text-emerald-400' : 'text-violet-400'}`}>
+                  <span className={`text-[12px] font-black inline-block ${t.jenis === 'Pelunasan' ? 'text-brand-500' : 'text-violet-400'}`}>
                     {showOp}{formatCurrency(t.nominal)}
                   </span>
                 </div>
@@ -1248,18 +1248,18 @@ export default function Talang() {
                 {/* Kolom 3: baris 2, 3 (merge) - Icon Action */}
                 {isBendahara ? (
                   <div className="col-start-3 col-end-4 row-start-2 row-end-4 flex items-center justify-end self-center border-l border-white/5 pl-2 h-full py-1">
-                    <button 
+                    <button
                       onClick={() => handleStartEdit(t)}
                       className="p-1.5 rounded-lg text-slate-400 hover:text-violet-400 hover:bg-white/5 transition-colors"
                       title="Ubah Talangan"
                     >
                       <Edit2 className="h-3.5 w-3.5" />
                     </button>
-                    <button 
+                    <button
                       onClick={async () => {
                         const isConfirmed = await confirm({
                           title: 'Hapus Catatan Talang',
-                          message: `Apakah Anda benar-benar yakin ingin menghapus data talangan "${t.keterangan || t.jenis}" senilai ${formatCurrency(t.nominal)} secara permanen?` + 
+                          message: `Apakah Anda benar-benar yakin ingin menghapus data talangan "${t.keterangan || t.jenis}" senilai ${formatCurrency(t.nominal)} secara permanen?` +
                             (t.jenis === 'Pelunasan' ? ' Tindakan ini juga akan otomatis membatalkan kas pengeluaran terkait.' : ''),
                           confirmLabel: 'Ya, Hapus',
                           cancelLabel: 'Batal',

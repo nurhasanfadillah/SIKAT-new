@@ -11,12 +11,12 @@ import { Label } from '../components/ui/label';
 export default function Login() {
   const { user, refetchProfile } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
-  
+
   // Credentials input
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  
+
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -48,7 +48,7 @@ export default function Login() {
           throw new Error(res.error.message || 'Email atau password salah');
         }
       }
-      
+
       // Trigger context loading of the user profile
       await refetchProfile();
     } catch (err: any) {
@@ -60,16 +60,16 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060a13] font-sans relative overflow-hidden flex items-center justify-center p-4 text-slate-100">
+    <div className="min-h-screen bg-surface-app font-sans relative overflow-hidden flex items-center justify-center p-4 text-slate-100">
       {/* Background Orbs */}
-      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-[#00e5a3]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-[#a855f7]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Glassmorphic device card wrapper */}
-      <Card className="w-full max-w-sm bg-[#0c1221] border border-white/5 backdrop-blur-xl relative z-10 text-white rounded-2xl p-6 shadow-2xl ring-1 ring-white/5">
+      <Card className="w-full max-w-sm bg-surface-panel border border-white/5 backdrop-blur-xl relative z-10 text-white rounded-2xl p-6 shadow-2xl ring-1 ring-white/5">
         <div className="text-center mb-6">
           <div className="flex justify-center mb-3">
-            <div className="w-12 h-12 bg-gradient-to-tr from-[#00d2ff] to-[#00f5a0] rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,245,160,0.3)] text-slate-950 font-black text-lg">
+            <div className="w-12 h-12 bg-gradient-to-tr from-grd-start to-grd-end rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(0,245,160,0.3)] text-text-inverse font-black text-lg">
               <Wallet className="h-6 w-6" />
             </div>
           </div>
@@ -85,40 +85,40 @@ export default function Login() {
           {isSignUp && (
             <div className="space-y-1">
               <Label htmlFor="nama" className="text-slate-400 text-[10px] uppercase font-bold">Nama Lengkap</Label>
-              <Input 
-                id="nama" 
-                placeholder="Masukkan nama" 
-                value={name} 
-                onChange={e => setName(e.target.value)} 
-                required 
-                className="bg-slate-900/60 border-white/5 text-xs text-white h-10 rounded-xl focus:border-emerald-500/50"
+              <Input
+                id="nama"
+                placeholder="Masukkan nama"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+                className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
               />
             </div>
           )}
 
           <div className="space-y-1">
             <Label htmlFor="email" className="text-slate-400 text-[10px] uppercase font-bold">Alamat Email</Label>
-            <Input 
-              id="email" 
-              type="email" 
-              placeholder="nama@email.com" 
-              value={email} 
-              onChange={e => setEmail(e.target.value)} 
-              required 
-              className="bg-slate-900/60 border-white/5 text-xs text-white h-10 rounded-xl focus:border-emerald-500/50"
+            <Input
+              id="email"
+              type="email"
+              placeholder="nama@email.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
             />
           </div>
 
           <div className="space-y-1">
             <Label htmlFor="password" className="text-slate-400 text-[10px] uppercase font-bold">Kata Sandi</Label>
-            <Input 
-              id="password" 
-              type="password" 
-              placeholder="••••••••" 
-              value={password} 
-              onChange={e => setPassword(e.target.value)} 
-              required 
-              className="bg-slate-900/60 border-white/5 text-xs text-white h-10 rounded-xl focus:border-emerald-500/50"
+            <Input
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
             />
           </div>
 
@@ -126,10 +126,10 @@ export default function Login() {
             <p className="text-[11px] text-rose-400 font-bold text-center">{errorMsg}</p>
           )}
 
-          <Button 
-            type="submit" 
-            disabled={loading} 
-            className="w-full bg-[#00e5a3] hover:bg-[#00cfa2] text-slate-950 font-black text-xs h-10 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-1.5 mt-2"
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-brand-500 hover:bg-brand-400 text-text-inverse font-black text-xs h-10 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-1.5 mt-2"
           >
             {isSignUp ? <UserPlus className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
             {loading ? 'Memproses...' : isSignUp ? 'Daftar Akun Baru' : 'Masuk Aplikasi'}
@@ -137,16 +137,16 @@ export default function Login() {
         </form>
 
         <div className="mt-5 pt-4 border-t border-white/5 text-center">
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => {
               setIsSignUp(!isSignUp);
               setErrorMsg('');
             }}
-            className="text-[10px] text-emerald-400 font-bold hover:underline transition-colors"
+            className="text-[10px] text-brand-500 font-bold hover:underline transition-colors"
           >
-            {isSignUp 
-              ? 'Sudah punya akun? Masuk di sini' 
+            {isSignUp
+              ? 'Sudah punya akun? Masuk di sini'
               : 'Belum punya akun? Daftar sebagai Viewer'
             }
           </button>
@@ -155,4 +155,3 @@ export default function Login() {
     </div>
   );
 }
-
