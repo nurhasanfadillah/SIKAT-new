@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.6 (Color System — complete) |
+| Version | v0.7 (Spacing & Typography — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -35,6 +35,12 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Seluruh app dimigrasikan ke token system: UI components + shell + auth + 4 halaman utama — Phase 06 (v0.6)
 - ✓ WCAG accessibility improvements: nav label (4.21:1→7.81:1), input border (3.6:1), focus ring solid — Phase 06 (v0.6)
 - ✓ Recharts fills via tokens.ts (bukan hardcoded hex di JSX props) — Phase 06 (v0.6)
+- ✓ 5 custom text-size utilities di @theme (text-nano/micro/label/body/value) — Phase 07 (v0.7)
+- ✓ 177 arbitrary font-size classes diganti semantic class di 6 file — Phase 07 (v0.7)
+- ✓ 3-tier card padding: hero=p-5, standard=p-4, compact=p-3 — Phase 07 (v0.7)
+- ✓ Section spacing seragam (space-y-4) dan grid gap konsisten (gap-3) — Phase 07 (v0.7)
+- ✓ Font-weight hierarchy: medium/bold/black; font-extrabold dihilangkan — Phase 07 (v0.7)
+- ✓ Section header alignment: px-1 offset dihapus dari 4 section headers — Phase 07 (v0.7)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -59,4 +65,4 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-12 | text-text-secondary (slate-400) menggantikan text-slate-500 sebagai secondary text | WCAG SC 1.4.3 upgrade: 7.81:1 vs 4.21:1 pada bg-surface-card |
 
 ---
-*Last updated: 2026-06-12 after Phase 06*
+*Last updated: 2026-06-12 after Phase 07*

@@ -67,12 +67,12 @@ export default function Laporan() {
           <div className="space-y-1 z-10">
             <div className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
-              <span className="text-[10px] font-bold text-brand-500 tracking-wider uppercase">Bersih SIKAT</span>
+              <span className="text-micro font-bold text-brand-500 tracking-wider uppercase">Bersih SIKAT</span>
             </div>
             <h2 className="text-2xl font-black text-white tracking-tight">
               {formatCurrency(saldoBersih)}
             </h2>
-            <p className="text-[9px] text-slate-400 font-medium">Dana bersih lembaga siap sikat setelah dikurangi utang talang</p>
+            <p className="text-nano text-slate-400 font-medium">Dana bersih lembaga siap sikat setelah dikurangi utang talang</p>
           </div>
           <div className="h-11 w-11 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center shrink-0 z-10">
             <Wallet className="h-5 w-5 text-brand-500" />
@@ -82,15 +82,15 @@ export default function Laporan() {
         {/* Baris 2: Kas Lembaga & Hutang Talang */}
         <div className="grid grid-cols-2 gap-3">
           {/* Kas Lembaga */}
-          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
+          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[9.5px] font-bold text-slate-400 tracking-wider uppercase">Kas Lembaga</span>
+              <span className="text-micro font-bold text-slate-400 tracking-wider uppercase">Kas Lembaga</span>
               <div className="h-6 w-6 rounded-lg bg-brand-500/10 flex items-center justify-center">
                 <Building2 className="h-3.5 w-3.5 text-brand-500" />
               </div>
             </div>
             <div className="space-y-0.5">
-              <span className="text-[15px] font-extrabold text-white tracking-tight leading-tight block truncate">
+              <span className="text-[15px] font-black text-white tracking-tight leading-tight block truncate">
                 {formatCurrency(kasBalance)}
               </span>
               <span className="text-[8px] text-slate-500 font-medium">Total cash terkumpul</span>
@@ -98,15 +98,15 @@ export default function Laporan() {
           </div>
 
           {/* Hutang Talang */}
-          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-3.5 flex flex-col justify-between relative overflow-hidden group">
+          <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[9.5px] font-bold text-rose-400 tracking-wider uppercase">Hutang Talang</span>
+              <span className="text-micro font-bold text-rose-400 tracking-wider uppercase">Hutang Talang</span>
               <div className="h-6 w-6 rounded-lg bg-rose-500/10 flex items-center justify-center">
                 <Receipt className="h-3.5 w-3.5 text-rose-400" />
               </div>
             </div>
             <div className="space-y-0.5">
-              <span className="text-[15px] font-extrabold text-rose-400 tracking-tight leading-tight block truncate">
+              <span className="text-[15px] font-black text-rose-400 tracking-tight leading-tight block truncate">
                 {formatCurrency(totalTalangAktif)}
               </span>
               <span className="text-[8px] text-rose-400/50 font-medium">Kewajiban penjamin aktif</span>
@@ -120,13 +120,13 @@ export default function Laporan() {
         <TabsList className="grid w-full grid-cols-2 bg-surface-card/60 p-1 rounded-xl border border-white/5 h-auto">
           <TabsTrigger
             value="kas"
-            className="data-[state=active]:bg-brand-500 data-[state=active]:text-text-inverse text-slate-400 text-xs py-1.5 rounded-lg font-bold"
+            className="data-[state=active]:bg-brand-500 data-[state=active]:text-text-inverse text-slate-400 text-body py-1.5 rounded-lg font-bold"
           >
             Arus Kas Utama
           </TabsTrigger>
           <TabsTrigger
             value="talang"
-            className="data-[state=active]:bg-violet-500 data-[state=active]:text-white text-slate-400 text-xs py-1.5 rounded-lg font-bold"
+            className="data-[state=active]:bg-violet-500 data-[state=active]:text-white text-slate-400 text-body py-1.5 rounded-lg font-bold"
           >
             Sensus Dana Talang
           </TabsTrigger>
@@ -135,13 +135,13 @@ export default function Laporan() {
         <TabsContent value="kas" className="outline-none">
           <Card className="bg-surface-card/40 border-white/5 rounded-2xl p-4 overflow-hidden">
             <div className="flex flex-col mb-4">
-              <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
+              <h3 className="text-value font-black text-slate-200 flex items-center gap-1.5">
                 <BarChart3 className="h-4 w-4 text-brand-500" /> Tren Transaksi Bulanan
               </h3>
-              <p className="text-[9px] text-slate-500 mt-0.5">Komparasi kredit & debit instansi terpusat</p>
+              <p className="text-nano text-slate-500 mt-0.5">Komparasi kredit & debit instansi terpusat</p>
             </div>
 
-            <div className="h-64 w-full text-[10px]">
+            <div className="h-64 w-full text-micro">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1e293b" opacity={0.3} />
@@ -173,11 +173,11 @@ export default function Laporan() {
             <div className="flex justify-center items-center gap-4 mt-3 pt-3 border-t border-white/5">
               <div className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-brand-500" />
-                <span className="text-[10px] font-bold text-slate-300">Pemasukan</span>
+                <span className="text-micro font-bold text-slate-300">Pemasukan</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-rose-500" />
-                <span className="text-[10px] font-bold text-slate-300">Pengeluaran</span>
+                <span className="text-micro font-bold text-slate-300">Pengeluaran</span>
               </div>
             </div>
           </Card>
@@ -186,10 +186,10 @@ export default function Laporan() {
         <TabsContent value="talang" className="outline-none">
           <Card className="bg-surface-card/40 border-white/5 rounded-2xl p-4 overflow-hidden space-y-4">
             <div className="flex flex-col">
-              <h3 className="text-[13px] font-extrabold text-slate-200 flex items-center gap-1.5">
+              <h3 className="text-value font-black text-slate-200 flex items-center gap-1.5">
                 <Users className="h-4 w-4 text-violet-400" /> Kewajiban Outstanding Aktif
               </h3>
-              <p className="text-[9px] text-slate-500 mt-0.5">Analisa hutang terhutang per penjamin dana</p>
+              <p className="text-nano text-slate-500 mt-0.5">Analisa hutang terhutang per penjamin dana</p>
             </div>
 
             <div className="space-y-2">
@@ -201,12 +201,12 @@ export default function Laporan() {
                   <div key={akun} className="p-3 bg-surface-card/60 hover:border-white/10 transition-colors rounded-xl border border-white/5 space-y-2">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
-                        <div className="h-6 w-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-200 text-[10px]">
+                        <div className="h-6 w-6 rounded-full bg-slate-800 flex items-center justify-center font-bold text-slate-200 text-micro">
                           {akun[0]}
                         </div>
-                        <span className="text-xs font-bold text-slate-100">{akun}</span>
+                        <span className="text-body font-bold text-slate-100">{akun}</span>
                       </div>
-                      <span className="text-xs font-bold text-rose-400">{formatCurrency(balance)}</span>
+                      <span className="text-body font-bold text-rose-400">{formatCurrency(balance)}</span>
                     </div>
 
                     {/* Progress tracking indicator */}
@@ -233,8 +233,8 @@ export default function Laporan() {
               <div className="rounded-xl border border-amber-500/10 bg-amber-500/5 p-3 flex items-start gap-2.5">
                 <AlertTriangle className="h-4.5 w-4.5 text-amber-500 shrink-0" />
                 <div className="space-y-1">
-                  <h4 className="text-[10px] font-bold text-amber-300">Peringatan Dana Talang</h4>
-                  <p className="text-[9px] text-slate-400 leading-relaxed">
+                  <h4 className="text-micro font-bold text-amber-300">Peringatan Dana Talang</h4>
+                  <p className="text-nano text-slate-400 leading-relaxed">
                     Total kewajiban outstanding aktif sebesar {formatCurrency(totalTalangAktif)} membebani likuditas kas sekolah. Segera lakukan koordinasi settlement pelunasan.
                   </p>
                 </div>

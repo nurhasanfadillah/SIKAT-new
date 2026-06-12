@@ -62,6 +62,19 @@
 
 ---
 
+## Milestone v0.7 — Spacing & Typography Polish ✅
+
+**Status:** Complete (2026-06-12)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 07 — Spacing, Typography & Alignment ✅
+**Status:** Complete (2026-06-12) | **Plans:** 3/3
+- Plan 07-01: 5 custom text utilities (@theme) + 177 arbitrary font-size → semantic class
+- Plan 07-02: Card padding 3-tier (p-5/p-4/p-3) + space-y-4 seragam + gap-3 stat grids
+- Plan 07-03: font-extrabold→black (24×) + px-1 section headers dihapus (4×)
+
+---
+
 ## Milestone v0.5 — Design Polish ✅
 
 **Status:** Complete (2026-06-12)

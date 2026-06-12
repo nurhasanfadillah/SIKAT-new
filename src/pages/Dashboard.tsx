@@ -52,7 +52,7 @@ export default function Dashboard() {
   ].sort((a, b) => parseDateIgnoreTimezone(b.tanggal).getTime() - parseDateIgnoreTimezone(a.tanggal).getTime()).slice(0, 4);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       {/* Premium Gradient Hero Card (Fintech E-Wallet style) */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-hero-from via-hero-via to-hero-to p-5 border border-white/5 shadow-[0_15px_30px_rgba(4,18,33,0.5)]">
         {/* Glow decorative effects inside hero */}
@@ -62,25 +62,25 @@ export default function Dashboard() {
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-brand-500 animate-pulse" />
-            <span className="text-[10px] uppercase tracking-wider text-slate-300 font-bold">Total Saldo Terpusat</span>
+            <span className="text-micro uppercase tracking-wider text-slate-300 font-bold">Total Saldo Terpusat</span>
           </div>
-          <span className="text-[10px] font-mono text-slate-400">IDR • Akun Utama</span>
+          <span className="text-micro font-mono text-slate-400">IDR • Akun Utama</span>
         </div>
 
         <div className="space-y-1 mb-5">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white select-all">
+          <h2 className="text-3xl font-black tracking-tight text-white select-all">
             {formatCurrency(kasBalance)}
           </h2>
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] text-slate-400">Saldo bersih instansi:</span>
-            <span className={`text-[12px] font-bold ${saldoBersih >= 0 ? 'text-brand-500' : 'text-rose-400'}`}>
+            <span className="text-label text-slate-400">Saldo bersih instansi:</span>
+            <span className={`text-body font-bold ${saldoBersih >= 0 ? 'text-brand-500' : 'text-rose-400'}`}>
               {formatCurrency(saldoBersih)}
             </span>
           </div>
         </div>
 
         {/* Quick Micro-Operations: 3 solid-color buttons stretching full-width horizontally */}
-        <div className="grid grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-3 gap-3">
           <Link
             to="/kas"
             title="Catat Masuk"
@@ -110,7 +110,7 @@ export default function Dashboard() {
         <Card className="bg-surface-card/60 border-white/5 rounded-2xl p-3 flex flex-col justify-between hover:border-white/10 transition-colors">
           <div className="flex items-center gap-1.5 text-slate-400 mb-2">
             <CreditCard className="h-3.5 w-3.5 text-rose-400" />
-            <span className="text-[11px] font-semibold">Dana Talang Aktif</span>
+            <span className="text-label font-semibold">Dana Talang Aktif</span>
           </div>
           <div className="text-[18px] font-bold text-slate-100">
             {formatCurrency(totalTalangAktif)}
@@ -126,7 +126,7 @@ export default function Dashboard() {
         <Card className="bg-surface-card/60 border-white/5 rounded-2xl p-3 flex flex-col justify-between hover:border-white/10 transition-colors">
           <div className="flex items-center gap-1.5 text-slate-400 mb-2">
             <Wallet className="h-3.5 w-3.5 text-brand-500" />
-            <span className="text-[11px] font-semibold">Kapasitas Sisa</span>
+            <span className="text-label font-semibold">Kapasitas Sisa</span>
           </div>
           <div className="text-[18px] font-bold text-brand-500">
             {formatCurrency(saldoBersih > 0 ? saldoBersih : 0)}
@@ -147,14 +147,14 @@ export default function Dashboard() {
           <div className="flex justify-between items-center mb-3">
             <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
-              <h3 className="text-xs font-bold text-slate-200 tracking-tight">Rincian Per Akun Talang</h3>
+              <h3 className="text-body font-bold text-slate-200 tracking-tight">Rincian Per Akun Talang</h3>
             </div>
-            <span className="text-[9px] bg-slate-800/60 px-2 py-0.5 rounded-full border border-white/5 text-slate-400 font-medium">
+            <span className="text-nano bg-slate-800/60 px-2 py-0.5 rounded-full border border-white/5 text-slate-400 font-medium">
               Sisa Kewajiban
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {Object.entries(talangBalances).map(([akun, balance]) => {
               const possessesBalance = balance > 0;
               return (
@@ -167,15 +167,15 @@ export default function Dashboard() {
                   }`}
                 >
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[11px] font-bold text-slate-300 truncate tracking-wide">{akun}</span>
-                    <span className={`text-xs font-mono font-bold tracking-tight mt-0.5 ${
+                    <span className="text-label font-bold text-slate-300 truncate tracking-wide">{akun}</span>
+                    <span className={`text-body font-mono font-bold tracking-tight mt-0.5 ${
                       possessesBalance ? 'text-rose-400' : 'text-brand-500'
                     }`}>
                       {possessesBalance ? formatCurrency(balance) : 'Lunas'}
                     </span>
                   </div>
 
-                  <div className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-lg text-[9px] font-bold border leading-none shrink-0 ${
+                  <div className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-lg text-nano font-bold border leading-none shrink-0 ${
                     possessesBalance
                       ? 'bg-rose-500/5 text-rose-400 border-rose-500/10'
                       : 'bg-brand-500/5 text-brand-500 border-brand-500/10'
@@ -190,13 +190,13 @@ export default function Dashboard() {
         </Card>
 
         {/* Recent Transactions List with colored pill icons */}
-        <div className="space-y-2.5">
-          <div className="flex justify-between items-center px-1">
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
             <div className="flex items-center gap-1.5">
               <span className="h-4 w-1 bg-brand-500 rounded-full" />
-              <h3 className="text-[13px] font-bold text-slate-200">Riwayat Transaksi Terkini</h3>
+              <h3 className="text-value font-bold text-slate-200">Riwayat Transaksi Terkini</h3>
             </div>
-            <Link to="/kas" className="text-[11px] font-medium text-brand-500 hover:underline flex items-center gap-0.5">
+            <Link to="/kas" className="text-label font-medium text-brand-500 hover:underline flex items-center gap-0.5">
               <ListCollapse className="h-3 w-3" /> Semua
             </Link>
           </div>
@@ -234,9 +234,9 @@ export default function Dashboard() {
                       <Icon className="h-4.5 w-4.5" />
                     </div>
                     <div className="flex flex-col truncate">
-                      <span className="text-[12px] font-bold text-slate-100 truncate">{tx.keterangan}</span>
-                      <span className="text-[9px] text-slate-400 flex items-center gap-1 mt-0.5">
-                        <span className="font-semibold text-slate-300">
+                      <span className="text-body font-bold text-slate-100 truncate">{tx.keterangan}</span>
+                      <span className="text-nano text-slate-400 flex items-center gap-1 mt-0.5">
+                        <span className="font-medium text-slate-300">
                           {tx.kind === 'kas' ? 'Kas' : `Talang ${((tx as TransaksiTalang).akun_talang)}`}
                         </span>
                         <span>•</span>
@@ -245,7 +245,7 @@ export default function Dashboard() {
                     </div>
                   </div>
 
-                  <span className={`text-[12px] font-bold shrink-0 ml-2 ${isIncoming || isTalangBaru ? 'text-brand-500' : 'text-slate-100'}`}>
+                  <span className={`text-body font-black shrink-0 ml-2 ${isIncoming || isTalangBaru ? 'text-brand-500' : 'text-slate-100'}`}>
                     {isIncoming || isTalangBaru ? '+' : '-'}{formatCurrency(tx.nominal)}
                   </span>
                 </div>
@@ -253,7 +253,7 @@ export default function Dashboard() {
             })}
 
             {allTransactions.length === 0 && (
-              <div className="text-center text-slate-500 py-6 text-xs bg-surface-card/20 rounded-2xl border border-white/5">
+              <div className="text-center text-slate-500 py-6 text-body bg-surface-card/20 rounded-2xl border border-white/5">
                 Belum ada transaksi terekam
               </div>
             )}

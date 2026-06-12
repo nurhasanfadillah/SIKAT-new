@@ -76,7 +76,7 @@ export default function Login() {
           <h1 className="text-2xl font-black tracking-tight text-white mb-1">
             &lt;SIKAT&gt;
           </h1>
-          <p className="text-slate-400 text-[10px] leading-relaxed uppercase tracking-wider font-bold">
+          <p className="text-slate-400 text-micro leading-relaxed uppercase tracking-wider font-bold">
             Sistem Informasi Keuangan Terpusat
           </p>
         </div>
@@ -84,20 +84,20 @@ export default function Login() {
         <form onSubmit={handleAuth} className="space-y-3.5">
           {isSignUp && (
             <div className="space-y-1">
-              <Label htmlFor="nama" className="text-slate-400 text-[10px] uppercase font-bold">Nama Lengkap</Label>
+              <Label htmlFor="nama" className="text-slate-400 text-micro uppercase font-bold">Nama Lengkap</Label>
               <Input
                 id="nama"
                 placeholder="Masukkan nama"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 required
-                className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
+                className="bg-surface-card/60 border-white/15 text-body h-10 rounded-xl focus:border-brand-500"
               />
             </div>
           )}
 
           <div className="space-y-1">
-            <Label htmlFor="email" className="text-slate-400 text-[10px] uppercase font-bold">Alamat Email</Label>
+            <Label htmlFor="email" className="text-slate-400 text-micro uppercase font-bold">Alamat Email</Label>
             <Input
               id="email"
               type="email"
@@ -105,12 +105,12 @@ export default function Login() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
+              className="bg-surface-card/60 border-white/15 text-body h-10 rounded-xl focus:border-brand-500"
             />
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="password" className="text-slate-400 text-[10px] uppercase font-bold">Kata Sandi</Label>
+            <Label htmlFor="password" className="text-slate-400 text-micro uppercase font-bold">Kata Sandi</Label>
             <Input
               id="password"
               type="password"
@@ -118,18 +118,18 @@ export default function Login() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="bg-surface-card/60 border-white/15 text-xs h-10 rounded-xl focus:border-brand-500"
+              className="bg-surface-card/60 border-white/15 text-body h-10 rounded-xl focus:border-brand-500"
             />
           </div>
 
           {errorMsg && (
-            <p className="text-[11px] text-rose-400 font-bold text-center">{errorMsg}</p>
+            <p className="text-label text-rose-400 font-bold text-center">{errorMsg}</p>
           )}
 
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-brand-500 hover:bg-brand-400 text-text-inverse font-black text-xs h-10 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-1.5 mt-2"
+            className="w-full bg-brand-500 hover:bg-brand-400 text-text-inverse font-black text-body h-10 rounded-xl transition-all shadow-lg active:scale-95 flex items-center justify-center gap-1.5 mt-2"
           >
             {isSignUp ? <UserPlus className="h-4 w-4" /> : <LogIn className="h-4 w-4" />}
             {loading ? 'Memproses...' : isSignUp ? 'Daftar Akun Baru' : 'Masuk Aplikasi'}
@@ -143,7 +143,7 @@ export default function Login() {
               setIsSignUp(!isSignUp);
               setErrorMsg('');
             }}
-            className="text-[10px] text-brand-500 font-bold hover:underline transition-colors"
+            className="text-micro text-brand-500 font-bold hover:underline transition-colors"
           >
             {isSignUp
               ? 'Sudah punya akun? Masuk di sini'

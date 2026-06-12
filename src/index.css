@@ -44,6 +44,13 @@
   --color-text-secondary: #94a3b8;
   --color-text-muted:     #64748b;
   --color-text-inverse:   #0f172a;
+
+  /* ── Type Scale ──────────────────────────────────── */
+  --text-nano:  0.5625rem;   /* 9px  — badge, pill, legend */
+  --text-micro: 0.625rem;    /* 10px — label, caption, metadata */
+  --text-label: 0.6875rem;   /* 11px — form label, nav item, card label */
+  --text-body:  0.75rem;     /* 12px — list item, description, form input */
+  --text-value: 0.8125rem;   /* 13px — section header secondary, card value */
 }
 
 body {

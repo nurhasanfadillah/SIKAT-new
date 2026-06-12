@@ -53,8 +53,8 @@ export default function Layout() {
               {profile?.nama?.[0]?.toUpperCase() || 'U'}
             </div>
             <div className="flex flex-col">
-              <span className="text-[11px] text-slate-400 font-medium">Selamat Datang,</span>
-              <span className="text-[13px] font-bold text-slate-100 leading-tight truncate max-w-[120px]">
+              <span className="text-label text-slate-400 font-medium">Selamat Datang,</span>
+              <span className="text-value font-bold text-slate-100 leading-tight truncate max-w-[120px]">
                 {profile?.nama || 'Pengguna'}
               </span>
             </div>
@@ -62,7 +62,7 @@ export default function Layout() {
 
           <div className="flex items-center gap-2">
             {/* Centered Compact Badge */}
-            <span className="text-[9px] font-bold tracking-wider uppercase px-2 py-1 rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/20 shadow-sm leading-tight">
+            <span className="text-nano font-bold tracking-wider uppercase px-2 py-1 rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/20 shadow-sm leading-tight">
               {profile?.role || 'Viewer'}
             </span>
             <button
@@ -122,7 +122,7 @@ export default function Layout() {
                 >
                   <item.icon className="h-5.5 w-5.5" />
                 </div>
-                <span className={`text-[9px] mt-1 font-medium transition-colors ${
+                <span className={`text-nano mt-1 font-medium transition-colors ${
                   isActive ? 'text-brand-500 font-bold' : 'text-text-secondary group-hover:text-text-primary'
                 }`}>
                   {item.name}

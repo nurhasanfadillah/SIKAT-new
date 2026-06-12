@@ -512,25 +512,25 @@ export default function Talang() {
   return (
     <div className="space-y-4">
       {/* Premium Hero Stats Panel (Overview & Audit Dashboard) */}
-      <Card className="bg-gradient-to-br from-violet-900/30 via-indigo-950/20 to-slate-900/60 border border-violet-500/20 rounded-3xl p-4 shadow-xl relative overflow-hidden">
+      <Card className="bg-gradient-to-br from-violet-900/30 via-indigo-950/20 to-slate-900/60 border border-violet-500/20 rounded-3xl p-5 shadow-xl relative overflow-hidden">
         {/* Abstract design elements */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/5 rounded-full blur-2xl pointer-events-none" />
 
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <span className="text-[10px] font-bold text-violet-300 uppercase tracking-widest flex items-center gap-1">
+            <span className="text-micro font-bold text-violet-300 uppercase tracking-widest flex items-center gap-1">
               <Coins className="h-3 w-3" /> Buku Besar Dana Talangan
             </span>
-            <h3 className="text-2xl font-extrabold text-white tracking-tight">
+            <h3 className="text-2xl font-black text-white tracking-tight">
               {formatCurrency(talangMetrics.outstanding)}
             </h3>
-            <p className="text-[10px] text-slate-400 font-medium">
+            <p className="text-micro text-slate-400 font-medium">
               Sisa kewajiban aktif yang belum diselesaikan sekolah
             </p>
           </div>
           <div className="bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-2xl text-center">
-            <span className="text-[9px] font-extrabold text-violet-300 block uppercase leading-none">Settlement</span>
-            <span className="text-[12px] font-black text-white mt-1 block">{talangMetrics.repaymentProgress}%</span>
+            <span className="text-nano font-black text-violet-300 block uppercase leading-none">Settlement</span>
+            <span className="text-body font-black text-white mt-1 block">{talangMetrics.repaymentProgress}%</span>
           </div>
         </div>
 
@@ -579,14 +579,14 @@ export default function Talang() {
         <div className="grid grid-cols-2 gap-3 pt-1">
           <div className="bg-slate-900/40 p-2 rounded-2xl border border-white/5">
             <span className="text-[8px] font-bold text-slate-500 uppercase block">Total Talangan Berjalan</span>
-            <span className="text-[12px] font-extrabold text-slate-200 mt-0.5 block flex items-center gap-1">
+            <span className="text-body font-black text-slate-200 mt-0.5 block flex items-center gap-1">
               <TrendingUp className="h-3 w-3 text-violet-400 shrink-0" />
               {formatCurrency(talangMetrics.totalBorrowed)}
             </span>
           </div>
           <div className="bg-slate-900/40 p-2 rounded-2xl border border-white/5">
             <span className="text-[8px] font-bold text-slate-500 uppercase block">Total Pengembalian (Kas)</span>
-            <span className="text-[12px] font-extrabold text-brand-500 mt-0.5 block flex items-center gap-1">
+            <span className="text-body font-black text-brand-500 mt-0.5 block flex items-center gap-1">
               <CheckCircle2 className="h-3 w-3 text-brand-500 shrink-0" />
               {formatCurrency(talangMetrics.totalRepaid)}
             </span>
@@ -596,9 +596,9 @@ export default function Talang() {
 
       {/* Account Info Cards with clickable triggers */}
       <div className="space-y-1">
-        <div className="flex justify-between items-center px-1 text-[10px] font-bold text-slate-400 tracking-wider">
+        <div className="flex justify-between items-center text-micro font-bold text-slate-400 tracking-wider">
           <span>SUMBER DANA TALANG INDIVIDUAL</span>
-          <span className="text-[9px] text-brand-500 bg-brand-500/5 px-1.5 py-0.5 rounded-full border border-brand-500/10">Saring Cepat</span>
+          <span className="text-nano text-brand-500 bg-brand-500/5 px-1.5 py-0.5 rounded-full border border-brand-500/10">Saring Cepat</span>
         </div>
         <div className="space-y-2">
           {(Object.entries(talangBalances) as [AkunTalang, number][]).map(([akun, balance]) => {
@@ -616,18 +616,18 @@ export default function Talang() {
               >
                 {/* Kolom 1 (Kiri) - Akun */}
                 <div className="flex items-center gap-3">
-                  <div className={`h-7 w-7 rounded-full flex items-center justify-center font-black text-xs border ${initialsColor}`}>
+                  <div className={`h-7 w-7 rounded-full flex items-center justify-center font-black text-body border ${initialsColor}`}>
                     {akun[0]}
                   </div>
                   <div>
-                    <span className="text-[11px] font-black text-slate-200 uppercase leading-none tracking-wide">{akun}</span>
-                    <span className="text-[9px] text-slate-500 block">Saring Akun</span>
+                    <span className="text-label font-black text-slate-200 uppercase leading-none tracking-wide">{akun}</span>
+                    <span className="text-nano text-slate-500 block">Saring Akun</span>
                   </div>
                 </div>
 
                 {/* Kolom 2 (Kanan) - Nominal */}
                 <div className="text-right">
-                  <span className={`text-[13px] font-black leading-tight block ${balance > 0 ? 'text-white' : 'text-slate-500'}`}>
+                  <span className={`text-value font-black leading-tight block ${balance > 0 ? 'text-white' : 'text-slate-500'}`}>
                     {balance > 0 ? formatCurrency(balance) : 'Lunas'}
                   </span>
                   {balance < 0 && (
@@ -645,22 +645,22 @@ export default function Talang() {
         {['Jisoi', 'Rakka', 'Shae'].includes(akunFilter) && (
           <div className="p-3 bg-[#161d30] border border-violet-500/20 rounded-2xl flex items-center justify-between gap-2 animate-in fade-in slide-in-from-top-1 duration-200">
             <div className="space-y-0.5">
-              <span className="text-[8px] font-extrabold text-violet-400 uppercase tracking-widest block">Akun Terpilih</span>
-              <p className="text-[11px] font-bold text-white flex items-center gap-1 flex-wrap">
+              <span className="text-[8px] font-black text-violet-400 uppercase tracking-widest block">Akun Terpilih</span>
+              <p className="text-label font-bold text-white flex items-center gap-1 flex-wrap">
                 Lender: {akunFilter} <span className="inline-block h-1.5 w-1.5 rounded-full bg-violet-400" /> Outstanding: {formatCurrency(talangBalances[akunFilter as keyof typeof talangBalances])}
               </p>
             </div>
             <div className="flex items-center gap-1.5 shrink-0">
               <button
                 onClick={() => setAkunFilter('Semua')}
-                className="px-2 py-1 bg-white/5 border border-white/10 hover:bg-white/10 transition-all rounded-lg text-[10px] text-slate-300 font-bold"
+                className="px-2 py-1 bg-white/5 border border-white/10 hover:bg-white/10 transition-all rounded-lg text-micro text-slate-300 font-bold"
               >
                 Tutup
               </button>
               {isBendahara && talangBalances[akunFilter as keyof typeof talangBalances] > 0 && (
                 <button
                   onClick={() => initiateQuickRepayment(akunFilter as AkunTalang, talangBalances[akunFilter as keyof typeof talangBalances])}
-                  className="px-2.5 py-1 bg-violet-500 hover:bg-violet-600 active:scale-95 text-white shadow-md transition-all rounded-lg text-[10px] font-black flex items-center gap-1"
+                  className="px-2.5 py-1 bg-violet-500 hover:bg-violet-600 active:scale-95 text-white shadow-md transition-all rounded-lg text-micro font-black flex items-center gap-1"
                 >
                   ⚡ Bayar Pelunasan
                 </button>
@@ -671,14 +671,14 @@ export default function Talang() {
       </div>
 
       {/* Header Form & Floating Toggle */}
-      <div className="flex justify-between items-center px-1 pt-1">
-        <h2 className="text-[12px] font-bold text-slate-300 flex items-center gap-1 uppercase tracking-wide">
+      <div className="flex justify-between items-center pt-1">
+        <h2 className="text-body font-bold text-slate-300 flex items-center gap-1 uppercase tracking-wide">
           <Info className="h-3.5 w-3.5 text-violet-400" /> {showForm ? 'Isi Formulir Sirkulasi' : 'Alokasikan & Urus Data'}
         </h2>
         {isBendahara && (
           <button
             onClick={() => { if (showForm) { handleCancelEdit(); } else { setShowForm(true); } }}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all active:scale-95 border ${
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-label font-bold transition-all active:scale-95 border ${
               showForm
                 ? 'bg-rose-500/15 text-rose-400 border-rose-500/25'
                 : 'bg-violet-500/10 text-violet-300 border-violet-500/20 shadow-sm'
@@ -691,7 +691,7 @@ export default function Talang() {
 
       {showForm && isBendahara && (
         <Card id="talang-action-form" className="bg-[#161d30]/90 border border-violet-500/25 rounded-2xl p-4 shadow-xl animate-in fade-in slide-in-from-top-3 duration-200 space-y-4">
-          <h3 className="text-xs font-black text-violet-400 border-b border-white/5 pb-1 flex items-center gap-1.5 uppercase tracking-wider">
+          <h3 className="text-body font-black text-violet-400 border-b border-white/5 pb-1 flex items-center gap-1.5 uppercase tracking-wider">
             <ArrowLeftRight className="h-4 w-4" /> {editingId ? 'Edit Draft Kewajiban Talang' : 'Catat Aliran Dana Talang'}
           </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -701,7 +701,7 @@ export default function Talang() {
               <button
                 type="button"
                 onClick={() => setJenis('Baru')}
-                className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
+                className={`py-1.5 rounded-lg text-micro font-black tracking-wide uppercase transition-all ${
                   jenis === 'Baru'
                     ? 'bg-violet-500 text-white shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
@@ -712,7 +712,7 @@ export default function Talang() {
               <button
                 type="button"
                 onClick={() => setJenis('Pelunasan')}
-                className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
+                className={`py-1.5 rounded-lg text-micro font-black tracking-wide uppercase transition-all ${
                   jenis === 'Pelunasan'
                     ? 'bg-brand-500 text-text-inverse shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
@@ -723,7 +723,7 @@ export default function Talang() {
               <button
                 type="button"
                 onClick={() => setJenis('Transfer')}
-                className={`py-1.5 rounded-lg text-[10px] font-black tracking-wide uppercase transition-all ${
+                className={`py-1.5 rounded-lg text-micro font-black tracking-wide uppercase transition-all ${
                   jenis === 'Transfer'
                     ? 'bg-blue-500 text-white shadow-md'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
@@ -736,22 +736,22 @@ export default function Talang() {
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
-                  <Label className="text-slate-400 text-[9px] uppercase font-bold">Tanggal</Label>
+                  <Label className="text-slate-400 text-nano uppercase font-bold">Tanggal</Label>
                   <Input
                     type="date"
                     value={tanggal}
                     onChange={e => setTanggal(e.target.value)}
                     required
-                    className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl pr-2 focus:border-violet-500/40"
+                    className="bg-slate-900 border-white/5 text-body text-white h-9 rounded-xl pr-2 focus:border-violet-500/40"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-slate-400 text-[9px] uppercase font-bold">
+                  <Label className="text-slate-400 text-nano uppercase font-bold">
                     {jenis === 'Transfer' ? 'Dari Akun' : 'Nama Pemegang'}
                   </Label>
                   <select
-                    className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+                    className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-body text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                     value={akunTalang}
                     onChange={(e) => setAkunTalang(e.target.value as AkunTalang)}
                   >
@@ -765,9 +765,9 @@ export default function Talang() {
               <div className="grid grid-cols-2 gap-2">
                 {jenis === 'Transfer' && (
                   <div className="space-y-1">
-                    <Label className="text-slate-400 text-[9px] uppercase font-bold">Ke Akun Tujuan</Label>
+                    <Label className="text-slate-400 text-nano uppercase font-bold">Ke Akun Tujuan</Label>
                     <select
-                      className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+                      className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-body text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                       value={akunTujuan}
                       onChange={(e) => setAkunTujuan(e.target.value as AkunTalang)}
                     >
@@ -780,9 +780,9 @@ export default function Talang() {
 
                 {jenis === 'Baru' && (
                   <div className="space-y-1">
-                    <Label className="text-slate-400 text-[9px] uppercase font-bold">Unit Terkait</Label>
+                    <Label className="text-slate-400 text-nano uppercase font-bold">Unit Terkait</Label>
                     <select
-                      className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-xs text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
+                      className="flex h-9 w-full rounded-xl border border-white/5 bg-slate-900 text-body text-white px-2 focus:outline-none focus:ring-1 focus:ring-violet-500/50"
                       value={unit || 'SD'}
                       onChange={(e) => setUnit(e.target.value)}
                     >
@@ -795,9 +795,9 @@ export default function Talang() {
                 )}
 
                 <div className={`space-y-1 ${jenis === 'Pelunasan' ? 'col-span-2' : ''}`}>
-                  <Label className="text-slate-400 text-[9px] uppercase font-bold">Nominal (IDR)</Label>
+                  <Label className="text-slate-400 text-nano uppercase font-bold">Nominal (IDR)</Label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500 font-mono">Rp</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-body font-bold text-slate-500 font-mono">Rp</span>
                     <Input
                       type="number"
                       min="0"
@@ -805,11 +805,11 @@ export default function Talang() {
                       value={nominal}
                       onChange={e => setNominal(e.target.value)}
                       required
-                      className="bg-slate-900 border-white/4 text-xs text-white h-9 rounded-xl pl-8 placeholder:text-slate-605 w-full focus:border-violet-500/40"
+                      className="bg-slate-900 border-white/4 text-body text-white h-9 rounded-xl pl-8 placeholder:text-slate-605 w-full focus:border-violet-500/40"
                     />
                   </div>
                   {Number(nominal) < 0 && (
-                    <span className="text-[10px] text-rose-500 font-semibold block mt-1">
+                    <span className="text-micro text-rose-500 font-semibold block mt-1">
                       ⚠ Nominal tidak boleh bernilai negatif!
                     </span>
                   )}
@@ -818,14 +818,14 @@ export default function Talang() {
 
               {/* Real-time formatted helper & spelling text to prevent zero entry mistakes */}
               {numericNominal > 0 && (
-                <div className="p-2.5 bg-slate-950/80 rounded-xl border border-white/5 text-[10px] space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
-                  <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
+                <div className="p-2.5 bg-slate-950/80 rounded-xl border border-white/5 text-micro space-y-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <div className="flex justify-between items-center text-nano font-bold text-slate-500">
                     <span>SPELLING PREWIEW INDONESIA</span>
                     <span className="text-violet-400">BENDAHARA ASSIST</span>
                   </div>
                   <div>
                     <span className="text-slate-400">Terbaca: </span>
-                    <strong className="text-violet-300 font-extrabold">{formatCurrency(numericNominal)}</strong>
+                    <strong className="text-violet-300 font-black">{formatCurrency(numericNominal)}</strong>
                   </div>
                   <div className="border-t border-white/5 pt-1 text-slate-400 italic font-medium leading-relaxed">
                     "{getTerbilang(numericNominal)}"
@@ -834,18 +834,18 @@ export default function Talang() {
               )}
 
               <div className="space-y-1">
-                <Label className="text-slate-400 text-[9px] uppercase font-bold">Keterangan Catatan Keuangan</Label>
+                <Label className="text-slate-400 text-nano uppercase font-bold">Keterangan Catatan Keuangan</Label>
                 <Input
                   placeholder="Detail sirkulasi dana / keperluan sekolah..."
                   value={keterangan}
                   onChange={e => setKeterangan(e.target.value)}
                   required
-                  className="bg-slate-900 border-white/5 text-xs text-white h-9 rounded-xl placeholder:text-slate-600 focus:border-violet-500/40"
+                  className="bg-slate-900 border-white/5 text-body text-white h-9 rounded-xl placeholder:text-slate-600 focus:border-violet-500/40"
                 />
               </div>
 
               {jenis === 'Pelunasan' && (
-                <div className="bg-brand-500/10 p-2.5 rounded-xl text-[10px] text-brand-500 border border-brand-500/15 leading-relaxed flex items-start gap-1.5">
+                <div className="bg-brand-500/10 p-2.5 rounded-xl text-micro text-brand-500 border border-brand-500/15 leading-relaxed flex items-start gap-1.5">
                   <AlertCircle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
                   <div>
                     <strong>Pelunasan Otomatis:</strong> Kas Utama Sekolah <strong>(Pengeluaran)</strong> akan terpotong secara real-time sejumlah nominal di atas untuk menyinkronkan pengembalian {akunTalang}.
@@ -859,7 +859,7 @@ export default function Talang() {
                 <Button
                   type="button"
                   onClick={handleCancelEdit}
-                  className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-extrabold text-xs h-9 rounded-xl transition-all"
+                  className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-black text-body h-9 rounded-xl transition-all"
                 >
                   Batal
                 </Button>
@@ -867,7 +867,7 @@ export default function Talang() {
               <Button
                 type="submit"
                 disabled={submitting}
-                className={`${editingId ? 'flex-1' : 'w-full'} bg-violet-500 hover:bg-violet-600 text-white font-extrabold text-xs h-9 rounded-xl shadow-md`}
+                className={`${editingId ? 'flex-1' : 'w-full'} bg-violet-500 hover:bg-violet-600 text-white font-black text-body h-9 rounded-xl shadow-md`}
               >
                 {submitting ? 'Menyimpan...' : (editingId ? 'Simpan Perubahan' : 'Daftarkan Transaksi Talangan')}
               </Button>
@@ -879,8 +879,8 @@ export default function Talang() {
       {/* Main Talang History Ledger */}
       <Card className="bg-[#121829]/40 border border-white/5 rounded-3xl p-4 overflow-hidden">
         <div className="flex justify-between items-center mb-3 border-b border-white/5 pb-1">
-          <span className="text-[11px] font-black text-slate-300 uppercase tracking-wide">Linimasa & Log Transaksi</span>
-          <span className="text-[9px] font-semibold text-slate-500 font-mono">Buku Kas Pembantu</span>
+          <span className="text-label font-black text-slate-300 uppercase tracking-wide">Linimasa & Log Transaksi</span>
+          <span className="text-nano font-semibold text-slate-500 font-mono">Buku Kas Pembantu</span>
         </div>
 
         {/* Search, Filter, Sort Controls */}
@@ -892,7 +892,7 @@ export default function Talang() {
                 placeholder="Cari keterangan, akun, unit..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-8 bg-[#121829]/70 border-white/5 text-xs text-white h-10 rounded-xl w-full focus-visible:ring-violet-500"
+                className="pl-9 pr-8 bg-[#121829]/70 border-white/5 text-body text-white h-10 rounded-xl w-full focus-visible:ring-violet-500"
               />
               {searchTerm && (
                 <button
@@ -906,9 +906,9 @@ export default function Talang() {
 
             <button
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              className={`flex items-center gap-1.5 px-3 h-10 rounded-xl text-xs font-bold transition-all border active:scale-95 ${
+              className={`flex items-center gap-1.5 px-3 h-10 rounded-xl text-body font-bold transition-all border active:scale-95 ${
                 showAdvancedFilters || dateFrom || dateTo || akunFilter !== 'Semua' || unitFilter !== 'Semua'
-                  ? 'bg-violet-500/15 border-violet-500/30 text-violet-300 font-extrabold'
+                  ? 'bg-violet-500/15 border-violet-500/30 text-violet-300 font-black'
                   : 'bg-[#121829]/60 border-white/5 text-slate-300 hover:border-white/10'
               }`}
             >
@@ -935,15 +935,15 @@ export default function Talang() {
             <div className="grid grid-cols-4 gap-1 w-full sm:w-auto">
               {[
                 { label: 'Semua', value: 'Semua', count: countAll },
-                { label: 'Baru', value: 'Baru', count: countBaru, color: 'text-violet-400 font-extrabold' },
-                { label: 'Lunas', value: 'Pelunasan', count: countPelunasan, color: 'text-brand-500 font-extrabold' },
-                { label: 'Transfer', value: 'Transfer', count: countTransfer, color: 'text-blue-400 font-extrabold' }
+                { label: 'Baru', value: 'Baru', count: countBaru, color: 'text-violet-400 font-black' },
+                { label: 'Lunas', value: 'Pelunasan', count: countPelunasan, color: 'text-brand-500 font-black' },
+                { label: 'Transfer', value: 'Transfer', count: countTransfer, color: 'text-blue-400 font-black' }
               ].map((item) => (
                 <button
                   key={item.value}
                   type="button"
                   onClick={() => setJenisFilter(item.value as any)}
-                  className={`px-1.5 py-1.5 rounded-lg text-[10px] font-semibold flex items-center justify-center gap-1 transition-all ${
+                  className={`px-1.5 py-1.5 rounded-lg text-micro font-semibold flex items-center justify-center gap-1 transition-all ${
                     jenisFilter === item.value
                       ? 'bg-violet-500 text-white shadow font-black'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
@@ -961,7 +961,7 @@ export default function Talang() {
               ))}
             </div>
 
-            <div className="text-[9px] text-slate-400 px-1 py-1 sm:py-0 font-medium text-right sm:text-left">
+            <div className="text-nano text-slate-400 px-1 py-1 sm:py-0 font-medium text-right sm:text-left">
               Menampilkan <span className="text-violet-400 font-bold">{filteredTalang.length}</span> dari <span className="text-white">{talang.length}</span> catatan
             </div>
           </div>
@@ -971,7 +971,7 @@ export default function Talang() {
             <div className="p-3 bg-[#121829]/80 border border-violet-500/15 rounded-2xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
               {/* Quick Date Presets */}
               <div className="space-y-1.5">
-                <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Pilihan Rentang Waktu</Label>
+                <Label className="text-nano font-bold text-slate-400 uppercase tracking-wider block">Pilihan Rentang Waktu</Label>
                 <div className="flex flex-wrap gap-1.5">
                   {[
                     { label: 'Bulan Ini', value: 'Bulan Ini' },
@@ -981,7 +981,7 @@ export default function Talang() {
                       key={preset.value}
                       type="button"
                       onClick={() => handleQuickDateChange(preset.value)}
-                      className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all ${
+                      className={`px-2.5 py-1 rounded-lg text-micro font-medium transition-all ${
                         quickDate === preset.value
                           ? 'bg-violet-500/15 border border-violet-500/35 text-violet-300 font-bold'
                           : 'bg-slate-900/40 border border-white/5 text-slate-400 hover:text-slate-200'
@@ -996,7 +996,7 @@ export default function Talang() {
               {/* Custom Date Picker Range & Dropdowns */}
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
                 <div className="space-y-1 sm:col-span-2">
-                  <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Rentang Tanggal Kustom</Label>
+                  <Label className="text-nano font-bold text-slate-400 uppercase tracking-wider block">Rentang Tanggal Kustom</Label>
                   <div className="flex items-center gap-1.5">
                     <div className="relative flex-1">
                       <Input
@@ -1006,10 +1006,10 @@ export default function Talang() {
                           setDateFrom(e.target.value);
                           setQuickDate('Custom');
                         }}
-                        className="px-2 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-violet-500 [color-scheme:dark]"
+                        className="px-2 bg-slate-950/80 border-white/5 text-label text-slate-300 h-8 rounded-lg w-full focus-visible:ring-violet-500 [color-scheme:dark]"
                       />
                     </div>
-                    <span className="text-slate-500 text-xs">-</span>
+                    <span className="text-slate-500 text-body">-</span>
                     <div className="relative flex-1">
                       <Input
                         type="date"
@@ -1018,16 +1018,16 @@ export default function Talang() {
                           setDateTo(e.target.value);
                           setQuickDate('Custom');
                         }}
-                        className="px-2 bg-slate-950/80 border-white/5 text-[11px] text-slate-300 h-8 rounded-lg w-full focus-visible:ring-violet-500 [color-scheme:dark]"
+                        className="px-2 bg-slate-950/80 border-white/5 text-label text-slate-300 h-8 rounded-lg w-full focus-visible:ring-violet-500 [color-scheme:dark]"
                       />
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Akun/Pemegang</Label>
+                  <Label className="text-nano font-bold text-slate-400 uppercase tracking-wider block">Akun/Pemegang</Label>
                   <select
-                    className="flex h-8 w-full rounded-lg border border-white/5 bg-slate-950/80 text-[11px] text-slate-300 px-2 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                    className="flex h-8 w-full rounded-lg border border-white/5 bg-slate-950/80 text-label text-slate-300 px-2 focus:outline-none focus:ring-1 focus:ring-violet-500"
                     value={akunFilter}
                     onChange={(e) => setAkunFilter(e.target.value)}
                   >
@@ -1038,9 +1038,9 @@ export default function Talang() {
                 </div>
 
                 <div className="space-y-1">
-                  <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Unit Terkait</Label>
+                  <Label className="text-nano font-bold text-slate-400 uppercase tracking-wider block">Unit Terkait</Label>
                   <select
-                    className="flex h-8 w-full rounded-lg border border-white/5 bg-slate-950/80 text-[11px] text-slate-300 px-2 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                    className="flex h-8 w-full rounded-lg border border-white/5 bg-slate-950/80 text-label text-slate-300 px-2 focus:outline-none focus:ring-1 focus:ring-violet-500"
                     value={unitFilter}
                     onChange={(e) => setUnitFilter(e.target.value)}
                   >
@@ -1053,14 +1053,14 @@ export default function Talang() {
 
               {/* Sorting Selection Rows */}
               <div className="border-t border-white/5 pt-2.5">
-                <Label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Metode Pengurutan Audit</Label>
+                <Label className="text-nano font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Metode Pengurutan Audit</Label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setSortBy('tanggal_desc')}
-                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-semibold text-center border transition-all ${
+                    className={`px-2.5 py-1.5 rounded-lg text-micro font-semibold text-center border transition-all ${
                       sortBy === 'tanggal_desc'
-                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-extrabold'
+                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-black'
                         : 'bg-slate-950/40 border-white/5 text-slate-400 hover:text-slate-350'
                     }`}
                   >
@@ -1069,9 +1069,9 @@ export default function Talang() {
                   <button
                     type="button"
                     onClick={() => setSortBy('tanggal_asc')}
-                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-semibold text-center border transition-all ${
+                    className={`px-2.5 py-1.5 rounded-lg text-micro font-semibold text-center border transition-all ${
                       sortBy === 'tanggal_asc'
-                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-extrabold'
+                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-black'
                         : 'bg-slate-950/40 border-white/5 text-slate-400 hover:text-slate-350'
                     }`}
                   >
@@ -1080,9 +1080,9 @@ export default function Talang() {
                   <button
                     type="button"
                     onClick={() => setSortBy('nominal_desc')}
-                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-semibold text-center border transition-all ${
+                    className={`px-2.5 py-1.5 rounded-lg text-micro font-semibold text-center border transition-all ${
                       sortBy === 'nominal_desc'
-                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-extrabold'
+                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-black'
                         : 'bg-slate-950/40 border-white/5 text-slate-400 hover:text-slate-350'
                     }`}
                   >
@@ -1091,9 +1091,9 @@ export default function Talang() {
                   <button
                     type="button"
                     onClick={() => setSortBy('nominal_asc')}
-                    className={`px-2.5 py-1.5 rounded-lg text-[10px] font-semibold text-center border transition-all ${
+                    className={`px-2.5 py-1.5 rounded-lg text-micro font-semibold text-center border transition-all ${
                       sortBy === 'nominal_asc'
-                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-extrabold'
+                        ? 'bg-violet-500/15 border-violet-500/40 text-violet-300 font-black'
                         : 'bg-slate-950/40 border-white/5 text-slate-400 hover:text-slate-350'
                     }`}
                   >
@@ -1107,45 +1107,45 @@ export default function Talang() {
           {/* Active Filter Pills list */}
           {isAnyFilterActive && (
             <div className="flex flex-wrap items-center gap-1.5 pt-1">
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider">Filter Aktif:</span>
+              <span className="text-nano font-bold text-slate-500 uppercase tracking-wider">Filter Aktif:</span>
 
               {searchTerm && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Cari: "{searchTerm}"
                   <button onClick={() => setSearchTerm('')} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
               )}
 
               {jenisFilter !== 'Semua' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Jenis: {jenisFilter}
                   <button onClick={() => setJenisFilter('Semua')} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
               )}
 
               {quickDate !== 'Semua' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Waktu: {quickDate === '30_hari' ? '30 Hari Terakhir' : quickDate}
                   <button onClick={() => { setQuickDate('Semua'); setDateFrom(''); setDateTo(''); }} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
               )}
 
               {(dateFrom || dateTo) && quickDate === 'Custom' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Rentang: {dateFrom || '...'} s/d {dateTo || '...'}
                   <button onClick={() => { setDateFrom(''); setDateTo(''); setQuickDate('Semua'); }} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
               )}
 
               {akunFilter !== 'Semua' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Akun: {akunFilter}
                   <button onClick={() => setAkunFilter('Semua')} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
               )}
 
               {unitFilter !== 'Semua' && (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-nano font-medium bg-violet-500/10 border border-violet-500/15 text-violet-300">
                   Unit: {unitFilter}
                   <button onClick={() => setUnitFilter('Semua')} className="p-0.5 hover:text-white"><X className="h-2.5 w-2.5" /></button>
                 </span>
@@ -1153,7 +1153,7 @@ export default function Talang() {
 
               <button
                 onClick={handleResetFilters}
-                className="text-[9px] text-rose-400 hover:text-rose-300 font-bold underline cursor-pointer ml-1"
+                className="text-nano text-rose-400 hover:text-rose-300 font-bold underline cursor-pointer ml-1"
               >
                 Reset
               </button>
@@ -1181,7 +1181,7 @@ export default function Talang() {
             return (
               <div
                 key={t.id}
-                className={`p-3.5 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1.5 items-center group ${
+                className={`p-3 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1.5 items-center group ${
                   editingId === t.id
                     ? 'border-violet-500 bg-[#121829]/95 shadow-[0_0_15px_rgba(139,92,246,0.15)]'
                     : 'border-white/5 hover:border-white/10 hover:bg-[#121829]/95'
@@ -1196,14 +1196,14 @@ export default function Talang() {
 
                 {/* Kolom 1: baris 2 - tanggal (dd/mm) */}
                 <div className="col-start-1 col-end-2 row-start-2 row-end-3 flex justify-center justify-self-center select-none">
-                  <span className="text-[10px] font-bold text-slate-400 font-mono text-center">
+                  <span className="text-micro font-bold text-slate-400 font-mono text-center">
                     {formatIgnoreTimezone(t.tanggal, 'dd/MM', { locale: localeId })}
                   </span>
                 </div>
 
                 {/* Kolom 1: baris 3 - akun dana talang */}
                 <div className="col-start-1 col-end-2 row-start-3 row-end-4 flex justify-center justify-self-center w-full">
-                  <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-bold border shrink-0 text-center w-full max-w-[56px] truncate leading-none ${
+                  <span className={`px-1.5 py-0.5 rounded-md text-nano font-bold border shrink-0 text-center w-full max-w-[56px] truncate leading-none ${
                     t.akun_talang === 'Jisoi'
                       ? 'bg-violet-500/10 border-violet-500/20 text-violet-300'
                       : t.akun_talang === 'Rakka'
@@ -1216,18 +1216,18 @@ export default function Talang() {
 
                 {/* Kolom 2, 3 (merge): baris 1 - Keterangan */}
                 <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0">
-                  <span className="text-[12px] font-bold text-slate-100 group-hover:text-violet-300 transition-colors leading-tight block truncate">
+                  <span className="text-body font-bold text-slate-100 group-hover:text-violet-300 transition-colors leading-tight block truncate">
                     {t.jenis === 'Transfer' ? `Transfer dari ${t.akun_talang} ke ${t.akun_tujuan}` : t.keterangan}
                   </span>
                 </div>
 
                 {/* Kolom 2: baris 2 - unit + jenis transaksi */}
-                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-wrap items-center gap-1.5 text-[9px] text-slate-400">
+                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-wrap items-center gap-1.5 text-nano text-slate-400">
                   <span className="bg-white/5 px-1.5 py-0.5 rounded text-white border border-white/5 font-medium">
                     Unit {t.unit || '-'}
                   </span>
                   <span>•</span>
-                  <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold border shrink-0 ${
+                  <span className={`px-1.5 py-0.5 rounded text-nano font-semibold border shrink-0 ${
                     t.jenis === 'Pelunasan'
                       ? 'bg-brand-500/10 border-brand-500/20 text-brand-500'
                       : t.jenis === 'Transfer'
@@ -1240,7 +1240,7 @@ export default function Talang() {
 
                 {/* Kolom 2: baris 3 - Nominal (rata kanan) */}
                 <div className="col-start-2 col-end-3 row-start-3 row-end-4 text-right">
-                  <span className={`text-[12px] font-black inline-block ${t.jenis === 'Pelunasan' ? 'text-brand-500' : 'text-violet-400'}`}>
+                  <span className={`text-body font-black inline-block ${t.jenis === 'Pelunasan' ? 'text-brand-500' : 'text-violet-400'}`}>
                     {showOp}{formatCurrency(t.nominal)}
                   </span>
                 </div>
@@ -1283,7 +1283,7 @@ export default function Talang() {
           })}
 
           {filteredTalang.length === 0 && (
-            <div className="text-center py-12 text-xs text-slate-500 border border-dashed border-white/5 rounded-3xl">
+            <div className="text-center py-12 text-body text-slate-500 border border-dashed border-white/5 rounded-3xl">
               Belum ada transaksi dana talang terekam untuk penyaringan ini.
             </div>
           )}
