@@ -22,6 +22,10 @@ async function getApp(): Promise<express.Express> {
 }
 
 export default async (req: any, res: any) => {
-  const handler = await getApp();
-  handler(req, res);
+  try {
+    const handler = await getApp();
+    handler(req, res);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message || 'Server initialization failed' });
+  }
 };
