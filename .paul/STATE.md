@@ -5,8 +5,8 @@
 Milestone: v0.10 Vercel Deployment Fix
 Phase: 10 of 10 (API Routing Fix) — Complete
 Plan: 10-01 complete
-Status: UNIFY complete — milestone v0.10 ready for git commit + production verification
-Last activity: 2026-06-13 — UNIFY 10-01 (vercel.json split routing + api-handler.ts cleanup)
+Status: Milestone v0.10 complete — ready for production deployment + verification
+Last activity: 2026-06-13 — Phase 10 committed (aa8ba67)
 
 Progress:
 - Milestone v0.1–v0.9: [██████████] 100% ✅ (all complete)
@@ -25,7 +25,7 @@ PLAN ──▶ APPLY ──▶ UNIFY
 
 Last session: 2026-06-13
 Stopped at: UNIFY complete — phase 10 done
-Next action: Git commit phase 10, deploy ke Vercel, verifikasi production (API, static, SPA navigation)
+Next action: Push ke Vercel, verifikasi production: POST /api/auth/login, static assets, SPA navigation di-refresh
 Resume file: .paul/phases/10-api-routing-fix/10-01-SUMMARY.md
 
 ## Decisions
@@ -79,5 +79,5 @@ Resume file: .paul/phases/10-api-routing-fix/10-01-SUMMARY.md
 
 ### Git State
 Branch: main
-Last commit: 3f95494 (fix(vercel): revert to rewrites+/api, add try/catch for DB errors)
+Last commit: aa8ba67 (feat(10-api-routing-fix): fix Vercel split routing — API to function, static via CDN)
 Feature branches merged: none
