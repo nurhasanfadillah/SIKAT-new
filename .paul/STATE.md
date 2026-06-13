@@ -2,31 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.11 Offline UX Fix — Complete ✅
-Phase: 11 of 11 (Offline UX Fix) — Complete
-Plan: 11-01 complete
-Status: Milestone v0.11 complete — ready for next milestone
-Last activity: 2026-06-13 — Phase 11 committed
+Milestone: v0.12 Dashboard UI Polish — Complete ✅
+Phase: 12 of 12 (Dashboard UI Polish) — Complete
+Plan: 12-01 complete
+Status: Milestone v0.12 complete — ready for next milestone
+Last activity: 2026-06-13 — Phase 12 committed
 
 Progress:
-- Milestone v0.1–v0.11: [██████████] 100% ✅ (all complete)
-- Milestone v0.11: [██████████] 100% ✅
-- Phase 11: [██████████] 100% ✅
+- Milestone v0.1–v0.12: [██████████] 100% ✅ (all complete)
+- Milestone v0.12: [██████████] 100% ✅
+- Phase 12: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — phase 11 done]
+  ✓        ✓        ✓     [Loop complete — phase 12 done]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: UNIFY complete — phase 11 done, milestone v0.11 complete
-Next action: Push ke Vercel, verifikasi offline page di production
-Resume file: .paul/phases/11-offline-ux/11-01-SUMMARY.md
+Stopped at: UNIFY complete — phase 12 done, milestone v0.12 complete
+Next action: Push ke Vercel, atau planning milestone berikutnya
+Resume file: .paul/phases/12-dashboard-ui-polish/12-01-SUMMARY.md
 
 ## Decisions
 
@@ -47,6 +47,9 @@ Resume file: .paul/phases/11-offline-ux/11-01-SUMMARY.md
 | 2026-06-12 | FeedbackContext.tsx dikecualikan dari type scale migration | Tidak ada di files_modified PLAN 07-01 — deferred |
 | 2026-06-13 | Audit PWA komprehensif → milestone v0.9 | 3 gap kritis: offline fallback, update notification toast, custom install prompt — sisanya manifest polish di 09-02 |
 | 2026-06-13 | Split routing: /api/* ke function, static via CDN | Single catch-all ke function overwhelm NeonDB concurrent init; rewrites tidak override API file detection |
+| 2026-06-13 | Warna Pelunasan → text-rose-400 | Pelunasan = kas keluar dari perspektif sekolah; neutral (slate-100) misleading bagi pengguna |
+| 2026-06-13 | Progress bar: guard kasBalance > 0 | `(kasBalance || 1)` fallback tidak valid; guard eksplisit lebih semantically correct |
+| 2026-06-13 | Polling Dashboard 5s → 30s | Data keuangan sekolah tidak butuh sub-5s; 30s hemat battery mobile PWA |
 
 ## Accumulated Context
 
@@ -71,6 +74,14 @@ Resume file: .paul/phases/11-offline-ux/11-01-SUMMARY.md
 - FeedbackContext.tsx: text-[11px], text-[12px], text-[13px], text-xs (6 occurrences) — belum dimigrasikan ke semantic class
 - ~~UI: ReloadPrompt (z-30) tertutup nav bar (z-40)~~ — ✅ Fixed in v0.11
 - UI: InstallPrompt (fixed bottom-6 right-6 z-40) overlap nav bar — deferred
+- Dashboard UI (Phase 12 audit): Skeleton loading states (nice-to-have, scope phase tersendiri)
+
+### Dashboard UI (Phase 12 — Complete)
+- Progress bar: `talangPct`/`saldoPct` dengan `kasBalance > 0` guard
+- Warna Pelunasan: `text-rose-400` (outgoing kas)
+- Truncation: `truncate` pada currency span, `overflow-hidden`+`shrink-0` pada metadata
+- Polling: 30_000ms (dari 5000ms)
+- Aria: decorative blurs di hero card punya `aria-hidden="true"`
 
 ### Deployment Architecture (Phase 10 — Complete)
 - ✅ vercel.json: `routes` + `outputDirectory:dist` — split routing benar
@@ -79,5 +90,5 @@ Resume file: .paul/phases/11-offline-ux/11-01-SUMMARY.md
 
 ### Git State
 Branch: main
-Last commit: aa8ba67 (feat(10-api-routing-fix): fix Vercel split routing — API to function, static via CDN)
+Last commit: (pending — Phase 12 commit)
 Feature branches merged: none

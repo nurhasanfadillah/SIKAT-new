@@ -45,6 +45,11 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ api-handler.ts murni API-only (express.static dan sendFile dihapus) — Phase 10 (v0.10)
 - ✓ PWA offline page: auto-reconnect (`window.online` listener) + tombol "Coba Lagi" — Phase 11 (v0.11)
 - ✓ ReloadPrompt z-index diperbaiki (z-30 → z-50), toast tidak tertutup navbar — Phase 11 (v0.11)
+- ✓ Dashboard: progress bar edge case aman (kasBalance=0 guard) — Phase 12 (v0.12)
+- ✓ Dashboard: warna nominal Pelunasan talang diperbaiki (text-rose-400) — Phase 12 (v0.12)
+- ✓ Dashboard: text overflow diatasi di account cards dan transaction metadata — Phase 12 (v0.12)
+- ✓ Dashboard: background polling dioptimalkan 5s → 30s — Phase 12 (v0.12)
+- ✓ Dashboard: elemen dekoratif diberi aria-hidden untuk aksesibilitas — Phase 12 (v0.12)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -71,6 +76,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-13 | `handle:filesystem` + `outputDirectory:dist` untuk static serving | CDN melayani static assets langsung tanpa masuk ke serverless function |
 | 2026-06-13 | Hapus express.static dari api-handler.ts | dist/ tidak accessible dari serverless context; function = API-only |
 | 2026-06-13 | Auto-reload langsung saat event `online` | Simpel; tidak perlu state; sesuai PWA mobile standard |
+| 2026-06-13 | Warna Pelunasan talang → text-rose-400 | Pelunasan = kas keluar dari perspektif sekolah; neutral (slate-100) misleading |
+| 2026-06-13 | Progress bar: guard `kasBalance > 0` sebelum division | `(kasBalance \|\| 1)` menghasilkan percentage tidak valid saat kasBalance=0 |
 
 ---
-*Last updated: 2026-06-13 after Phase 11*
+*Last updated: 2026-06-13 after Phase 12*

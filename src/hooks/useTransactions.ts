@@ -31,7 +31,7 @@ export function useTransactions() {
     fetchTransactions();
     
     // Set up a quiet background polling interval to keep screens updated in real-time
-    const interval = setInterval(fetchTransactions, 5000);
+    const interval = setInterval(fetchTransactions, 30_000);
     return () => clearInterval(interval);
   }, [fetchTransactions]);
 

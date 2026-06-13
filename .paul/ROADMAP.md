@@ -136,4 +136,17 @@
 
 ---
 
-*Last updated: 2026-06-13 — Milestone v0.11 complete*
+---
+
+## Milestone v0.12 — Dashboard UI Polish ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 12 — Dashboard UI Polish ✅
+**Status:** Complete (2026-06-13) | **Plans:** 1/1
+- Plan 12-01: 5 bug fungsional (progress bar edge case, warna Pelunasan, truncation account cards + metadata) + 4 polish (break-words, spinner track, min-height, aria-hidden) — 0 deviasi
+
+---
+
+*Last updated: 2026-06-13 — Milestone v0.12 complete*
