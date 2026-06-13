@@ -22,7 +22,7 @@ export function ReloadPrompt() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
-          className="fixed bottom-6 left-4 right-4 z-30 mx-auto max-w-sm rounded-xl border border-white/10 bg-surface-card/95 px-4 py-3 shadow-2xl backdrop-blur-md"
+          className="fixed bottom-6 left-4 right-4 z-50 mx-auto max-w-sm rounded-xl border border-white/10 bg-surface-card/95 px-4 py-3 shadow-2xl backdrop-blur-md"
         >
           <div className="flex items-center gap-3">
             <p className="text-white text-body flex-1">

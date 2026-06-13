@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.10 (Vercel Deployment Fix — complete) |
+| Version | v0.11 (Offline UX Fix — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -43,6 +43,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Section header alignment: px-1 offset dihapus dari 4 section headers — Phase 07 (v0.7)
 - ✓ Vercel split routing: `/api/*` → serverless function, static files via CDN, SPA fallback — Phase 10 (v0.10)
 - ✓ api-handler.ts murni API-only (express.static dan sendFile dihapus) — Phase 10 (v0.10)
+- ✓ PWA offline page: auto-reconnect (`window.online` listener) + tombol "Coba Lagi" — Phase 11 (v0.11)
+- ✓ ReloadPrompt z-index diperbaiki (z-30 → z-50), toast tidak tertutup navbar — Phase 11 (v0.11)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -68,6 +70,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-13 | Gunakan `routes` (bukan `rewrites`) di vercel.json | rewrites tidak override Vercel API file detection; routes lebih eksplisit |
 | 2026-06-13 | `handle:filesystem` + `outputDirectory:dist` untuk static serving | CDN melayani static assets langsung tanpa masuk ke serverless function |
 | 2026-06-13 | Hapus express.static dari api-handler.ts | dist/ tidak accessible dari serverless context; function = API-only |
+| 2026-06-13 | Auto-reload langsung saat event `online` | Simpel; tidak perlu state; sesuai PWA mobile standard |
 
 ---
-*Last updated: 2026-06-13 after Phase 10*
+*Last updated: 2026-06-13 after Phase 11*

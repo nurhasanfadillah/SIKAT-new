@@ -123,4 +123,17 @@
 
 ---
 
-*Last updated: 2026-06-13 — Milestone v0.10 complete*
+---
+
+## Milestone v0.11 — Offline UX Fix ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 11 — Offline UX Fix ✅
+**Status:** Complete (2026-06-13) | **Plans:** 1/1
+- Plan 11-01: auto-reconnect (`window.online`) + tombol "Coba Lagi" di offline.html + ReloadPrompt z-index z-30→z-50
+
+---
+
+*Last updated: 2026-06-13 — Milestone v0.11 complete*
