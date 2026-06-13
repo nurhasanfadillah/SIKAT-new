@@ -50,10 +50,6 @@ export default function Layout() {
           <div className="flex items-center gap-3 flex-1 min-w-0 overflow-hidden">
             {/* App Logo */}
             <img src="/logo.svg" alt="SIKAT" className="h-8 w-8 flex-shrink-0" />
-            {/* Quick Avatar Initials */}
-            <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-grd-start to-grd-end flex items-center justify-center font-bold text-surface-panel text-sm shadow-[0_0_15px_rgba(0,245,160,0.3)]">
-              {profile?.nama?.[0]?.toUpperCase() || 'U'}
-            </div>
             <div className="flex flex-col min-w-0">
               <span className="text-label text-slate-400 font-medium">Selamat Datang,</span>
               <span className="text-value font-bold text-slate-100 leading-tight truncate max-w-[120px]">

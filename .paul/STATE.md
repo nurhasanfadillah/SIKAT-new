@@ -2,31 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.14 Header Mobile Fix — Complete ✅
-Phase: 14 of 14 (Header Mobile Fix) — Complete
-Plan: 14-01 complete
-Status: Milestone v0.14 complete — ready for next milestone
-Last activity: 2026-06-14 — Phase 14 committed
+Milestone: v0.15 Header Avatar Remove — Complete ✅
+Phase: 15 (Header Avatar Remove) — Complete ✅
+Plan: 15-01 unified
+Status: Milestone v0.15 complete — ready for next milestone
+Last activity: 2026-06-14 — Phase 15 complete, milestone v0.15 closed
 
 Progress:
 - Milestone v0.1–v0.14: [██████████] 100% ✅ (all complete)
-- Milestone v0.14: [██████████] 100% ✅
-- Phase 14: [██████████] 100% ✅
+- Milestone v0.15: [██████████] 100% ✅
+- Phase 15: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — phase 14 done]
+  ✓        ✓        ✓     [Loop complete — Milestone v0.15 closed]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: UNIFY complete — phase 14 done, milestone v0.14 complete
-Next action: Push ke Vercel, atau planning milestone berikutnya
-Resume file: .paul/phases/14-header-mobile-fix/14-01-SUMMARY.md
+Stopped at: Milestone v0.15 complete — semua loop tertutup
+Next action: Tentukan milestone berikutnya, lalu /paul:milestone
+Resume file: .paul/ROADMAP.md
 
 ## Decisions
 
@@ -105,7 +105,12 @@ Resume file: .paul/phases/14-header-mobile-fix/14-01-SUMMARY.md
 - Flex anti-overflow: `flex-1 min-w-0 overflow-hidden` (left group) + `flex-shrink-0` (right group)
 - Type scale: `text-[15px]` → `text-value` di SIKAT branding span
 
+### Header Avatar Remove (Phase 15 — Complete)
+- Avatar circle (h-10 w-10 rounded-full gradient) dihapus dari left group header
+- Header kini: logo + teks (nama + "Selamat Datang") + right group (badge + logout)
+- Tidak ada replacement element — logo sudah cukup sebagai visual anchor
+
 ### Git State
 Branch: main
-Last commit: (akan diupdate setelah commit)
+Last commit: (pending — feat(15-header-avatar-remove))
 Feature branches merged: none

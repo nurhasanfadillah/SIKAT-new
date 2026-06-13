@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.14 (Header Mobile Fix — complete) |
+| Version | v0.15 (Header Avatar Remove — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -60,6 +60,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Header safe-area-inset-top padding via CSS max() function (pt-[max(env(safe-area-inset-top),1.25rem)]) — Phase 14 (v0.14)
 - ✓ Header flex layout aman di 360px Android (flex-1 min-w-0 left, flex-shrink-0 right) — Phase 14 (v0.14)
 - ✓ text-[15px] arbitrary dihapus dari Layout.tsx → text-value (13px, type scale Phase 07) — Phase 14 (v0.14)
+- ✓ Avatar circle inisial (h-10 w-10 gradient rounded-full) dihapus dari header — Phase 15 (v0.15)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -92,6 +93,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-13 | Empty state differentiation: `isAnyFilterActive ? filter-msg : empty-msg` | Flag sudah ada di useMemo; dipakai langsung untuk pesan kontekstual tanpa logic baru |
 | 2026-06-14 | iOS PWA edge-to-edge: black-translucent + viewport-fit=cover | App dark-themed — light status bar sangat janggal di atas dark navy; native dark PWA pakai edge-to-edge |
 | 2026-06-14 | Safe-area header via `pt-[max(env(safe-area-inset-top),1.25rem)]` | Tailwind v4 arbitrary support CSS function; satu class handle dua kondisi: notch vs tidak; tidak perlu utility baru di index.css |
+| 2026-06-14 | Hapus avatar div seluruhnya tanpa replacement | Tidak perlu elemen pengganti di posisi yang sama; logo + teks nama sudah cukup sebagai header identity |
 
 ---
-*Last updated: 2026-06-14 after Phase 14*
+*Last updated: 2026-06-14 after Phase 15*

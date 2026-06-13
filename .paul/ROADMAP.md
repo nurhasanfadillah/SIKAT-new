@@ -171,4 +171,15 @@
 
 ---
 
-*Last updated: 2026-06-14 — Milestone v0.14 complete*
+## Milestone v0.15 — Header Avatar Remove ✅
+
+**Status:** Complete (2026-06-14)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 15 — Header Avatar Remove ✅
+**Status:** Complete (2026-06-14) | **Plans:** 1/1
+- Plan 15-01: Hapus avatar circle (h-10 w-10 gradient inisial) dari header Layout.tsx
+
+---
+
+*Last updated: 2026-06-14 — Milestone v0.15 complete*
