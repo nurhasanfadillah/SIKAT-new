@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.7 (Spacing & Typography — complete) |
+| Version | v0.10 (Vercel Deployment Fix — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -41,6 +41,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Section spacing seragam (space-y-4) dan grid gap konsisten (gap-3) — Phase 07 (v0.7)
 - ✓ Font-weight hierarchy: medium/bold/black; font-extrabold dihilangkan — Phase 07 (v0.7)
 - ✓ Section header alignment: px-1 offset dihapus dari 4 section headers — Phase 07 (v0.7)
+- ✓ Vercel split routing: `/api/*` → serverless function, static files via CDN, SPA fallback — Phase 10 (v0.10)
+- ✓ api-handler.ts murni API-only (express.static dan sendFile dihapus) — Phase 10 (v0.10)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -63,6 +65,9 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-12 | recharts Bar fills via tokens.ts import (bukan inline hex) | Recharts `fill` prop tidak bisa pakai Tailwind class; tokens.ts = single source of truth |
 | 2026-06-12 | CartesianGrid/XAxis stroke hex dikecualikan dari migrasi | React inline style objects tidak support CSS custom properties — valid exception |
 | 2026-06-12 | text-text-secondary (slate-400) menggantikan text-slate-500 sebagai secondary text | WCAG SC 1.4.3 upgrade: 7.81:1 vs 4.21:1 pada bg-surface-card |
+| 2026-06-13 | Gunakan `routes` (bukan `rewrites`) di vercel.json | rewrites tidak override Vercel API file detection; routes lebih eksplisit |
+| 2026-06-13 | `handle:filesystem` + `outputDirectory:dist` untuk static serving | CDN melayani static assets langsung tanpa masuk ke serverless function |
+| 2026-06-13 | Hapus express.static dari api-handler.ts | dist/ tidak accessible dari serverless context; function = API-only |
 
 ---
-*Last updated: 2026-06-12 after Phase 07*
+*Last updated: 2026-06-13 after Phase 10*

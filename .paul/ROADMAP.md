@@ -111,4 +111,16 @@
 
 ---
 
-*Last updated: 2026-06-13*
+## Milestone v0.10 — Vercel Deployment Fix ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 10 — API Routing Fix ✅
+**Status:** Complete (2026-06-13) | **Plans:** 1/1
+- Plan 10-01: Split routing (`routes` + `outputDirectory:dist`): `/api/*` → serverless function, static via CDN, SPA fallback
+- api-handler.ts dibersihkan dari express.static/sendFile — function murni API-only
+
+---
+
+*Last updated: 2026-06-13 — Milestone v0.10 complete*

@@ -2,37 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.9 PWA Installation Polish ✅ — COMPLETE
-Phase: 9 (PWA Installation Polish) — Complete
-Plan: 09-02 — COMPLETE (phase done)
-Status: Milestone v0.9 complete
-Last activity: 2026-06-13 — Phase 09 complete: PWA installation polish selesai
+Milestone: v0.10 Vercel Deployment Fix
+Phase: 10 of 10 (API Routing Fix) — Complete
+Plan: 10-01 complete
+Status: UNIFY complete — milestone v0.10 ready for git commit + production verification
+Last activity: 2026-06-13 — UNIFY 10-01 (vercel.json split routing + api-handler.ts cleanup)
 
 Progress:
-- Milestone v0.1: [██████████] 100% ✅
-- Milestone v0.2: [██████████] 100% ✅
-- Milestone v0.3: [██████████] 100% ✅
-- Milestone v0.4: [██████████] 100% ✅
-- Milestone v0.5: [██████████] 100% ✅
-- Milestone v0.6: [██████████] 100% ✅
-- Milestone v0.7: [██████████] 100% ✅
-- Milestone v0.8: [██████████] 100% ✅
-- Milestone v0.9: [██████████] 100% ✅
+- Milestone v0.1–v0.9: [██████████] 100% ✅ (all complete)
+- Milestone v0.10: [██████████] 100% ✅
+- Phase 10: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 09 complete — milestone v0.9 done]
+  ✓        ✓        ✓     [Loop complete — phase 10 done]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: Milestone v0.9 complete — PWA installation polish selesai
-Next action: Diskusikan milestone berikutnya
-Resume file: .paul/ROADMAP.md
+Stopped at: UNIFY complete — phase 10 done
+Next action: Git commit phase 10, deploy ke Vercel, verifikasi production (API, static, SPA navigation)
+Resume file: .paul/phases/10-api-routing-fix/10-01-SUMMARY.md
 
 ## Decisions
 
@@ -52,6 +46,7 @@ Resume file: .paul/ROADMAP.md
 | 2026-06-12 | font-extrabold dihilangkan dari codebase | Konvergen ke font-black untuk primary values; 3-level hierarchy lebih jelas |
 | 2026-06-12 | FeedbackContext.tsx dikecualikan dari type scale migration | Tidak ada di files_modified PLAN 07-01 — deferred |
 | 2026-06-13 | Audit PWA komprehensif → milestone v0.9 | 3 gap kritis: offline fallback, update notification toast, custom install prompt — sisanya manifest polish di 09-02 |
+| 2026-06-13 | Split routing: /api/* ke function, static via CDN | Single catch-all ke function overwhelm NeonDB concurrent init; rewrites tidak override API file detection |
 
 ## Accumulated Context
 
@@ -70,12 +65,19 @@ Resume file: .paul/ROADMAP.md
 - Type scale: text-nano(9px)/micro(10px)/label(11px)/body(12px)/value(13px) di @theme
 - Font-weight: font-medium=meta, font-bold=label/header, font-black=nominal/primary
 - Card padding: hero=p-5, standard=p-4, compact=p-3
-- FeedbackContext.tsx: masih pakai arbitrary sizes (6 occurrences) — belum dimigrasikan
+- FeedbackContext.tsx: masih pakai arbitrary sizes (6 occurrences) — belum dimigrasikan ke semantic class
 
 ### Deferred Issues
 - FeedbackContext.tsx: text-[11px], text-[12px], text-[13px], text-xs (6 occurrences) — belum dimigrasikan ke semantic class
+- UI: ReloadPrompt (z-30) tertutup nav bar (z-40) — deferred
+- UI: InstallPrompt (fixed bottom-6 right-6 z-40) overlap nav bar — deferred
+
+### Deployment Architecture (Phase 10 — Complete)
+- ✅ vercel.json: `routes` + `outputDirectory:dist` — split routing benar
+- ✅ api-handler.ts: murni API-only, express.static/sendFile dihapus
+- ⚠️ DATABASE_URL harus dikonfigurasi di Vercel dashboard environment variables
 
 ### Git State
 Branch: main
-Last commit: 331fafb (feat(07-spacing-typography): complete typography & spacing system — v0.7)
+Last commit: 3f95494 (fix(vercel): revert to rewrites+/api, add try/catch for DB errors)
 Feature branches merged: none
