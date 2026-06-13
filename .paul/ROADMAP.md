@@ -160,4 +160,15 @@
 
 ---
 
-*Last updated: 2026-06-13 — Milestone v0.13 complete*
+## Milestone v0.14 — Header Mobile Fix ✅
+
+**Status:** Complete (2026-06-14)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 14 — Header Mobile Fix ✅
+**Status:** Complete (2026-06-14) | **Plans:** 1/1
+- Plan 14-01: 5 targeted fixes — theme_color #2563EB→teal, iOS PWA edge-to-edge (black-translucent + viewport-fit=cover), safe-area-inset-top header padding, header flex overflow fix (360px Android), text-[15px]→text-value
+
+---
+
+*Last updated: 2026-06-14 — Milestone v0.14 complete*

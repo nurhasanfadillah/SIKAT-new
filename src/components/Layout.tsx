@@ -46,15 +46,15 @@ export default function Layout() {
         </div>
 
         {/* Custom Mobile Header Bar */}
-        <header className="sticky top-0 z-40 bg-surface-panel/95 backdrop-blur-md border-b border-white/5 pt-5 md:pt-9 pb-3 px-5 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-40 bg-surface-panel/95 backdrop-blur-md border-b border-white/5 pt-[max(env(safe-area-inset-top),1.25rem)] md:pt-9 pb-3 px-5 flex items-center justify-between">
+          <div className="flex items-center gap-3 flex-1 min-w-0 overflow-hidden">
             {/* App Logo */}
             <img src="/logo.svg" alt="SIKAT" className="h-8 w-8 flex-shrink-0" />
             {/* Quick Avatar Initials */}
             <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-grd-start to-grd-end flex items-center justify-center font-bold text-surface-panel text-sm shadow-[0_0_15px_rgba(0,245,160,0.3)]">
               {profile?.nama?.[0]?.toUpperCase() || 'U'}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-0">
               <span className="text-label text-slate-400 font-medium">Selamat Datang,</span>
               <span className="text-value font-bold text-slate-100 leading-tight truncate max-w-[120px]">
                 {profile?.nama || 'Pengguna'}
@@ -62,7 +62,7 @@ export default function Layout() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             {/* Centered Compact Badge */}
             <span className="text-nano font-bold tracking-wider uppercase px-2 py-1 rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/20 shadow-sm leading-tight">
               {profile?.role || 'Viewer'}
@@ -84,7 +84,7 @@ export default function Layout() {
               {getPageTitle()}
             </h1>
           </div>
-          <span className="text-[15px] font-bold tracking-wider text-brand-500 font-mono">
+          <span className="text-value font-bold tracking-wider text-brand-500 font-mono">
             &lt;SIKAT&gt;
           </span>
         </div>

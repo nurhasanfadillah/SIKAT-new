@@ -2,31 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.13 Kas Rekap UI Polish — Complete ✅
-Phase: 13 of 13 (Kas Rekap UI Polish) — Complete
-Plan: 13-01 complete
-Status: Milestone v0.13 complete — ready for next milestone
-Last activity: 2026-06-13 — Phase 13 committed
+Milestone: v0.14 Header Mobile Fix — Complete ✅
+Phase: 14 of 14 (Header Mobile Fix) — Complete
+Plan: 14-01 complete
+Status: Milestone v0.14 complete — ready for next milestone
+Last activity: 2026-06-14 — Phase 14 committed
 
 Progress:
-- Milestone v0.1–v0.13: [██████████] 100% ✅ (all complete)
-- Milestone v0.13: [██████████] 100% ✅
-- Phase 13: [██████████] 100% ✅
+- Milestone v0.1–v0.14: [██████████] 100% ✅ (all complete)
+- Milestone v0.14: [██████████] 100% ✅
+- Phase 14: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — phase 13 done]
+  ✓        ✓        ✓     [Loop complete — phase 14 done]
 ```
 
 ## Session Continuity
 
-Last session: 2026-06-13
-Stopped at: UNIFY complete — phase 13 done, milestone v0.13 complete
+Last session: 2026-06-14
+Stopped at: UNIFY complete — phase 14 done, milestone v0.14 complete
 Next action: Push ke Vercel, atau planning milestone berikutnya
-Resume file: .paul/phases/13-kas-rekap-ui-polish/13-01-SUMMARY.md
+Resume file: .paul/phases/14-header-mobile-fix/14-01-SUMMARY.md
 
 ## Decisions
 
@@ -52,6 +52,8 @@ Resume file: .paul/phases/13-kas-rekap-ui-polish/13-01-SUMMARY.md
 | 2026-06-13 | Polling Dashboard 5s → 30s | Data keuangan sekolah tidak butuh sub-5s; 30s hemat battery mobile PWA |
 | 2026-06-13 | rose=outgoing convention extended ke Kas.tsx | Konsisten dengan Dashboard: pemasukan=brand-500, pengeluaran=rose-400 |
 | 2026-06-13 | Empty state differentiation via isAnyFilterActive | Flag sudah ada; dipakai langsung untuk pesan kontekstual |
+| 2026-06-14 | iOS PWA edge-to-edge (black-translucent + viewport-fit=cover) | Dark app + light status bar sangat janggal; native dark PWA pakai edge-to-edge |
+| 2026-06-14 | Safe-area via `pt-[max(env(safe-area-inset-top),1.25rem)]` | Tailwind v4 support CSS function di arbitrary value; tidak perlu utility CSS baru |
 
 ## Accumulated Context
 
@@ -96,7 +98,14 @@ Resume file: .paul/phases/13-kas-rekap-ui-polish/13-01-SUMMARY.md
 - ✅ api-handler.ts: murni API-only, express.static/sendFile dihapus
 - ⚠️ DATABASE_URL harus dikonfigurasi di Vercel dashboard environment variables
 
+### Header Mobile (Phase 14 — Complete)
+- theme_color/background_color: `#00e5a3`/`#050811` di vite.config.ts + index.html
+- iOS PWA: `viewport-fit=cover` + `apple-mobile-web-app-status-bar-style: black-translucent`
+- Safe-area header: `pt-[max(env(safe-area-inset-top),1.25rem)] md:pt-9` di Layout.tsx header
+- Flex anti-overflow: `flex-1 min-w-0 overflow-hidden` (left group) + `flex-shrink-0` (right group)
+- Type scale: `text-[15px]` → `text-value` di SIKAT branding span
+
 ### Git State
 Branch: main
-Last commit: 4349c67 (docs(paul): update PROJECT.md version to v0.12)
+Last commit: (akan diupdate setelah commit)
 Feature branches merged: none

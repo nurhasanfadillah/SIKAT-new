@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.13 (Kas Rekap UI Polish — complete) |
+| Version | v0.14 (Header Mobile Fix — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -55,6 +55,11 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Kas Rekap: spinner track pattern diseragamkan dengan Dashboard (`border-white/10`) — Phase 13 (v0.13)
 - ✓ Kas Rekap: empty state pesan kontekstual — filter aktif vs benar-benar kosong — Phase 13 (v0.13)
 - ✓ Kas Rekap: icon dekoratif TrendingUp/TrendingDown diberi aria-hidden — Phase 13 (v0.13)
+- ✓ PWA theme_color dan background_color diperbarui ke teal (#00e5a3/#050811) — Phase 14 (v0.14)
+- ✓ iOS PWA edge-to-edge: viewport-fit=cover + apple-mobile-web-app-status-bar-style: black-translucent — Phase 14 (v0.14)
+- ✓ Header safe-area-inset-top padding via CSS max() function (pt-[max(env(safe-area-inset-top),1.25rem)]) — Phase 14 (v0.14)
+- ✓ Header flex layout aman di 360px Android (flex-1 min-w-0 left, flex-shrink-0 right) — Phase 14 (v0.14)
+- ✓ text-[15px] arbitrary dihapus dari Layout.tsx → text-value (13px, type scale Phase 07) — Phase 14 (v0.14)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -85,6 +90,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-13 | Progress bar: guard `kasBalance > 0` sebelum division | `(kasBalance \|\| 1)` menghasilkan percentage tidak valid saat kasBalance=0 |
 | 2026-06-13 | rose=outgoing convention extended ke Kas.tsx | Pemasukan=brand-500, Pengeluaran=rose-400 di seluruh transaction nominal displays; konsisten dengan Dashboard |
 | 2026-06-13 | Empty state differentiation: `isAnyFilterActive ? filter-msg : empty-msg` | Flag sudah ada di useMemo; dipakai langsung untuk pesan kontekstual tanpa logic baru |
+| 2026-06-14 | iOS PWA edge-to-edge: black-translucent + viewport-fit=cover | App dark-themed — light status bar sangat janggal di atas dark navy; native dark PWA pakai edge-to-edge |
+| 2026-06-14 | Safe-area header via `pt-[max(env(safe-area-inset-top),1.25rem)]` | Tailwind v4 arbitrary support CSS function; satu class handle dua kondisi: notch vs tidak; tidak perlu utility baru di index.css |
 
 ---
-*Last updated: 2026-06-13 after Phase 13*
+*Last updated: 2026-06-14 after Phase 14*
