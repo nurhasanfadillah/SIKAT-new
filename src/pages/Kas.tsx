@@ -205,7 +205,7 @@ export default function Kas() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
-        <div className="h-10 w-10 border-4 border-brand-500/30 border-t-brand-500 rounded-full animate-spin" />
+        <div className="h-10 w-10 border-4 border-white/10 border-t-brand-500 rounded-full animate-spin" />
         <span className="text-sm text-slate-400">Memuat Buku Kas...</span>
       </div>
     );
@@ -320,7 +320,7 @@ export default function Kas() {
           </div>
           <div className="bg-surface-card/60 border border-white/5 rounded-2xl p-3 flex flex-col justify-between">
             <span className="text-nano font-bold text-rose-400 uppercase">Out (Bulan ini)</span>
-            <span className="text-value font-bold text-rose-450 leading-tight mt-1 truncate">
+            <span className="text-value font-bold text-rose-400 leading-tight mt-1 truncate">
               {formatCurrency(pengeluaranBulanIni)}
             </span>
           </div>
@@ -719,7 +719,7 @@ export default function Kas() {
                 }`}
               >
                 {/* Kolom 1: baris 1, 2 merge center - Icon */}
-                <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex items-center justify-center self-center">
+                <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex items-center justify-center self-center" aria-hidden="true">
                   <div className={`p-2 rounded-xl shrink-0 border ${
                     isPemasukan
                       ? 'bg-brand-500/10 text-brand-500 border-brand-500/10'
@@ -747,7 +747,7 @@ export default function Kas() {
 
                 {/* Kolom 2: baris 3 - Nominal */}
                 <div className="col-start-2 col-end-3 row-start-3 row-end-4">
-                  <span className={`text-body font-black block ${isPemasukan ? 'text-brand-500' : 'text-slate-100'}`}>
+                  <span className={`text-body font-black block ${isPemasukan ? 'text-brand-500' : 'text-rose-400'}`}>
                     {isPemasukan ? '+' : '-'}{formatCurrency(t.nominal)}
                   </span>
                 </div>
@@ -796,7 +796,7 @@ export default function Kas() {
 
           {filteredKas.length === 0 && (
             <div className="text-center py-10 text-body text-slate-500 border border-dashed border-white/5 rounded-2xl">
-              Belum ada transaksi terekam.
+              {isAnyFilterActive ? 'Tidak ada transaksi yang sesuai filter.' : 'Belum ada transaksi terekam.'}
             </div>
           )}
         </div>

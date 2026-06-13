@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.12 (Dashboard UI Polish — complete) |
+| Version | v0.13 (Kas Rekap UI Polish — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -50,6 +50,11 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Dashboard: text overflow diatasi di account cards dan transaction metadata — Phase 12 (v0.12)
 - ✓ Dashboard: background polling dioptimalkan 5s → 30s — Phase 12 (v0.12)
 - ✓ Dashboard: elemen dekoratif diberi aria-hidden untuk aksesibilitas — Phase 12 (v0.12)
+- ✓ Kas Rekap: bug `text-rose-450` (class invalid) diperbaiki → `text-rose-400` — Phase 13 (v0.13)
+- ✓ Kas Rekap: warna nominal Pengeluaran → `text-rose-400` (konsisten rose=outgoing di seluruh transaction views) — Phase 13 (v0.13)
+- ✓ Kas Rekap: spinner track pattern diseragamkan dengan Dashboard (`border-white/10`) — Phase 13 (v0.13)
+- ✓ Kas Rekap: empty state pesan kontekstual — filter aktif vs benar-benar kosong — Phase 13 (v0.13)
+- ✓ Kas Rekap: icon dekoratif TrendingUp/TrendingDown diberi aria-hidden — Phase 13 (v0.13)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -78,6 +83,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-13 | Auto-reload langsung saat event `online` | Simpel; tidak perlu state; sesuai PWA mobile standard |
 | 2026-06-13 | Warna Pelunasan talang → text-rose-400 | Pelunasan = kas keluar dari perspektif sekolah; neutral (slate-100) misleading |
 | 2026-06-13 | Progress bar: guard `kasBalance > 0` sebelum division | `(kasBalance \|\| 1)` menghasilkan percentage tidak valid saat kasBalance=0 |
+| 2026-06-13 | rose=outgoing convention extended ke Kas.tsx | Pemasukan=brand-500, Pengeluaran=rose-400 di seluruh transaction nominal displays; konsisten dengan Dashboard |
+| 2026-06-13 | Empty state differentiation: `isAnyFilterActive ? filter-msg : empty-msg` | Flag sudah ada di useMemo; dipakai langsung untuk pesan kontekstual tanpa logic baru |
 
 ---
-*Last updated: 2026-06-13 after Phase 12*
+*Last updated: 2026-06-13 after Phase 13*

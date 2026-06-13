@@ -2,31 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.12 Dashboard UI Polish — Complete ✅
-Phase: 12 of 12 (Dashboard UI Polish) — Complete
-Plan: 12-01 complete
-Status: Milestone v0.12 complete — ready for next milestone
-Last activity: 2026-06-13 — Phase 12 committed
+Milestone: v0.13 Kas Rekap UI Polish — Complete ✅
+Phase: 13 of 13 (Kas Rekap UI Polish) — Complete
+Plan: 13-01 complete
+Status: Milestone v0.13 complete — ready for next milestone
+Last activity: 2026-06-13 — Phase 13 committed
 
 Progress:
-- Milestone v0.1–v0.12: [██████████] 100% ✅ (all complete)
-- Milestone v0.12: [██████████] 100% ✅
-- Phase 12: [██████████] 100% ✅
+- Milestone v0.1–v0.13: [██████████] 100% ✅ (all complete)
+- Milestone v0.13: [██████████] 100% ✅
+- Phase 13: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — phase 12 done]
+  ✓        ✓        ✓     [Loop complete — phase 13 done]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: UNIFY complete — phase 12 done, milestone v0.12 complete
+Stopped at: UNIFY complete — phase 13 done, milestone v0.13 complete
 Next action: Push ke Vercel, atau planning milestone berikutnya
-Resume file: .paul/phases/12-dashboard-ui-polish/12-01-SUMMARY.md
+Resume file: .paul/phases/13-kas-rekap-ui-polish/13-01-SUMMARY.md
 
 ## Decisions
 
@@ -50,6 +50,8 @@ Resume file: .paul/phases/12-dashboard-ui-polish/12-01-SUMMARY.md
 | 2026-06-13 | Warna Pelunasan → text-rose-400 | Pelunasan = kas keluar dari perspektif sekolah; neutral (slate-100) misleading bagi pengguna |
 | 2026-06-13 | Progress bar: guard kasBalance > 0 | `(kasBalance || 1)` fallback tidak valid; guard eksplisit lebih semantically correct |
 | 2026-06-13 | Polling Dashboard 5s → 30s | Data keuangan sekolah tidak butuh sub-5s; 30s hemat battery mobile PWA |
+| 2026-06-13 | rose=outgoing convention extended ke Kas.tsx | Konsisten dengan Dashboard: pemasukan=brand-500, pengeluaran=rose-400 |
+| 2026-06-13 | Empty state differentiation via isAnyFilterActive | Flag sudah ada; dipakai langsung untuk pesan kontekstual |
 
 ## Accumulated Context
 
@@ -82,6 +84,12 @@ Resume file: .paul/phases/12-dashboard-ui-polish/12-01-SUMMARY.md
 - Truncation: `truncate` pada currency span, `overflow-hidden`+`shrink-0` pada metadata
 - Polling: 30_000ms (dari 5000ms)
 - Aria: decorative blurs di hero card punya `aria-hidden="true"`
+
+### Kas Rekap UI (Phase 13 — Complete)
+- rose=outgoing convention: pemasukan=brand-500, pengeluaran=rose-400 di seluruh transaction nominal
+- Spinner track: `border-white/10` + `border-t-brand-500` (pattern seragam dengan Dashboard)
+- Empty state: `isAnyFilterActive ? 'Tidak ada transaksi yang sesuai filter.' : 'Belum ada transaksi terekam.'`
+- Aria: icon container TrendingUp/TrendingDown punya `aria-hidden="true"`
 
 ### Deployment Architecture (Phase 10 — Complete)
 - ✅ vercel.json: `routes` + `outputDirectory:dist` — split routing benar

@@ -149,4 +149,15 @@
 
 ---
 
-*Last updated: 2026-06-13 — Milestone v0.12 complete*
+## Milestone v0.13 — Kas Rekap UI Polish ✅
+
+**Status:** Complete (2026-06-13)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 13 — Kas Rekap UI Polish ✅
+**Status:** Complete (2026-06-13) | **Plans:** 1/1
+- Plan 13-01: 5 targeted fixes — bug (`text-rose-450`), warna nominal Pengeluaran (`text-rose-400`), spinner track (`border-white/10`), empty state pesan kontekstual, aria-hidden icon container
+
+---
+
+*Last updated: 2026-06-13 — Milestone v0.13 complete*
