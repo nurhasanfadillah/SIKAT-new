@@ -2,31 +2,31 @@
 
 ## Current Position
 
-Milestone: v0.16 UI Cleanup — Complete ✅
-Phase: 16 (UI Cleanup) — Complete ✅
-Plan: 16-01 unified
-Status: Milestone v0.16 complete — ready for next milestone
-Last activity: 2026-06-14 — Phase 16 complete, milestone v0.16 closed
+Milestone: v0.17 Kas & Talang Layout Fix — In progress
+Phase: 17 (Kas & Talang Layout Fix) — Planning
+Plan: 17-02 APPLY in progress — at checkpoint:human-verify
+Status: APPLY executing
+Last activity: 2026-06-14 — Task 1+2 done; awaiting visual verification
 
 Progress:
 - Milestone v0.1–v0.16: [██████████] 100% ✅ (all complete)
-- Milestone v0.16: [██████████] 100% ✅
-- Phase 16: [██████████] 100% ✅
+- Milestone v0.17: [███░░░░░░░] 33% (1/3 plans)
+- Phase 17: [███░░░░░░░] 33% (17-01 done; 17-02 Kas card pending; 17-03 Talang card pending)
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Milestone v0.16 closed]
+  ✓        ○        ○     [Plan 17-02 created, awaiting approval]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: Milestone v0.16 complete — semua loop tertutup
-Next action: Tentukan milestone berikutnya, lalu /paul:milestone
-Resume file: .paul/ROADMAP.md
+Stopped at: Plan 17-02 created (Kas card redesign)
+Next action: Review dan approve plan, lalu /paul:apply .paul/phases/17-kas-talang-layout-fix/17-02-PLAN.md
+Resume file: .paul/phases/17-kas-talang-layout-fix/17-02-PLAN.md
 
 ## Decisions
 

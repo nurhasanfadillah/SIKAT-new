@@ -9,8 +9,9 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { format, endOfDay } from 'date-fns';
 import { id as localeId } from 'date-fns/locale';
-import { TrendingUp, TrendingDown, Plus, X, Calendar, Wallet, Search, SlidersHorizontal, RotateCcw, Edit2, Trash2 } from 'lucide-react';
+import { TrendingUp, TrendingDown, Plus, X, Calendar, Wallet, Search, SlidersHorizontal, RotateCcw, Edit2, Trash2, ChevronDown } from 'lucide-react';
 import { parseDateIgnoreTimezone, formatIgnoreTimezone } from '../lib/utils';
+import { motion, AnimatePresence } from 'motion/react';
 
 const getLocalDateString = (dateInput: any) => {
   const d = parseDateIgnoreTimezone(dateInput);
@@ -26,8 +27,10 @@ export default function Kas() {
   const { toast, confirm } = useFeedback();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const handleStartEdit = (t: any) => {
+    setExpandedId(null);
     setEditingId(t.id || null);
     setJenis(t.jenis);
     setTanggal(getLocalDateString(t.tanggal));
@@ -706,90 +709,126 @@ export default function Kas() {
           )}
         </div>
 
-        <div className="space-y-2 max-h-[500px] overflow-y-auto no-scrollbar pr-0.5">
+        <div className="space-y-2 no-scrollbar pr-0.5">
           {filteredKas.map((t) => {
             const isPemasukan = t.jenis === 'Pemasukan';
             return (
               <div
                 key={t.id}
-                className={`p-3 rounded-2xl bg-surface-card/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 items-center ${
+                className={`p-3 rounded-2xl bg-surface-card/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 cursor-pointer ${
                   editingId === t.id
                     ? 'border-brand-500 bg-surface-card/95 shadow-[0_0_15px_rgba(0,229,163,0.15)]'
                     : 'border-white/5 hover:border-white/10'
                 }`}
+                onClick={() => {
+                  if (editingId === t.id) return;
+                  setExpandedId(expandedId === t.id ? null : t.id);
+                }}
               >
-                {/* Kolom 1: baris 1, 2 merge center - Icon */}
-                <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex items-center justify-center self-center" aria-hidden="true">
-                  <div className={`p-2 rounded-xl shrink-0 border ${
-                    isPemasukan
-                      ? 'bg-brand-500/10 text-brand-500 border-brand-500/10'
-                      : 'bg-rose-500/10 text-rose-400 border-rose-500/10'
-                  }`}>
-                    {isPemasukan ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-                  </div>
+                {/* Kolom 1 rowspan-2: Tanggal mini card */}
+                <div className="col-start-1 col-end-2 row-start-1 row-end-3 flex flex-col items-center justify-center self-center w-10 min-h-[2.75rem] bg-white/5 rounded-xl border border-white/10 px-1 gap-0.5">
+                  <span className="text-nano text-slate-500 font-medium leading-none uppercase">
+                    {formatIgnoreTimezone(t.tanggal, 'MMM', { locale: localeId })}
+                  </span>
+                  <span className="text-value font-black text-slate-100 leading-none">
+                    {formatIgnoreTimezone(t.tanggal, 'dd', { locale: localeId })}
+                  </span>
                 </div>
 
-                {/* Kolom 2, 3 (merge): baris 1 - Keterangan */}
-                <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0">
+                {/* Kolom 2+3 row 1: Keterangan */}
+                <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0 flex items-end pb-0.5">
                   <span className="text-body font-bold text-slate-100 block truncate leading-tight">
                     {t.keterangan}
                   </span>
                 </div>
 
-                {/* Kolom 2: baris 2 - Tanggal + Unit */}
-                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-wrap items-center gap-x-1.5 text-nano text-slate-400">
-                  <span className="bg-white/5 px-1.5 py-0.5 rounded text-white border border-white/5">
-                    {isPemasukan ? t.sumber_dana : t.kategori}
-                  </span>
-                  <span>•</span>
-                  <span>{formatIgnoreTimezone(t.tanggal, 'dd MMM yyyy', { locale: localeId })}</span>
-                </div>
-
-                {/* Kolom 2: baris 3 - Nominal */}
-                <div className="col-start-2 col-end-3 row-start-3 row-end-4">
-                  <span className={`text-body font-black block ${isPemasukan ? 'text-brand-500' : 'text-rose-400'}`}>
+                {/* Kolom 2 row 2: Nominal */}
+                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex items-center">
+                  <span className={`text-body font-black ${isPemasukan ? 'text-brand-500' : 'text-rose-400'}`}>
                     {isPemasukan ? '+' : '-'}{formatCurrency(t.nominal)}
                   </span>
                 </div>
 
-                {/* Kolom 3: baris 2, 3 (merge) - Icon Action */}
-                {isBendahara ? (
-                  t.kategori === 'Pelunasan Dana Talang' ? (
-                    <div className="col-start-3 col-end-4 row-start-2 row-end-4 pr-1 text-micro text-slate-500 italic text-right self-center">
-                      Kelola di Dana Talang
-                    </div>
-                  ) : (
-                    <div className="col-start-3 col-end-4 row-start-2 row-end-4 flex items-center justify-end self-center border-l border-white/10 pl-2 h-full py-1">
-                      <button
-                        onClick={() => handleStartEdit(t)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-brand-500 hover:bg-white/5 transition-colors"
-                        title="Ubah Transaksi"
-                      >
-                        <Edit2 className="h-3.5 w-3.5" />
-                      </button>
-                      <button
-                        onClick={async () => {
-                          const isConfirmed = await confirm({
-                            title: 'Hapus Transaksi Kas',
-                            message: `Apakah Anda benar-benar yakin ingin melenyapkan catatan "${t.keterangan}" senilai ${formatCurrency(t.nominal)} secara permanen?`,
-                            confirmLabel: 'Ya, Hapus',
-                            cancelLabel: 'Batal',
-                            variant: 'danger'
-                          });
-                          if (isConfirmed && t.id) {
-                            await handleDelete(t.id);
-                          }
-                        }}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-white/5 transition-colors"
-                        title="Hapus Transaksi"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </button>
-                    </div>
-                  )
-                ) : (
-                  <div className="col-start-3 col-end-4 row-start-2 row-end-4" />
-                )}
+                {/* Kolom 3 row 2: Chevron toggle */}
+                <div className="col-start-3 col-end-4 row-start-2 row-end-3 flex items-center justify-end">
+                  <motion.div
+                    animate={{ rotate: expandedId === t.id ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown className="h-4 w-4 text-slate-500" />
+                  </motion.div>
+                </div>
+
+                {/* Expanded detail area — full width */}
+                <AnimatePresence>
+                  {expandedId === t.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="col-start-1 col-end-4 overflow-hidden"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <div className="border-t border-white/5 mt-1 pt-2 space-y-2">
+                        {/* Badge jenis + sumber/kategori */}
+                        <div className="flex flex-wrap gap-1.5">
+                          <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-nano border ${
+                            isPemasukan
+                              ? 'bg-brand-500/10 text-brand-500 border-brand-500/10'
+                              : 'bg-rose-500/10 text-rose-400 border-rose-500/10'
+                          }`}>
+                            {isPemasukan ? <TrendingUp className="h-3 w-3" aria-hidden="true" /> : <TrendingDown className="h-3 w-3" aria-hidden="true" />}
+                            {t.jenis}
+                          </span>
+                          <span className="bg-white/5 px-1.5 py-0.5 rounded text-nano text-slate-300 border border-white/5">
+                            {isPemasukan ? t.sumber_dana : t.kategori}
+                          </span>
+                        </div>
+                        {/* Tanggal lengkap */}
+                        <div className="text-nano text-slate-500">
+                          {formatIgnoreTimezone(t.tanggal, 'EEEE, dd MMMM yyyy', { locale: localeId })}
+                        </div>
+                        {/* Action buttons */}
+                        {isBendahara && (
+                          t.kategori === 'Pelunasan Dana Talang' ? (
+                            <div className="text-micro text-slate-500 italic text-right">
+                              Kelola di Dana Talang
+                            </div>
+                          ) : (
+                            <div className="flex gap-1.5 justify-end">
+                              <button
+                                onClick={() => handleStartEdit(t)}
+                                className="flex items-center gap-1 px-2 py-1 rounded-lg text-nano text-slate-400 hover:text-brand-500 hover:bg-white/5 border border-white/5 transition-colors"
+                              >
+                                <Edit2 className="h-3 w-3" />
+                                Ubah
+                              </button>
+                              <button
+                                onClick={async () => {
+                                  const isConfirmed = await confirm({
+                                    title: 'Hapus Transaksi Kas',
+                                    message: `Apakah Anda benar-benar yakin ingin melenyapkan catatan "${t.keterangan}" senilai ${formatCurrency(t.nominal)} secara permanen?`,
+                                    confirmLabel: 'Ya, Hapus',
+                                    cancelLabel: 'Batal',
+                                    variant: 'danger'
+                                  });
+                                  if (isConfirmed && t.id) {
+                                    await handleDelete(t.id);
+                                  }
+                                }}
+                                className="flex items-center gap-1 px-2 py-1 rounded-lg text-nano text-slate-400 hover:text-rose-400 hover:bg-white/5 border border-white/5 transition-colors"
+                              >
+                                <Trash2 className="h-3 w-3" />
+                                Hapus
+                              </button>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

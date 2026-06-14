@@ -1155,7 +1155,7 @@ export default function Talang() {
         </div>
 
         {/* List of transactions */}
-        <div className={`space-y-2 overflow-y-auto no-scrollbar pr-0.5 ${showForm ? 'max-h-[300px]' : 'max-h-[500px]'}`}>
+        <div className="space-y-2 no-scrollbar pr-0.5">
           {filteredTalang.map((t) => {
             let bgTheme = "text-violet-400 bg-violet-400/10 border-violet-400/15";
             let Icon = ArrowUpRight;

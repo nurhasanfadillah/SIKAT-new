@@ -29,13 +29,13 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-dvh bg-surface-app font-sans flex items-center justify-center p-0 md:p-6 text-slate-100 relative overflow-hidden">
+    <div className="min-h-svh bg-surface-app font-sans flex items-center justify-center p-0 md:p-6 text-slate-100 relative overflow-hidden">
       {/* Decorative Blur Orbs */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-violet-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Main Responsive Smartphone Device Container */}
-      <div className="w-full max-w-md md:h-[860px] h-dvh md:rounded-3xl bg-surface-panel flex flex-col md:border-8 md:border-slate-800 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
+      <div className="w-full max-w-md md:h-[860px] h-svh md:rounded-3xl bg-surface-panel flex flex-col md:border-8 md:border-slate-800 md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] relative overflow-hidden ring-1 ring-white/5">
 
         {/* Device Camera Punch Hole / Speaker simulated (only visible on desktop wrapper) */}
         <div className="hidden md:flex absolute top-1.5 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-full z-50 items-center justify-center">

@@ -193,4 +193,20 @@
 
 ---
 
-*Last updated: 2026-06-14 — Milestone v0.16 complete*
+---
+
+## Milestone v0.17 — Kas & Talang Layout Fix + Card Redesign
+
+**Status:** In progress
+**Progress:** 1/3 plans complete — 33%
+
+### Phase 17 — Kas & Talang Layout Fix + Card Redesign
+**Status:** In progress | **Plans:** 1/3
+
+- Plan 17-01: Bug fixes ✅ — `h-dvh`→`h-svh` (keyboard overlay), hapus inner scroll Kas & Talang
+- Plan 17-02: Kas card redesign — tanggal card, 2-row grid, inline expand detail
+- Plan 17-03: Talang card redesign — tanggal card, 2-row grid, inline expand detail
+
+---
+
+*Last updated: 2026-06-14 — Plan 17-01 complete*
