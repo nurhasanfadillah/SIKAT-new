@@ -209,4 +209,16 @@
 
 ---
 
-*Last updated: 2026-06-14 — Phase 17 complete*
+## Milestone v0.18 — Filter Cleanup + PWA Offline Fix
+
+**Status:** Complete (2026-06-14)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 18 — Filter Cleanup + PWA Offline Fix ✅
+**Status:** Complete (2026-06-14) | **Plans:** 1/1
+
+- Plan 18-01: Workbox navigateFallback '/offline.html'→'/index.html' + denylist fix + offline.html retry href='/' + badge count dihapus dari filter Kas & Talang
+
+---
+
+*Last updated: 2026-06-14 — Phase 18 complete*

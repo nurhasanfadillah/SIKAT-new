@@ -338,11 +338,6 @@ export default function Talang() {
     };
   }, [talang, talangBalances]);
 
-  const countAll = talang.length;
-  const countBaru = talang.filter(t => t.jenis === 'Baru').length;
-  const countPelunasan = talang.filter(t => t.jenis === 'Pelunasan').length;
-  const countTransfer = talang.filter(t => t.jenis === 'Transfer').length;
-
   // Toggle account filters by clicking cards
   const handleAccountCardClick = (akun: string) => {
     if (akunFilter === akun) {
@@ -921,29 +916,22 @@ export default function Talang() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-[#121829]/30 p-1.5 rounded-xl border border-white/5">
             <div className="grid grid-cols-4 gap-1 w-full sm:w-auto">
               {[
-                { label: 'Semua', value: 'Semua', count: countAll },
-                { label: 'Baru', value: 'Baru', count: countBaru, color: 'text-violet-400 font-black' },
-                { label: 'Lunas', value: 'Pelunasan', count: countPelunasan, color: 'text-brand-500 font-black' },
-                { label: 'Transfer', value: 'Transfer', count: countTransfer, color: 'text-blue-400 font-black' }
+                { label: 'Semua', value: 'Semua' },
+                { label: 'Baru', value: 'Baru', color: 'text-violet-400 font-black' },
+                { label: 'Lunas', value: 'Pelunasan', color: 'text-brand-500 font-black' },
+                { label: 'Transfer', value: 'Transfer', color: 'text-blue-400 font-black' }
               ].map((item) => (
                 <button
                   key={item.value}
                   type="button"
                   onClick={() => setJenisFilter(item.value as any)}
-                  className={`px-1.5 py-1.5 rounded-lg text-micro font-semibold flex items-center justify-center gap-1 transition-all ${
+                  className={`px-1.5 py-1.5 rounded-lg text-micro font-semibold flex items-center justify-center transition-all ${
                     jenisFilter === item.value
                       ? 'bg-violet-500 text-white shadow font-black'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                   }`}
                 >
                   <span className={jenisFilter === item.value ? 'text-white' : item.color}>{item.label}</span>
-                  <span className={`text-[8px] px-1 py-0.2 rounded-full font-medium ${
-                    jenisFilter === item.value
-                      ? 'bg-white/20 text-white font-bold'
-                      : 'bg-white/5 text-slate-500'
-                  }`}>
-                    {item.count}
-                  </span>
                 </button>
               ))}
             </div>

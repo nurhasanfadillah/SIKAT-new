@@ -220,10 +220,6 @@ export default function Kas() {
   const pemasukanBulanIni = currentMonthTransactions.filter(t => t.jenis === 'Pemasukan').reduce((sum, t) => sum + t.nominal, 0);
   const pengeluaranBulanIni = currentMonthTransactions.filter(t => t.jenis === 'Pengeluaran').reduce((sum, t) => sum + t.nominal, 0);
 
-  const countAll = kas.length;
-  const countPemasukan = kas.filter(t => t.jenis === 'Pemasukan').length;
-  const countPengeluaran = kas.filter(t => t.jenis === 'Pengeluaran').length;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -524,28 +520,21 @@ export default function Kas() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-surface-card/30 p-1.5 rounded-xl border border-white/5">
             <div className="grid grid-cols-3 gap-1 w-full sm:w-auto">
               {[
-                { label: 'Semua', value: 'Semua', count: countAll },
-                { label: 'Pemasukan', value: 'Pemasukan', count: countPemasukan, color: 'text-brand-500' },
-                { label: 'Pengeluaran', value: 'Pengeluaran', count: countPengeluaran, color: 'text-rose-400' }
+                { label: 'Semua', value: 'Semua' },
+                { label: 'Pemasukan', value: 'Pemasukan', color: 'text-brand-500' },
+                { label: 'Pengeluaran', value: 'Pengeluaran', color: 'text-rose-400' }
               ].map((item) => (
                 <button
                   key={item.value}
                   type="button"
                   onClick={() => setJenisFilter(item.value as any)}
-                  className={`px-3 py-1.5 rounded-lg text-body font-semibold flex items-center justify-center gap-1.5 transition-all ${
+                  className={`px-3 py-1.5 rounded-lg text-body font-semibold flex items-center justify-center transition-all ${
                     jenisFilter === item.value
                       ? 'bg-brand-500 text-text-inverse shadow font-bold'
                       : 'text-slate-400 hover:text-slate-200'
                   }`}
                 >
-                  <span className={jenisFilter === item.value ? 'text-text-inverse hover:text-text-inverse' : item.color}>{item.label}</span>
-                  <span className={`text-nano px-1.5 py-0.5 rounded-full font-medium ${
-                    jenisFilter === item.value
-                      ? 'bg-slate-950/20 text-text-inverse font-bold'
-                      : 'bg-white/5 text-slate-500'
-                  }`}>
-                    {item.count}
-                  </span>
+                  <span className={jenisFilter === item.value ? 'text-text-inverse' : item.color}>{item.label}</span>
                 </button>
               ))}
             </div>

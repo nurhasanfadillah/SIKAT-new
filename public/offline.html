@@ -8,7 +8,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
-      background: #0f172a;
+      background: #050811;
       color: #f1f5f9;
       font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
       display: flex;
@@ -30,15 +30,15 @@
     .retry-btn {
       margin-top: 1.5rem;
       padding: 0.625rem 1.5rem;
-      background: #2563eb;
-      color: #fff;
+      background: #00e5a3;
+      color: #050811;
       border: none;
       border-radius: 0.5rem;
       font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
     }
-    .retry-btn:hover { background: #1d4ed8; }
+    .retry-btn:hover { background: #00cc90; }
   </style>
 </head>
 <body>
@@ -46,10 +46,10 @@
   <h1>Anda sedang offline</h1>
   <p>Periksa koneksi internet Anda dan coba lagi. Aplikasi akan otomatis terhubung kembali saat jaringan tersedia.</p>
   <p class="hint">Pastikan Wi-Fi atau data seluler Anda aktif</p>
-  <button class="retry-btn" onclick="window.location.reload()">Coba Lagi</button>
+  <button class="retry-btn" onclick="window.location.href = '/'">Coba Lagi</button>
   <script>
     window.addEventListener('online', function() {
-      window.location.reload();
+      window.location.href = '/';
     });
   </script>
 </body>

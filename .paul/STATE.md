@@ -2,30 +2,30 @@
 
 ## Current Position
 
-Milestone: v0.17 Kas & Talang Layout Fix — Complete ✅
-Phase: 17 (Kas & Talang Layout Fix) — Complete (3/3 plans done)
-Plan: 17-03 UNIFY complete — Phase 17 closed
-Status: Loop closed — milestone v0.17 complete
-Last activity: 2026-06-14 — UNIFY 17-03: Talang card redesign (2-row col1 + accordion + AnimatePresence)
+Milestone: v0.18 Filter Cleanup + PWA Offline Fix — Complete ✅
+Phase: 18 (Filter Cleanup + PWA Offline Fix) — Complete (1/1 plans done)
+Plan: 18-01 UNIFY complete — Phase 18 closed
+Status: Loop closed — milestone v0.18 complete
+Last activity: 2026-06-14 — UNIFY 18-01: Workbox navigateFallback fix + offline retry fix + filter badge cleanup
 
 Progress:
-- Milestone v0.1–v0.17: [██████████] 100% ✅ (all complete)
-- Phase 17: [██████████] 100% (17-01 ✅, 17-02 ✅, 17-03 ✅)
+- Milestone v0.1–v0.18: [██████████] 100% ✅ (all complete)
+- Phase 18: [██████████] 100% (18-01 ✅)
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop 17-03 closed — Phase 17 complete]
+  ✓        ✓        ✓     [Loop 18-01 closed — Phase 18 complete]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: UNIFY 17-03 complete — Phase 17 done
+Stopped at: UNIFY 18-01 complete — Phase 18 done
 Next action: /paul:milestone (atau /paul:plan untuk milestone baru)
-Resume file: .paul/phases/17-kas-talang-layout-fix/17-03-SUMMARY.md
+Resume file: .paul/phases/18-filter-offline-fix/18-01-SUMMARY.md
 
 ## Decisions
 

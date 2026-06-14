@@ -67,6 +67,9 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ h-dvh→h-svh (keyboard overlay fix) + hapus inner scroll Kas & Talang — Phase 17 (v0.17)
 - ✓ Kas card redesign: tanggal-first 2-row + expandedId accordion + AnimatePresence — Phase 17 (v0.17)
 - ✓ Talang card redesign: 2-row col1 (tanggal + akun tag) + expandedId accordion — Phase 17 (v0.17)
+- ✓ Workbox navigateFallback diperbaiki: '/offline.html'→'/index.html' (SPA routing benar) — Phase 18 (v0.18)
+- ✓ offline.html retry: window.location.reload()→href='/' (tidak loop lagi) — Phase 18 (v0.18)
+- ✓ Filter buttons Kas & Talang: badge count dihapus, label murni — Phase 18 (v0.18)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus

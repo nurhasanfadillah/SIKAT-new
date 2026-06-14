@@ -48,8 +48,8 @@ export default defineConfig(() => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
-          navigateFallback: '/offline.html',
-          navigateFallbackAllowlist: [/^(?!\/api\/).*/],
+          navigateFallback: '/index.html',
+          navigateFallbackDenylist: [/^\/api\//, /^\/offline\.html/],
           runtimeCaching: [
             {
               urlPattern: /^\/api\//,
