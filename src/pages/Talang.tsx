@@ -136,16 +136,6 @@ export default function Talang() {
     setKeterangan(t.keterangan);
     setNominal(String(t.nominal));
     setShowForm(true);
-
-    // Smoothly scroll to the form element
-    setTimeout(() => {
-      const formElement = document.getElementById('talang-action-form');
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }, 100);
   };
 
   const handleCancelEdit = async () => {
