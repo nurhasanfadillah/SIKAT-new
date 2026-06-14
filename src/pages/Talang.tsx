@@ -29,9 +29,11 @@ import {
   CheckCircle2,
   AlertCircle,
   ArrowUp,
-  ArrowDown
+  ArrowDown,
+  ChevronDown
 } from 'lucide-react';
 import { AkunTalang, JenisTalang } from '../types';
+import { motion, AnimatePresence } from 'motion/react';
 
 // Indonesian Language "Terbilang" Number spelling engine
 function getTerbilang(num: number): string {
@@ -85,6 +87,7 @@ export default function Talang() {
   const { toast, confirm } = useFeedback();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const kasBalance = useMemo(() => {
     return (kas || []).reduce((acc, curr) => {
@@ -120,6 +123,7 @@ export default function Talang() {
   }, [nominal]);
 
   const handleStartEdit = (t: any) => {
+    setExpandedId(null);
     setEditingId(t.id || null);
     setJenis(t.jenis);
     setTanggal(getLocalDateString(t.tanggal));
@@ -1174,28 +1178,25 @@ export default function Talang() {
             return (
               <div
                 key={t.id}
-                className={`p-3 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1.5 items-center group ${
+                className={`p-3 rounded-2xl bg-[#121829]/60 border transition-all grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-1 cursor-pointer ${
                   editingId === t.id
                     ? 'border-violet-500 bg-[#121829]/95 shadow-[0_0_15px_rgba(139,92,246,0.15)]'
                     : 'border-white/5 hover:border-white/10 hover:bg-[#121829]/95'
                 }`}
+                onClick={() => {
+                  if (editingId === t.id) return;
+                  setExpandedId(expandedId === t.id ? null : t.id);
+                }}
               >
-                {/* Kolom 1: baris 1 - Icon */}
-                <div className="col-start-1 col-end-2 row-start-1 row-end-2 flex justify-center justify-self-center">
-                  <div className={`p-2 rounded-xl border shrink-0 ${bgTheme}`}>
-                    <Icon className="h-4 w-4" />
-                  </div>
-                </div>
-
-                {/* Kolom 1: baris 2 - tanggal (dd/mm) */}
-                <div className="col-start-1 col-end-2 row-start-2 row-end-3 flex justify-center justify-self-center select-none">
+                {/* Kolom 1 row 1: tanggal */}
+                <div className="col-start-1 col-end-2 row-start-1 row-end-2 flex justify-center justify-self-center select-none">
                   <span className="text-micro font-bold text-slate-400 font-mono text-center">
                     {formatIgnoreTimezone(t.tanggal, 'dd/MM', { locale: localeId })}
                   </span>
                 </div>
 
-                {/* Kolom 1: baris 3 - akun dana talang */}
-                <div className="col-start-1 col-end-2 row-start-3 row-end-4 flex justify-center justify-self-center w-full">
+                {/* Kolom 1 row 2: akun tag */}
+                <div className="col-start-1 col-end-2 row-start-2 row-end-3 flex justify-center justify-self-center w-full">
                   <span className={`px-1.5 py-0.5 rounded-md text-nano font-bold border shrink-0 text-center w-full max-w-[56px] truncate leading-none ${
                     t.akun_talang === 'Jisoi'
                       ? 'bg-violet-500/10 border-violet-500/20 text-violet-300'
@@ -1207,70 +1208,102 @@ export default function Talang() {
                   </span>
                 </div>
 
-                {/* Kolom 2, 3 (merge): baris 1 - Keterangan */}
-                <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0">
-                  <span className="text-body font-bold text-slate-100 group-hover:text-violet-300 transition-colors leading-tight block truncate">
-                    {t.jenis === 'Transfer' ? `Transfer dari ${t.akun_talang} ke ${t.akun_tujuan}` : t.keterangan}
+                {/* Kolom 2+3 row 1: Keterangan */}
+                <div className="col-start-2 col-end-4 row-start-1 row-end-2 min-w-0 flex items-end pb-0.5">
+                  <span className="text-body font-bold text-slate-100 block truncate leading-tight">
+                    {t.jenis === 'Transfer' ? `Transfer: ${t.akun_talang} → ${t.akun_tujuan}` : t.keterangan}
                   </span>
                 </div>
 
-                {/* Kolom 2: baris 2 - unit + jenis transaksi */}
-                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex flex-wrap items-center gap-1.5 text-nano text-slate-400">
-                  <span className="bg-white/5 px-1.5 py-0.5 rounded text-white border border-white/5 font-medium">
-                    Unit {t.unit || '-'}
-                  </span>
-                  <span>•</span>
-                  <span className={`px-1.5 py-0.5 rounded text-nano font-semibold border shrink-0 ${
-                    t.jenis === 'Pelunasan'
-                      ? 'bg-brand-500/10 border-brand-500/20 text-brand-500'
-                      : t.jenis === 'Transfer'
-                      ? 'bg-blue-500/10 border-blue-500/20 text-blue-400'
-                      : 'bg-violet-500/10 border-violet-500/20 text-violet-400'
-                  }`}>
-                    {t.jenis === 'Baru' ? 'Pinjaman' : t.jenis}
-                  </span>
-                </div>
-
-                {/* Kolom 2: baris 3 - Nominal (rata kanan) */}
-                <div className="col-start-2 col-end-3 row-start-3 row-end-4 text-right">
-                  <span className={`text-body font-black inline-block ${t.jenis === 'Pelunasan' ? 'text-brand-500' : 'text-violet-400'}`}>
+                {/* Kolom 2 row 2: Nominal */}
+                <div className="col-start-2 col-end-3 row-start-2 row-end-3 flex items-center">
+                  <span className={`text-body font-black ${t.jenis === 'Pelunasan' ? 'text-brand-500' : 'text-violet-400'}`}>
                     {showOp}{formatCurrency(t.nominal)}
                   </span>
                 </div>
 
-                {/* Kolom 3: baris 2, 3 (merge) - Icon Action */}
-                {isBendahara ? (
-                  <div className="col-start-3 col-end-4 row-start-2 row-end-4 flex items-center justify-end self-center border-l border-white/5 pl-2 h-full py-1">
-                    <button
-                      onClick={() => handleStartEdit(t)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-violet-400 hover:bg-white/5 transition-colors"
-                      title="Ubah Talangan"
+                {/* Kolom 3 row 2: chevron */}
+                <div className="col-start-3 col-end-4 row-start-2 row-end-3 flex items-center justify-end">
+                  <motion.div
+                    animate={{ rotate: expandedId === t.id ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown className="h-4 w-4 text-slate-500" />
+                  </motion.div>
+                </div>
+
+                {/* Expanded detail area — full width */}
+                <AnimatePresence>
+                  {expandedId === t.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="col-start-1 col-end-4 overflow-hidden"
+                      onClick={e => e.stopPropagation()}
                     >
-                      <Edit2 className="h-3.5 w-3.5" />
-                    </button>
-                    <button
-                      onClick={async () => {
-                        const isConfirmed = await confirm({
-                          title: 'Hapus Catatan Talang',
-                          message: `Apakah Anda benar-benar yakin ingin menghapus data talangan "${t.keterangan || t.jenis}" senilai ${formatCurrency(t.nominal)} secara permanen?` +
-                            (t.jenis === 'Pelunasan' ? ' Tindakan ini juga akan otomatis membatalkan kas pengeluaran terkait.' : ''),
-                          confirmLabel: 'Ya, Hapus',
-                          cancelLabel: 'Batal',
-                          variant: 'danger'
-                        });
-                        if (isConfirmed && t.id) {
-                          await handleDelete(t.id);
-                        }
-                      }}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-white/5 transition-colors"
-                      title="Hapus Talangan"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="col-start-3 col-end-4 row-start-2 row-end-4" />
-                )}
+                      <div className="border-t border-white/5 mt-1 pt-2 space-y-2">
+                        {/* Badge jenis + icon + unit/akun_tujuan */}
+                        <div className="flex flex-wrap gap-1.5">
+                          <span className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-nano border ${bgTheme}`}>
+                            <Icon className="h-3 w-3" aria-hidden="true" />
+                            {t.jenis === 'Baru' ? 'Pinjaman Baru' : t.jenis}
+                          </span>
+                          {t.unit && t.jenis === 'Baru' && (
+                            <span className="bg-white/5 px-1.5 py-0.5 rounded text-nano text-slate-300 border border-white/5">
+                              Unit {t.unit}
+                            </span>
+                          )}
+                          {t.jenis === 'Transfer' && t.akun_tujuan && (
+                            <span className="bg-blue-500/10 px-1.5 py-0.5 rounded text-nano text-blue-300 border border-blue-500/20">
+                              → {t.akun_tujuan}
+                            </span>
+                          )}
+                        </div>
+                        {/* Keterangan full (hanya jika bukan Transfer) */}
+                        {t.keterangan && t.jenis !== 'Transfer' && (
+                          <div className="text-nano text-slate-400">{t.keterangan}</div>
+                        )}
+                        {/* Tanggal lengkap */}
+                        <div className="text-nano text-slate-500">
+                          {formatIgnoreTimezone(t.tanggal, 'EEEE, dd MMMM yyyy', { locale: localeId })}
+                        </div>
+                        {/* Action buttons */}
+                        {isBendahara && (
+                          <div className="flex gap-1.5 justify-end">
+                            <button
+                              onClick={() => handleStartEdit(t)}
+                              className="flex items-center gap-1 px-2 py-1 rounded-lg text-nano text-slate-400 hover:text-violet-400 hover:bg-white/5 border border-white/5 transition-colors"
+                            >
+                              <Edit2 className="h-3 w-3" />
+                              Ubah
+                            </button>
+                            <button
+                              onClick={async () => {
+                                const isConfirmed = await confirm({
+                                  title: 'Hapus Catatan Talang',
+                                  message: `Apakah Anda benar-benar yakin ingin menghapus data talangan "${t.keterangan || t.jenis}" senilai ${formatCurrency(t.nominal)} secara permanen?` +
+                                    (t.jenis === 'Pelunasan' ? ' Tindakan ini juga akan otomatis membatalkan kas pengeluaran terkait.' : ''),
+                                  confirmLabel: 'Ya, Hapus',
+                                  cancelLabel: 'Batal',
+                                  variant: 'danger'
+                                });
+                                if (isConfirmed && t.id) {
+                                  await handleDelete(t.id);
+                                }
+                              }}
+                              className="flex items-center gap-1 px-2 py-1 rounded-lg text-nano text-slate-400 hover:text-rose-400 hover:bg-white/5 border border-white/5 transition-colors"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                              Hapus
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             );
           })}

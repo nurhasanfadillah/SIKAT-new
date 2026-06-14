@@ -195,18 +195,18 @@
 
 ---
 
-## Milestone v0.17 — Kas & Talang Layout Fix + Card Redesign
+## Milestone v0.17 — Kas & Talang Layout Fix + Card Redesign ✅
 
-**Status:** In progress
-**Progress:** 1/3 plans complete — 33%
+**Status:** Complete (2026-06-14)
+**Progress:** 3/3 plans complete — 100%
 
-### Phase 17 — Kas & Talang Layout Fix + Card Redesign
-**Status:** In progress | **Plans:** 1/3
+### Phase 17 — Kas & Talang Layout Fix + Card Redesign ✅
+**Status:** Complete (2026-06-14) | **Plans:** 3/3
 
 - Plan 17-01: Bug fixes ✅ — `h-dvh`→`h-svh` (keyboard overlay), hapus inner scroll Kas & Talang
-- Plan 17-02: Kas card redesign — tanggal card, 2-row grid, inline expand detail
-- Plan 17-03: Talang card redesign — tanggal card, 2-row grid, inline expand detail
+- Plan 17-02: Kas card redesign ✅ — tanggal-first 2-row grid + expandedId accordion + AnimatePresence
+- Plan 17-03: Talang card redesign ✅ — 2-row col1 (tanggal + akun tag) + expandedId accordion + AnimatePresence
 
 ---
 
-*Last updated: 2026-06-14 — Plan 17-01 complete*
+*Last updated: 2026-06-14 — Phase 17 complete*

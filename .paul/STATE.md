@@ -2,31 +2,30 @@
 
 ## Current Position
 
-Milestone: v0.17 Kas & Talang Layout Fix — In progress
-Phase: 17 (Kas & Talang Layout Fix) — Planning
-Plan: 17-02 APPLY in progress — at checkpoint:human-verify
-Status: APPLY executing
-Last activity: 2026-06-14 — Task 1+2 done; awaiting visual verification
+Milestone: v0.17 Kas & Talang Layout Fix — Complete ✅
+Phase: 17 (Kas & Talang Layout Fix) — Complete (3/3 plans done)
+Plan: 17-03 UNIFY complete — Phase 17 closed
+Status: Loop closed — milestone v0.17 complete
+Last activity: 2026-06-14 — UNIFY 17-03: Talang card redesign (2-row col1 + accordion + AnimatePresence)
 
 Progress:
-- Milestone v0.1–v0.16: [██████████] 100% ✅ (all complete)
-- Milestone v0.17: [███░░░░░░░] 33% (1/3 plans)
-- Phase 17: [███░░░░░░░] 33% (17-01 done; 17-02 Kas card pending; 17-03 Talang card pending)
+- Milestone v0.1–v0.17: [██████████] 100% ✅ (all complete)
+- Phase 17: [██████████] 100% (17-01 ✅, 17-02 ✅, 17-03 ✅)
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 17-02 created, awaiting approval]
+  ✓        ✓        ✓     [Loop 17-03 closed — Phase 17 complete]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: Plan 17-02 created (Kas card redesign)
-Next action: Review dan approve plan, lalu /paul:apply .paul/phases/17-kas-talang-layout-fix/17-02-PLAN.md
-Resume file: .paul/phases/17-kas-talang-layout-fix/17-02-PLAN.md
+Stopped at: UNIFY 17-03 complete — Phase 17 done
+Next action: /paul:milestone (atau /paul:plan untuk milestone baru)
+Resume file: .paul/phases/17-kas-talang-layout-fix/17-03-SUMMARY.md
 
 ## Decisions
 

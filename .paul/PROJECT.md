@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.16 (UI Cleanup — complete) |
+| Version | v0.17 (Kas & Talang Card Redesign — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -64,6 +64,9 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Card "Rincian Per Akun Talang" dihapus dari Dashboard; mini stats + recent transactions tetap intact — Phase 16 (v0.16)
 - ✓ Halaman Laporan dihapus sepenuhnya (Laporan.tsx, route `/laporan`, nav item) — Phase 16 (v0.16)
 - ✓ recharts di-uninstall; navigasi tersisa 3 item (Beranda · Kas Rekap · Dana Talang) — Phase 16 (v0.16)
+- ✓ h-dvh→h-svh (keyboard overlay fix) + hapus inner scroll Kas & Talang — Phase 17 (v0.17)
+- ✓ Kas card redesign: tanggal-first 2-row + expandedId accordion + AnimatePresence — Phase 17 (v0.17)
+- ✓ Talang card redesign: 2-row col1 (tanggal + akun tag) + expandedId accordion — Phase 17 (v0.17)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
