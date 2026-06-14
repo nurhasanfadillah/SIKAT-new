@@ -182,4 +182,15 @@
 
 ---
 
-*Last updated: 2026-06-14 — Milestone v0.15 complete*
+## Milestone v0.16 — UI Cleanup ✅
+
+**Status:** Complete (2026-06-14)
+**Progress:** 1/1 phases complete — 100%
+
+### Phase 16 — UI Cleanup ✅
+**Status:** Complete (2026-06-14) | **Plans:** 1/1
+- Plan 16-01: Hapus card "Rincian Per Akun Talang" dari Dashboard, hapus halaman Laporan (Laporan.tsx + route + nav item), uninstall recharts (39 packages removed)
+
+---
+
+*Last updated: 2026-06-14 — Milestone v0.16 complete*

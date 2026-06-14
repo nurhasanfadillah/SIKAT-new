@@ -2,29 +2,29 @@
 
 ## Current Position
 
-Milestone: v0.15 Header Avatar Remove — Complete ✅
-Phase: 15 (Header Avatar Remove) — Complete ✅
-Plan: 15-01 unified
-Status: Milestone v0.15 complete — ready for next milestone
-Last activity: 2026-06-14 — Phase 15 complete, milestone v0.15 closed
+Milestone: v0.16 UI Cleanup — Complete ✅
+Phase: 16 (UI Cleanup) — Complete ✅
+Plan: 16-01 unified
+Status: Milestone v0.16 complete — ready for next milestone
+Last activity: 2026-06-14 — Phase 16 complete, milestone v0.16 closed
 
 Progress:
-- Milestone v0.1–v0.14: [██████████] 100% ✅ (all complete)
-- Milestone v0.15: [██████████] 100% ✅
-- Phase 15: [██████████] 100% ✅
+- Milestone v0.1–v0.16: [██████████] 100% ✅ (all complete)
+- Milestone v0.16: [██████████] 100% ✅
+- Phase 16: [██████████] 100% ✅
 
 ## Loop Position
 
 Current loop state:
 ```
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Milestone v0.15 closed]
+  ✓        ✓        ✓     [Loop complete — Milestone v0.16 closed]
 ```
 
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: Milestone v0.15 complete — semua loop tertutup
+Stopped at: Milestone v0.16 complete — semua loop tertutup
 Next action: Tentukan milestone berikutnya, lalu /paul:milestone
 Resume file: .paul/ROADMAP.md
 
@@ -64,9 +64,8 @@ Resume file: .paul/ROADMAP.md
 
 ### Color System (Phase 06 — Complete)
 - Token pattern: `brand-*` = teal (#00e5a3); `surface-card/elevated/panel/nav/app/overlay/base` untuk backgrounds
-- recharts fills: selalu pakai `tokens.colors.chart.*` via import (bukan Tailwind class)
 - WCAG: text-text-secondary (slate-400) untuk secondary text; focus ring solid (tanpa opacity)
-- CartesianGrid/XAxis stroke dalam recharts dikecualikan — React inline style tidak support CSS variables
+- ~~recharts fills via tokens.ts~~ — recharts diuninstall di Phase 16; tidak relevan lagi
 
 ### Typography System (Phase 07 — Complete)
 - Type scale: text-nano(9px)/micro(10px)/label(11px)/body(12px)/value(13px) di @theme
@@ -110,7 +109,12 @@ Resume file: .paul/ROADMAP.md
 - Header kini: logo + teks (nama + "Selamat Datang") + right group (badge + logout)
 - Tidak ada replacement element — logo sudah cukup sebagai visual anchor
 
+### UI Cleanup (Phase 16 — Complete)
+- Dashboard: card "Rincian Per Akun Talang" dihapus; mini stats (Dana Talang Aktif + Kapasitas Sisa) + recent transactions tetap
+- Navigasi: 3 item (Beranda · Kas Rekap · Dana Talang) — Laporan dihapus
+- recharts di-uninstall (39 packages removed); `tsc --noEmit` clean
+
 ### Git State
 Branch: main
-Last commit: (pending — feat(15-header-avatar-remove))
+Last commit: (akan diupdate setelah commit Phase 16)
 Feature branches merged: none

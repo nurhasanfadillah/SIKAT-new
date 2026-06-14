@@ -146,131 +146,81 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* Bento Grid: Accounts list & recent transaction summary */}
-      <div className="space-y-4">
-        {/* Rincian Dana Talang Accounts */}
-        <Card className="bg-gradient-to-b from-surface-elevated/65 to-surface-card/40 border-white/5 rounded-2xl p-4 relative shadow-lg">
-          <div className="flex justify-between items-center mb-3">
-            <div className="flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
-              <h3 className="text-body font-bold text-slate-200 tracking-tight">Rincian Per Akun Talang</h3>
-            </div>
-            <span className="text-nano bg-slate-800/60 px-2 py-0.5 rounded-full border border-white/5 text-slate-400 font-medium">
-              Sisa Kewajiban
-            </span>
+      {/* Recent Transactions List with colored pill icons */}
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-1.5">
+            <span className="h-4 w-1 bg-brand-500 rounded-full" />
+            <h3 className="text-value font-bold text-slate-200">Riwayat Transaksi Terkini</h3>
           </div>
+          <Link to="/kas" className="text-label font-medium text-brand-500 hover:underline flex items-center gap-0.5">
+            <ListCollapse className="h-3 w-3" /> Semua
+          </Link>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {Object.entries(talangBalances).map(([akun, balance]) => {
-              const possessesBalance = balance > 0;
-              return (
-                <div
-                  key={akun}
-                  className={`flex items-center justify-between p-3 rounded-xl border relative transition-all duration-250 hover:border-white/10 ${
-                    possessesBalance
-                      ? 'bg-rose-950/10 border-rose-500/10'
-                      : 'bg-brand-500/5 border-brand-500/10'
-                  }`}
-                >
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-label font-bold text-slate-300 truncate tracking-wide">{akun}</span>
-                    <span className={`text-body font-mono font-bold tracking-tight mt-0.5 truncate ${
-                      possessesBalance ? 'text-rose-400' : 'text-brand-500'
-                    }`}>
-                      {possessesBalance ? formatCurrency(balance) : 'Lunas'}
+        <div className="space-y-2">
+          {allTransactions.map((tx, idx) => {
+            const isIncoming = tx.kind === 'kas' && (tx as TransaksiKas).jenis === 'Pemasukan';
+            const isExpense = tx.kind === 'kas' && (tx as TransaksiKas).jenis === 'Pengeluaran';
+            const isTalangBaru = tx.kind === 'talang' && (tx as TransaksiTalang).jenis === 'Baru';
+            const isTalangPelunasan = tx.kind === 'talang' && (tx as TransaksiTalang).jenis === 'Pelunasan';
+
+            let Icon = Wallet;
+            let bgTheme = "text-amber-400 bg-amber-500/10 border-amber-500/10";
+
+            if (isIncoming) {
+              Icon = ArrowUpRight;
+              bgTheme = "text-brand-500 bg-brand-500/10 border-brand-500/15";
+            } else if (isExpense) {
+              Icon = ArrowDownLeft;
+              bgTheme = "text-rose-400 bg-rose-400/10 border-rose-400/15";
+            } else if (isTalangBaru) {
+              Icon = CreditCard;
+              bgTheme = "text-violet-400 bg-violet-400/10 border-violet-400/15";
+            } else {
+              Icon = RefreshCw;
+              bgTheme = "text-sky-400 bg-sky-400/10 border-sky-400/15";
+            }
+
+            return (
+              <div
+                key={`${tx.kind}-${tx.id}-${idx}`}
+                className="flex items-center justify-between p-3 rounded-2xl bg-surface-card/60 border border-white/5 hover:border-white/10 active:bg-white/5 transition-all duration-200"
+              >
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className={`p-2 rounded-xl border ${bgTheme}`}>
+                    <Icon className="h-4.5 w-4.5" />
+                  </div>
+                  <div className="flex flex-col truncate">
+                    <span className="text-body font-bold text-slate-100 truncate">{tx.keterangan}</span>
+                    <span className="text-nano text-slate-400 flex items-center gap-1 mt-0.5 overflow-hidden">
+                      <span className="font-medium text-slate-300 truncate">
+                        {tx.kind === 'kas' ? 'Kas' : `Talang ${((tx as TransaksiTalang).akun_talang)}`}
+                      </span>
+                      <span className="shrink-0">•</span>
+                      <span className="shrink-0">{formatIgnoreTimezone(tx.tanggal, 'dd MMM yy', { locale: id })}</span>
                     </span>
                   </div>
-
-                  <div className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-lg text-nano font-bold border leading-none shrink-0 ${
-                    possessesBalance
-                      ? 'bg-rose-500/5 text-rose-400 border-rose-500/10'
-                      : 'bg-brand-500/5 text-brand-500 border-brand-500/10'
-                  }`}>
-                    <span className={`h-1.5 w-1.5 rounded-full ${possessesBalance ? 'bg-rose-500 animate-pulse' : 'bg-brand-500'}`} />
-                    {possessesBalance ? 'Aktif' : 'Aman'}
-                  </div>
                 </div>
-              );
-            })}
-          </div>
-        </Card>
 
-        {/* Recent Transactions List with colored pill icons */}
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-1.5">
-              <span className="h-4 w-1 bg-brand-500 rounded-full" />
-              <h3 className="text-value font-bold text-slate-200">Riwayat Transaksi Terkini</h3>
-            </div>
-            <Link to="/kas" className="text-label font-medium text-brand-500 hover:underline flex items-center gap-0.5">
-              <ListCollapse className="h-3 w-3" /> Semua
-            </Link>
-          </div>
-
-          <div className="space-y-2">
-            {allTransactions.map((tx, idx) => {
-              const isIncoming = tx.kind === 'kas' && (tx as TransaksiKas).jenis === 'Pemasukan';
-              const isExpense = tx.kind === 'kas' && (tx as TransaksiKas).jenis === 'Pengeluaran';
-              const isTalangBaru = tx.kind === 'talang' && (tx as TransaksiTalang).jenis === 'Baru';
-              const isTalangPelunasan = tx.kind === 'talang' && (tx as TransaksiTalang).jenis === 'Pelunasan';
-
-              let Icon = Wallet;
-              let bgTheme = "text-amber-400 bg-amber-500/10 border-amber-500/10";
-
-              if (isIncoming) {
-                Icon = ArrowUpRight;
-                bgTheme = "text-brand-500 bg-brand-500/10 border-brand-500/15";
-              } else if (isExpense) {
-                Icon = ArrowDownLeft;
-                bgTheme = "text-rose-400 bg-rose-400/10 border-rose-400/15";
-              } else if (isTalangBaru) {
-                Icon = CreditCard;
-                bgTheme = "text-violet-400 bg-violet-400/10 border-violet-400/15";
-              } else {
-                Icon = RefreshCw;
-                bgTheme = "text-sky-400 bg-sky-400/10 border-sky-400/15";
-              }
-
-              return (
-                <div
-                  key={`${tx.kind}-${tx.id}-${idx}`}
-                  className="flex items-center justify-between p-3 rounded-2xl bg-surface-card/60 border border-white/5 hover:border-white/10 active:bg-white/5 transition-all duration-200"
-                >
-                  <div className="flex items-center gap-3 overflow-hidden">
-                    <div className={`p-2 rounded-xl border ${bgTheme}`}>
-                      <Icon className="h-4.5 w-4.5" />
-                    </div>
-                    <div className="flex flex-col truncate">
-                      <span className="text-body font-bold text-slate-100 truncate">{tx.keterangan}</span>
-                      <span className="text-nano text-slate-400 flex items-center gap-1 mt-0.5 overflow-hidden">
-                        <span className="font-medium text-slate-300 truncate">
-                          {tx.kind === 'kas' ? 'Kas' : `Talang ${((tx as TransaksiTalang).akun_talang)}`}
-                        </span>
-                        <span className="shrink-0">•</span>
-                        <span className="shrink-0">{formatIgnoreTimezone(tx.tanggal, 'dd MMM yy', { locale: id })}</span>
-                      </span>
-                    </div>
-                  </div>
-
-                  <span className={`text-body font-black shrink-0 ml-2 ${
-                    isIncoming || isTalangBaru
-                      ? 'text-brand-500'
-                      : isExpense || isTalangPelunasan
-                        ? 'text-rose-400'
-                        : 'text-slate-100'
-                  }`}>
-                    {isIncoming || isTalangBaru ? '+' : '-'}{formatCurrency(tx.nominal)}
-                  </span>
-                </div>
-              );
-            })}
-
-            {allTransactions.length === 0 && (
-              <div className="text-center text-slate-500 py-6 text-body bg-surface-card/20 rounded-2xl border border-white/5">
-                Belum ada transaksi terekam
+                <span className={`text-body font-black shrink-0 ml-2 ${
+                  isIncoming || isTalangBaru
+                    ? 'text-brand-500'
+                    : isExpense || isTalangPelunasan
+                      ? 'text-rose-400'
+                      : 'text-slate-100'
+                }`}>
+                  {isIncoming || isTalangBaru ? '+' : '-'}{formatCurrency(tx.nominal)}
+                </span>
               </div>
-            )}
-          </div>
+            );
+          })}
+
+          {allTransactions.length === 0 && (
+            <div className="text-center text-slate-500 py-6 text-body bg-surface-card/20 rounded-2xl border border-white/5">
+              Belum ada transaksi terekam
+            </div>
+          )}
         </div>
       </div>
     </div>

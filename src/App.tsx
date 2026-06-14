@@ -15,7 +15,6 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Kas from './pages/Kas';
 import Talang from './pages/Talang';
-import Laporan from './pages/Laporan';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -46,7 +45,6 @@ export default function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="kas" element={<Kas />} />
                 <Route path="talang" element={<Talang />} />
-                <Route path="laporan" element={<Laporan />} />
               </Route>
             </Routes>
           </Router>

@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Home, Wallet, CreditCard, BarChart2, LogOut } from 'lucide-react';
+import { Home, Wallet, CreditCard, LogOut } from 'lucide-react';
 import { authClient } from '../lib/auth-client';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -12,7 +12,6 @@ export default function Layout() {
     { name: 'Beranda', href: '/', icon: Home },
     { name: 'Kas Rekap', href: '/kas', icon: Wallet },
     { name: 'Dana Talang', href: '/talang', icon: CreditCard },
-    { name: 'Laporan', href: '/laporan', icon: BarChart2 },
   ];
 
   const handleLogout = async () => {
@@ -25,7 +24,6 @@ export default function Layout() {
       case '/': return 'Dashboard Utama';
       case '/kas': return 'Kas Sekolah';
       case '/talang': return 'Dana Talang';
-      case '/laporan': return 'Sensus Keuangan';
       default: return 'Keuangan';
     }
   };

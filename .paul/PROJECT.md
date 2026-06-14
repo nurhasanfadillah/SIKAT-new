@@ -9,7 +9,7 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | Field | Value |
 |-------|-------|
 | Status | Active development |
-| Version | v0.15 (Header Avatar Remove — complete) |
+| Version | v0.16 (UI Cleanup — complete) |
 | Stack | React 19, Express, PostgreSQL, TypeScript, Vite, Tailwind v4, vite-plugin-pwa, motion |
 | Auth | Custom token-based auth |
 | Database | PostgreSQL via NeonDB |
@@ -61,6 +61,9 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 - ✓ Header flex layout aman di 360px Android (flex-1 min-w-0 left, flex-shrink-0 right) — Phase 14 (v0.14)
 - ✓ text-[15px] arbitrary dihapus dari Layout.tsx → text-value (13px, type scale Phase 07) — Phase 14 (v0.14)
 - ✓ Avatar circle inisial (h-10 w-10 gradient rounded-full) dihapus dari header — Phase 15 (v0.15)
+- ✓ Card "Rincian Per Akun Talang" dihapus dari Dashboard; mini stats + recent transactions tetap intact — Phase 16 (v0.16)
+- ✓ Halaman Laporan dihapus sepenuhnya (Laporan.tsx, route `/laporan`, nav item) — Phase 16 (v0.16)
+- ✓ recharts di-uninstall; navigasi tersisa 3 item (Beranda · Kas Rekap · Dana Talang) — Phase 16 (v0.16)
 
 ### Out of Scope
 - Firebase/Firestore integration — tidak pernah diimplementasikan, dihapus
@@ -94,6 +97,8 @@ Aplikasi manajemen keuangan sekolah (SIKAT = Sistem Kas Sekolah dan Talang) yang
 | 2026-06-14 | iOS PWA edge-to-edge: black-translucent + viewport-fit=cover | App dark-themed — light status bar sangat janggal di atas dark navy; native dark PWA pakai edge-to-edge |
 | 2026-06-14 | Safe-area header via `pt-[max(env(safe-area-inset-top),1.25rem)]` | Tailwind v4 arbitrary support CSS function; satu class handle dua kondisi: notch vs tidak; tidak perlu utility baru di index.css |
 | 2026-06-14 | Hapus avatar div seluruhnya tanpa replacement | Tidak perlu elemen pengganti di posisi yang sama; logo + teks nama sudah cukup sebagai header identity |
+| 2026-06-14 | Hapus halaman Laporan sepenuhnya | Informasi di Laporan redundan — semua data sudah cukup di Dashboard, Kas Rekap, dan Dana Talang |
+| 2026-06-14 | Hapus recharts sepenuhnya (uninstall) | Hanya dipakai Laporan.tsx; setelah halaman dihapus, dependency menjadi dead weight (39 packages removed) |
 
 ---
-*Last updated: 2026-06-14 after Phase 15*
+*Last updated: 2026-06-14 after Phase 16*
